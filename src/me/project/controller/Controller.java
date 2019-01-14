@@ -22,10 +22,10 @@ public class Controller extends AbstractController implements ActionListener {
 	private ActionEvent event;
 	private JButton getTotalCars, continueSim;
 	
-/**
-* Controller Constructor
-* Adds the buttons to the GUI
-*/
+	/**
+	* Controller Constructor
+	* Adds the buttons to the GUI
+	*/
 	
 	public Controller(CarParkingLogic carParkingLogic) {
 		super(carParkingLogic);
