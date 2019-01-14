@@ -11,7 +11,7 @@ import me.project.logic.CarParkingLogic;
 /**
  * This is class Controller for Simulator 
  * This Class contains all the additional functions in the GUI of the simulator
- * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu1, Thalisa Jagt
+ * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
  *
  */
 
