@@ -95,7 +95,10 @@ public abstract class Car extends AbstractModel {
      * does nothing, ReservationCar implements this method.
      */
     
-    public void removeArrivalTime(){}
+    public void removeArrivalTime(){
+    	
+    }
+    
     
     public abstract Color getColor();
 }
