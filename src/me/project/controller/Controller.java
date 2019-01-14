@@ -22,10 +22,10 @@ public class Controller extends AbstractController implements ActionListener {
 	private ActionEvent event;
 	private JButton getTotalCars, continueSim;
 	
-	/**
-	* Controller Constructor
-	* Adds the buttons to the GUI
-	*/
+/**
+* Controller Constructor
+* Adds the buttons to the GUI
+*/
 	
 	public Controller(CarParkingLogic carParkingLogic) {
 		super(carParkingLogic);
@@ -124,53 +124,53 @@ public class Controller extends AbstractController implements ActionListener {
 			 public void run (){
 				ActionEvent e = getActionEvent();
 				String command = e.getActionCommand();
-					if (command.equalsIgnoreCase("One Step")){
+					if (command == "One Step"){
 						CarParkingLogic.tick();
 					} 
 
-					if (command.equalsIgnoreCase("Start")){
+					if (command == "Start"){
 						CarParkingLogic.buttonTick(100000);
 					}
 					
-					if(command.equalsIgnoreCase("Stop")) {
+					if(command == "Stop") {
 						CarParkingLogic.Stop();
 					}
 					
-					if(command.equalsIgnoreCase("Continue")) {
+					if(command == "Continue") {
 						CarParkingLogic.Continue();
 					}
 					
-					if(command.equalsIgnoreCase("Quit")) {
+					if(command == "Quit") {
 						System.exit(0);
 					}
 					
-					if(command.equalsIgnoreCase("Total Cars")) {
+					if(command == "Total Cars") {
 						System.out.println("Total AdHoc Cars: " + CarParkingLogic.getTotalAdHocCars());
 						System.out.println("Total Pass Cars: " + CarParkingLogic.getTotalPassCars());
 						System.out.println("Total Cars: " + CarParkingLogic.getTotalCars());
 					}	
 					
-					if(command.equalsIgnoreCase("Increment Enter Speed")) {
+					if(command == "Increment Enter Speed") {
 						CarParkingLogic.incrementEnteringSpeed();
 						System.out.println("Current Enter Speed: " + CarParkingLogic.getEnterSpeed());
 					}
 					
-					if(command.equalsIgnoreCase("Decrement Enter Speed")) {
+					if(command == "Decrement Enter Speed") {
 						CarParkingLogic.decrementEnteringSpeed();
 						System.out.println("Current Enter Speed: " + CarParkingLogic.getEnterSpeed());
 					}
 					
-					if(command.equalsIgnoreCase("Increment WeekDayArrivals")) {
+					if(command ==  "Increment WeekDayArrivals") {
 						CarParkingLogic.incrementWeekDayArrivals();
 						System.out.println("Current WeekDayArrivals: " + CarParkingLogic.getWeekDayArrivals());
 					}
 					
-					if(command.equalsIgnoreCase("Decrement WeekDayArrivals")) {
+					if(command ==  "Decrement WeekDayArrivals") {
 						CarParkingLogic.decrementWeekDayArrivals();
 						System.out.println("Current WeekDayArrivals: " + CarParkingLogic.getWeekDayArrivals());
 					}
 					
-					if(command.equalsIgnoreCase("Reset All")) {
+					if(command == "Reset All") {
 						CarParkingLogic.resetAll();
 						System.out.println("All values have been reset");
 					}

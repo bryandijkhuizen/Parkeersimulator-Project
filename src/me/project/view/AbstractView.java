@@ -15,7 +15,7 @@ public abstract class AbstractView extends JFrame {
 	protected static CarParkingLogic carParkingLogic;
 
 	@SuppressWarnings("static-access")
-	public AbstractView(CarParkingLogic carParkingLogic, SimulatorView simulatorView ) {
+	public AbstractView(CarParkingLogic carParkingLogic) {
 		this.carParkingLogic=carParkingLogic;
 		carParkingLogic.addView(this);
 		
