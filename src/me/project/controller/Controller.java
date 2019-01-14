@@ -124,53 +124,53 @@ public class Controller extends AbstractController implements ActionListener {
 			 public void run (){
 				ActionEvent e = getActionEvent();
 				String command = e.getActionCommand();
-					if (command == "One Step"){
+					if (command.equalsIgnoreCase("One Step")){
 						CarParkingLogic.tick();
 					} 
 
-					if (command == "Start"){
+					if (command.equalsIgnoreCase("Start")){
 						CarParkingLogic.buttonTick(100000);
 					}
 					
-					if(command == "Stop") {
+					if(command.equalsIgnoreCase("Stop")) {
 						CarParkingLogic.Stop();
 					}
 					
-					if(command == "Continue") {
+					if(command.equalsIgnoreCase("Continue")) {
 						CarParkingLogic.Continue();
 					}
 					
-					if(command == "Quit") {
+					if(command.equalsIgnoreCase("Quit")) {
 						System.exit(0);
 					}
 					
-					if(command == "Total Cars") {
+					if(command.equalsIgnoreCase("Total Cars")) {
 						System.out.println("Total AdHoc Cars: " + CarParkingLogic.getTotalAdHocCars());
 						System.out.println("Total Pass Cars: " + CarParkingLogic.getTotalPassCars());
 						System.out.println("Total Cars: " + CarParkingLogic.getTotalCars());
 					}	
 					
-					if(command == "Increment Enter Speed") {
+					if(command.equalsIgnoreCase("Increment Enter Speed")) {
 						CarParkingLogic.incrementEnteringSpeed();
 						System.out.println("Current Enter Speed: " + CarParkingLogic.getEnterSpeed());
 					}
 					
-					if(command == "Decrement Enter Speed") {
+					if(command.equalsIgnoreCase("Decrement Enter Speed")) {
 						CarParkingLogic.decrementEnteringSpeed();
 						System.out.println("Current Enter Speed: " + CarParkingLogic.getEnterSpeed());
 					}
 					
-					if(command ==  "Increment WeekDayArrivals") {
+					if(command.equalsIgnoreCase("Increment WeekDayArrivals")) {
 						CarParkingLogic.incrementWeekDayArrivals();
 						System.out.println("Current WeekDayArrivals: " + CarParkingLogic.getWeekDayArrivals());
 					}
 					
-					if(command ==  "Decrement WeekDayArrivals") {
+					if(command.equalsIgnoreCase("Decrement WeekDayArrivals")) {
 						CarParkingLogic.decrementWeekDayArrivals();
 						System.out.println("Current WeekDayArrivals: " + CarParkingLogic.getWeekDayArrivals());
 					}
 					
-					if(command == "Reset All") {
+					if(command.equalsIgnoreCase("Reset All")) {
 						CarParkingLogic.resetAll();
 						System.out.println("All values have been reset");
 					}
