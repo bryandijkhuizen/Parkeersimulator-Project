@@ -34,8 +34,8 @@ public class CarParkingLogic extends AbstractModel {
     private int hour = 0;
     private int minute = 0;
 
-    int weekDayArrivals= 50; 
-    int weekendArrivals = 90; 
+    int weekDayArrivals= 90; 
+    int weekendArrivals = 50; 
 
     int enterSpeed;
     int paymentSpeed;
@@ -556,6 +556,9 @@ public class CarParkingLogic extends AbstractModel {
     	return amountOfPassHolders;
     }
     
+    public int getCarsInEntranceQueue() {
+    	return entranceCarQueue.carsInQueue();
+    }
     
     public void quit() {
     	System.exit(0);

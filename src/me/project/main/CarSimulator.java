@@ -9,7 +9,7 @@ import me.project.controller.Controller;
 import me.project.logic.CarParkingLogic;
 import me.project.view.AbstractView;
 import me.project.view.CarParkView;
-import me.project.view.StatisticView;
+import me.project.view.totalCarsView;
 import java.awt.BorderLayout;
 import java.awt.Color;
 
@@ -19,7 +19,7 @@ public class CarSimulator {
 	private AbstractView carParkView;
     private CarParkingLogic carParking;
     private AbstractController controller;
-    private StatisticView statView;
+    private totalCarsView totalCars;
     
     private int tickPause;
     public static boolean run;
@@ -39,22 +39,23 @@ public CarSimulator() {
 		controller.setBackground(Color.LIGHT_GRAY);
 		carParkView = new CarParkView(carParking);
 		carParkView.setBackground(Color.GRAY);
-		statView = new StatisticView(carParking);
-		statView.setBackground(Color.LIGHT_GRAY);
+		totalCars = new totalCarsView(carParking);
+		totalCars.setBackground(Color.LIGHT_GRAY);
 		
 		
 		frame=new JFrame("CarParking Simulation");
 		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
 		
-		frame.setSize(811, 500);
+		frame.setSize(811, 560);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(carParkView);
 		frame.getContentPane().add(controller);
-		frame.getContentPane().add(statView);
+		frame.getContentPane().add(totalCars);
 
 		carParkView.setBounds(27, 12, 737, 339);
 		controller.setBounds(27, 376, 400, 74);
-		statView.setBounds(448, 386, 275, 29);
+		totalCars.setBounds(437, 421, 275, 29);
+		
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);

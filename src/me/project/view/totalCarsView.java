@@ -6,27 +6,30 @@ import javax.swing.JTextField;
 import me.project.logic.CarParkingLogic;
 
 	@SuppressWarnings("serial")
-	public class StatisticView extends AbstractView {
+	public class totalCarsView extends AbstractView {
 		
 		private JLabel carCounterLabel;
+
 		private JTextField totalCarCount;
+
 		
 		private int totalCars;
 		
-		public StatisticView(CarParkingLogic model) {
+		public totalCarsView(CarParkingLogic model) {
 			super(model);
 			this.setLayout(null);
 
 			carCounterLabel = new JLabel("Current Amount of Cars: ");
 			
 			totalCarCount = new JTextField();    
-			
 	        
 	        carCounterLabel.setBounds(5, 0, 200, 20);
 	        totalCarCount.setBounds(180, 3, 50, 20);
 	        
+	        
 	        add(carCounterLabel);
 	        add(totalCarCount);
+
 	        
 	        totalCarCount.setEditable(false);
 		
@@ -38,6 +41,7 @@ import me.project.logic.CarParkingLogic;
 
 	        totalCars = carPark.getTotalCars();
 	        totalCarCount.setText("" + totalCars);
+	        
 
 	        setVisible(true);
 	        super.updateView();
