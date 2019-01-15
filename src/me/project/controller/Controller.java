@@ -16,7 +16,6 @@ import me.project.logic.CarParkingLogic;
 	public class Controller extends AbstractController implements ActionListener {
 		private JButton quitButton;
 		private JButton printCars;
-		private JButton button;
 		
 	/**
 	* Controller Constructor
