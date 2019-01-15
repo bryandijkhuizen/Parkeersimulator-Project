@@ -19,7 +19,7 @@ import me.project.logic.CarParkingLogic;
 		
 	/**
 	* Controller Constructor
-	* Adds the controlls to the GUI
+	* Adds the controls to the GUI
 	*/
 	
 	public Controller(CarParkingLogic carParkingLogic) {
