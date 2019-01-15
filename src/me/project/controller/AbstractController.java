@@ -2,7 +2,7 @@ package me.project.controller;
 
 import javax.swing.JPanel;
 
-import me.project.logic.CarParkingLogic;
+import me.project.model.AbstractModel;
 
 /**
  * Abstract Class for the controller
@@ -12,13 +12,13 @@ import me.project.logic.CarParkingLogic;
 
 @SuppressWarnings("serial")
 public abstract class AbstractController extends JPanel {
-	protected CarParkingLogic carParkingLogic;
+	protected AbstractModel model;
 	
 	/**
-	 * AbstractController Constructor
+	 * The constructor initializes the instance variable model with a model that applies to this controller.
+	 * @param model Model life is ascribed to the instance variable life
 	 */
-	
-	public AbstractController(CarParkingLogic carParkingLogic) {
-		this.carParkingLogic=carParkingLogic;
+	public AbstractController(AbstractModel model) {
+		this.model = model;
 	}
 }

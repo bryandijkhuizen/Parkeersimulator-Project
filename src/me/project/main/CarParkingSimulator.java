@@ -33,8 +33,8 @@ public class CarParkingSimulator {
 		controller = new Controller(carParking);
 		carParkView = new CarParkView(carParking);
 		
-		screen=new JFrame("Car park simulation");
-		screen.setSize(1000, 820);
+		screen=new JFrame("CarParking Simulation");
+		screen.setSize(800, 500);
 		screen.setLayout(null);
 		screen.getContentPane().add(carParkView);
 		screen.getContentPane().add(controller);
@@ -60,6 +60,5 @@ public class CarParkingSimulator {
                 e.printStackTrace();
             }
         }
-
 	}
 }

@@ -1,14 +1,9 @@
 package me.project.controller;
 
-import java.awt.Color;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-
 import me.project.logic.CarParkingLogic;
-
 
 	/**
 	 * This is class Controller for Simulator 
@@ -19,8 +14,7 @@ import me.project.logic.CarParkingLogic;
 	
 	@SuppressWarnings("serial")
 	public class Controller extends AbstractController implements ActionListener {
-		private JButton oneStep;
-		private ActionEvent event;
+		private JButton quitButton;
 		
 	/**
 	* Controller Constructor
@@ -30,23 +24,22 @@ import me.project.logic.CarParkingLogic;
 	public Controller(CarParkingLogic carParkingLogic) {
 		super(carParkingLogic);
 		
-		
+		quitButton = new JButton("Quit");
+		quitButton.addActionListener(this);
+		add(quitButton);
 
-	}
-
-	public void setActionEvent(ActionEvent e) {
-		event = e;
-	}
-	
-	public ActionEvent getActionEvent() {
-		return event;
 	}
 	
 	public void actionPerformed(ActionEvent e) {
+		CarParkingLogic cpl = (CarParkingLogic) super.model;
 		
+		if (e.getSource() == quitButton) {
+			try {
+				cpl.quit();
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+			return;
+		}
 	}
 }
-	
-	
-	
-	

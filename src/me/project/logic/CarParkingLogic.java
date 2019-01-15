@@ -9,7 +9,6 @@ import me.project.model.CarQueue;
 import me.project.model.Location;
 import me.project.model.ParkingPassCar;
 
-
 /**
  * This class contains all the logic for the simulator
  * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
@@ -26,31 +25,28 @@ public class CarParkingLogic extends AbstractModel {
     private static CarQueue exitCarQueue;
     private Car[][][] cars;
     
-    // amount of pass holders allowed in the car park
     int amountOfPassHolders;
     
     private int day = 0;
     private int hour = 0;
     private int minute = 0;
 
-    int weekDayArrivals= 50; // average number of arriving cars per hour
-    int weekendArrivals = 90; // average number of arriving cars per hour
+    int weekDayArrivals= 50; 
+    int weekendArrivals = 90; 
 
     int enterSpeed;
     int paymentSpeed;
     int exitSpeed; 
     
-    // Keeping track of statistics
-    int numberOfEnteringCars; // how many cars are in entranceCarQueue
-    int numberOfPayingCars; // how many cars are in paymentCarQueue
-    int numberOfExitingCars; // how many cars are in exitCarQueue
-    int numberOfMembersExiting; // how many cars are in the membersCarQueue
-    int totalCars; // amount of no member cars in car park 
-    int totalPassHolders; // amount of members in car park
-    int total; // amount of all cars in car park
+    int numberOfEnteringCars; 
+    int numberOfPayingCars; 
+    int numberOfExitingCars; 
+    int numberOfMembersExiting;
+    int totalCars; 
+    int totalPassHolders; 
+    int total; 
     int totalSpace;
     
-
     /**
      * Constructor of the CarParkingLogic. 
      * @param numberOfFloors The number of floors of the car park
@@ -92,6 +88,7 @@ public class CarParkingLogic extends AbstractModel {
      * @param max
      * @return returns a random number 
      */
+    
     public int getRandInt(int max, int min){
     	
     	Random rand;
@@ -102,7 +99,6 @@ public class CarParkingLogic extends AbstractModel {
     	return randNum;
     }
     
-
     /**
      * Get number of floors of the car park.
      *
@@ -380,7 +376,6 @@ public class CarParkingLogic extends AbstractModel {
         return null;
     }
     
-
     /**
      * For every car call the tick method by looping through the car park.
      */
@@ -559,12 +554,7 @@ public class CarParkingLogic extends AbstractModel {
     	return amountOfPassHolders;
     }
     
-    /**
-     * Change the amount of pass holders allowed in the car park.
-     * @param newNumber 
-     */
-    public void setNumberOfPassHolders(int newNumber){
-    	amountOfPassHolders = newNumber;
+    public void quit() {
+    	System.exit(0);
     }
 }
-

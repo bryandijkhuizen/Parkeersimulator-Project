@@ -20,7 +20,7 @@ import me.project.model.ParkingPassCar;
  */
 public class CarParkView extends AbstractView{
 
-    private JLabel title;
+    private JLabel titleLabel;
     private Image carParkImage;
     private Dimension size;
 
@@ -35,13 +35,10 @@ public class CarParkView extends AbstractView{
         
         size = new Dimension(0, 0); 
         
-        title = new JLabel("Representation of the car park");
-        title.setFont(new Font("SansSerif", Font.BOLD, 14));
+        titleLabel = new JLabel("Car Parking Simulation");
 
-        add(title);
-        
-       // setLayout(null);
-       // title.setBounds(200, -5, 250, 10);
+        add(titleLabel);
+
     }
 
     @Override

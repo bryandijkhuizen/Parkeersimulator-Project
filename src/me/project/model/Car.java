@@ -12,20 +12,13 @@ public abstract class Car extends AbstractModel {
 	private Location location;
     private int minutesLeft;
     private boolean isPaying;
-    //voor de opdracht
     private boolean isMember;
-    private boolean hasReservation;
-    
-    //test to see if this fixes crashing
-    private boolean isNormalCustomer;
-
     protected int minutesStay; 
     
     /**
      * Constructor for objects of class Car
      */
     public Car() {
-    	//default van het membership is false (voor normalCustomer)
     	isMember = false; 
     }
 
@@ -95,34 +88,6 @@ public abstract class Car extends AbstractModel {
 	public boolean getIsMember(){
 		return isMember; 
 	}
-	
-	/**
-	 * Make a car have a reservation.
-	 */
-	public void setHasReservation(){
-		hasReservation = true; 
-	}
-	
-	/**
-	 * @return hasReservation	Return whether the particular car has a reservation
-	 */
-	public boolean getHasReservation(){
-		return hasReservation; 
-	}
-	
-	/**
-	 * If it is not a pass holder or somebody with a reservation, use this method.
-	 */
-	public void setIsNormalCustomer(){
-		isNormalCustomer = true;
-	}
-	
-	/**
-	 * @return isNormalCustomer Return whether a particular car is a normal customer
-	 */
-	public boolean getIsNormalCustomer(){
-		return isNormalCustomer; 
-	}
 
 	/**
 	 * @return minutesStay The amount of time a particular car is parked
@@ -138,6 +103,7 @@ public abstract class Car extends AbstractModel {
      * @param min
      * @return returns a random number between the max and min value 
      */
+	
 	public int randInt(int max, int min){
 	    	Random rand;
 	    	rand = new Random();

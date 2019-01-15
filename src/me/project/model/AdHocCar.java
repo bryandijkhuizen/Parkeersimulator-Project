@@ -21,7 +21,6 @@ public class AdHocCar extends Car {
 	 */
 	
     public AdHocCar() {
-    	setIsNormalCustomer(); 
 		
 		Random random = new Random(); 
 		
