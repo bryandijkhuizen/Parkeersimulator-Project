@@ -52,9 +52,7 @@ public class CarParkingLogic extends AbstractModel {
     
 
     /**
-     * Constructor of the CarPark. It initializes the fields and creates the
-     * three dimensional array to represent the parking spots in the car park.
-     *
+     * Constructor of the CarParkingLogic. 
      * @param numberOfFloors The number of floors of the car park
      * @param numberOfRows   The number of rows per floor of the car park
      * @param numberOfPlaces The number of parking spots per row of the car park
@@ -74,10 +72,8 @@ public class CarParkingLogic extends AbstractModel {
         paymentSpeed = 10; // number of cars that can pay per minute
         exitSpeed = 9; // number of cars that can leave per minute
         totalSpace = numberOfPlaces * numberOfRows * numberOfFloors;
-        // amount of cars that have membership at the car park
         amountOfPassHolders = 150;
-        
-        // counting different cars to be able to visualize this data
+
         numberOfEnteringCars = 0;
         numberOfPayingCars = 0;
         numberOfExitingCars = 0;
@@ -89,14 +85,12 @@ public class CarParkingLogic extends AbstractModel {
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         
     }
-    
-    //week 2 a random number
+
     /**
-     * This method creates a random number, where min and max are the boundries between which the
-     * random number should lie.
+     * This method creates a random number.
      * @param min
      * @param max
-     * @return returns a random number between the min and max value 
+     * @return returns a random number 
      */
     public int getRandInt(int max, int min){
     	
@@ -114,6 +108,7 @@ public class CarParkingLogic extends AbstractModel {
      *
      * @return numberOfFloors Number of floors of the car park
      */
+    
     public int getNumberOfFloors() {
         return numberOfFloors;
     }
@@ -130,8 +125,9 @@ public class CarParkingLogic extends AbstractModel {
     /**
      * Get number of parking spots in the car park.
      *
-     * @return numberOfPlaces Number of parking spots in the car park
+     * @return numberOfPlaces 
      */
+    
     public int getNumberOfPlaces() {
         return numberOfPlaces;
     }
@@ -139,7 +135,7 @@ public class CarParkingLogic extends AbstractModel {
     /**
      * Get the three dimensional array that represents the car park.
      *
-     * @return cars Return the array cars
+     * @return cars 
      */
     public Car[][][] getCars() {
         return cars;
@@ -150,6 +146,7 @@ public class CarParkingLogic extends AbstractModel {
      *
      * @return cars Return the queue with all cars entering
      */
+    
     public CarQueue getEntranceCarQueue() {
         return entranceCarQueue;
     }
@@ -159,6 +156,7 @@ public class CarParkingLogic extends AbstractModel {
      *
      * @return cars Return the queue with all cars that need to pay
      */
+    
     public CarQueue getPaymentCarQueue() {
         return paymentCarQueue;
     }
@@ -168,6 +166,7 @@ public class CarParkingLogic extends AbstractModel {
      *
      * @return cars Return the queue with all cars exiting
      */
+    
     public CarQueue getExitCarQueue() {
         return exitCarQueue;
     }
@@ -177,6 +176,7 @@ public class CarParkingLogic extends AbstractModel {
      * 
      * @param newSpeed The speed the user wants to change the entering speed to.
      */
+    
     public void setEnterSpeed(int newSpeed) {
     	enterSpeed = newSpeed;
     }
@@ -186,6 +186,7 @@ public class CarParkingLogic extends AbstractModel {
      * 
      * @param newSpeed The speed the user wants to change the payment speed to.
      */
+    
     public void setPaySpeed(int newSpeed) {
     	paymentSpeed = newSpeed;
     }
@@ -195,27 +196,31 @@ public class CarParkingLogic extends AbstractModel {
      * 
      * @param newSpeed The speed the user wants to change the exiting speed to.
      */
+    
     public void setExitSpeed(int newSpeed) {
     	exitSpeed = newSpeed;
     }
     
     /**
-     * @return enterSpeed The speed with which cars currently are entering per minute.
+     * @return enterSpeed
      */
+    
 	public int getEnterSpeed() {
 		return enterSpeed;
 	}
 	
     /**
-     * @return paymentSpeed The speed with which car owners currently are paying per minute.
+     * @return paymentSpeed
      */
+	
 	public int getPaySpeed() {
 		return paymentSpeed;
 	}
 	
     /**
-     * @return exitSpeed The speed with which cars currently are exiting per minute.
+     * @return exitSpeed 
      */
+	
 	public int getExitSpeed(){
 		return exitSpeed;
 	}
@@ -223,8 +228,8 @@ public class CarParkingLogic extends AbstractModel {
     /**
      * Executes one simulation step, it advances the time by one minute.
      */
+	
     public void tick() {
-        // Advance the time by one minute.
         minute++;
         while (minute > 59) {
             minute -= 60;
@@ -339,7 +344,7 @@ public class CarParkingLogic extends AbstractModel {
                 numberOfExitingCars--;	
             }
             super.notifyViews();
-            // Bye!
+ 
         }
 
         for (int i = 0; i < exitSpeed; i++) {
@@ -354,7 +359,6 @@ public class CarParkingLogic extends AbstractModel {
         }
         
         total = totalCars + totalPassHolders;
-        // Update the car park view.
         super.notifyViews();
         System.out.println("Regular Cars: " + totalCars);
         System.out.println("ParkingPass Cars: " + totalPassHolders);
@@ -380,6 +384,7 @@ public class CarParkingLogic extends AbstractModel {
     /**
      * For every car call the tick method by looping through the car park.
      */
+    
     private void tickCars() {
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
@@ -397,8 +402,8 @@ public class CarParkingLogic extends AbstractModel {
     /**
      * Get a car from a specific location in the car park.
      *
-     * @param location A Location object which stores where the car is parked.
-     * @return car The car that is parked at the given location.
+     * @param location 
+     * @return car 
      */
     public Car getCarAt(Location location) {
         if (!locationIsValid(location)) {
@@ -410,10 +415,11 @@ public class CarParkingLogic extends AbstractModel {
     /**
      * Put a car in a certain parking spot, a certain Location in the car park.
      *
-     * @param location Location object where the car should be parked
-     * @param car The car that needs to be parked
-     * @return boolean Return true if the car is successfully parked, if not return false
+     * @param location
+     * @param car
+     * @return boolean 
      */
+    
     public boolean setCarAt(Location location, Car car) {
         if (!locationIsValid(location)) {
             return false;
@@ -430,9 +436,10 @@ public class CarParkingLogic extends AbstractModel {
     /**
      * Check if a specific location is empty in the car park.
      *
-     * @param location Location to check
-     * @return boolean Return true if location is empty, if not return
+     * @param location 
+     * @return boolean 
      */
+    
     private boolean locationIsValid(Location location) {
         int floor = location.getFloor();
         int row = location.getRow();
@@ -442,18 +449,13 @@ public class CarParkingLogic extends AbstractModel {
         }
         return true;
     }
-
-    /**
-     * Gets the first free parking spot that is empty in the car park.
-     *
-     * @return location | null If empty location is found return location, if not return null 
-     */
-
+    
     /**
      * Get the first leaving car in the car park.
      *
-     * @return car | null | If a leaving car is found return this car, if not return null
+     * @return car | null
      */
+    
     public Car getFirstLeavingCar() {
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
@@ -472,10 +474,10 @@ public class CarParkingLogic extends AbstractModel {
     /**
      * Remove a car at a specific location in the car park.
      *
-     * @param location Location of the car that needs to be removed
-     * @return car | null | If the location is not valid or there is no car at the 
-     *                      specified location return null, else return the car
+     * @param location 
+     * @return car | null 
      */
+    
     public Car removeCarAt(Location location) {
         if (!locationIsValid(location)) {
             return null;
@@ -492,8 +494,9 @@ public class CarParkingLogic extends AbstractModel {
     /**
      * Set steps in the simulator
      *
-     * @param steps Amount of steps we should do
+     * @param steps 
      */
+    
     public void setSteps(int steps) {
         for(int i = 0; i < steps; i++) {
             tick();
@@ -503,6 +506,7 @@ public class CarParkingLogic extends AbstractModel {
     /**
      * @return numberOfEnteringCars
      */
+    
     public int getNumberOfEntering() {
         return numberOfEnteringCars;
     }
@@ -510,6 +514,7 @@ public class CarParkingLogic extends AbstractModel {
     /**
      * @return numberOfPayingCars
      */
+    
     public int getNumberOfPaying() {
         return numberOfPayingCars;
     }
@@ -517,6 +522,7 @@ public class CarParkingLogic extends AbstractModel {
     /**
      * @return numberOfExitingCars
      */
+    
     public int getNumberOfExiting() {
         return numberOfExitingCars;
     }
@@ -524,34 +530,38 @@ public class CarParkingLogic extends AbstractModel {
     /**
      * @return numberOfExitingCars
      */
+    
     public int getNumberOfExitingMembers() {
         return numberOfMembersExiting;
     }
     
     /**
-     * @return totalCars Return total number of no member cars in car park
+     * @return totalCars 
      */
+    
     public int getTotalCars() {
         return totalCars;
     }
 
     /**
-     * @return totalCars Return total number of members in car park
+     * @return totalCars 
      */
+    
     public int getTotalPassHolders() {
         return totalPassHolders;
     }
     
     /**
-     * @return amountOfPassHolders Amount of pass holders allowed in the car park
+     * @return amountOfPassHolders
      */
+    
     public int getNumberOfPassHolders(){
     	return amountOfPassHolders;
     }
     
     /**
      * Change the amount of pass holders allowed in the car park.
-     * @param newNumber The new amount to set
+     * @param newNumber 
      */
     public void setNumberOfPassHolders(int newNumber){
     	amountOfPassHolders = newNumber;
