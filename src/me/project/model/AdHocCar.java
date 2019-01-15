@@ -5,7 +5,6 @@ import java.util.Random;
 import me.project.view.Colors;
 
 import java.awt.Color;
-import java.awt.*;
 
 /**
  * Class for adHocCar when they enter an how long the stay

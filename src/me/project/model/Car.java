@@ -88,7 +88,6 @@ public abstract class Car extends AbstractModel {
     
     public void tick() {
         minutesLeft--;
-        removeArrivalTime();
     }
     
     /**
