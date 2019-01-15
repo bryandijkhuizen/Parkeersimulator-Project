@@ -7,6 +7,7 @@ import me.project.controller.Controller;
 import me.project.logic.CarParkingLogic;
 import me.project.view.AbstractView;
 import me.project.view.CarParkView;
+import me.project.view.StatisticView;
 
 /**
  * Main ParkingSimulator class
@@ -20,6 +21,7 @@ public class CarParkingSimulator {
 	private AbstractView carParkView;
     private CarParkingLogic carParking;
     private AbstractController controller;
+    private AbstractView statView;
     
     private int tickPause;
     public static boolean run;
@@ -32,15 +34,19 @@ public class CarParkingSimulator {
 		carParking = new CarParkingLogic(3, 6, 30);
 		controller = new Controller(carParking);
 		carParkView = new CarParkView(carParking);
+		statView = new StatisticView(carParking);
+		
 		
 		screen=new JFrame("CarParking Simulation");
-		screen.setSize(800, 500);
+		screen.setSize(1200, 500);
 		screen.setLayout(null);
 		screen.getContentPane().add(carParkView);
 		screen.getContentPane().add(controller);
+		screen.getContentPane().add(statView);
 
 		carParkView.setBounds(50, 10, 700, 330);
 		controller.setBounds(0, 360, 750, 80);
+		statView.setBounds(800, 10, 400, 20);
 
 		screen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		screen.setVisible(true);
