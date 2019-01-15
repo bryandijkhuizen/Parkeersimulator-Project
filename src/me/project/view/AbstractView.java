@@ -9,8 +9,8 @@ import me.project.model.AbstractModel;
 /**
  * All views should extend AbstractView.
  *
- * @author Femke Hoornveld
- * @version 2.0 (11-04-2016)
+ * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
+ * @version 14.01.2019
  */
 public abstract class AbstractView extends JPanel {
 	
