@@ -21,6 +21,10 @@ public abstract class AbstractModel {
 		AbstractViews=new ArrayList<AbstractView>();
 	}
 	
+	/**
+	 * Adds view to views list.
+	 */
+	
 	public void addView(AbstractView AbstractView) {
 		AbstractViews.add(AbstractView);
 	}

@@ -8,6 +8,12 @@ import me.project.logic.CarParkingLogic;
 import me.project.view.AbstractView;
 import me.project.view.CarParkView;
 
+/**
+ * Main ParkingSimulator class
+ * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
+ *
+ */
+
 public class CarParkingSimulator {
 	
 	private JFrame screen;
@@ -19,9 +25,9 @@ public class CarParkingSimulator {
     public static boolean run;
 	
 	/**
-	 * The Constructor creates new instances of LifeLogic, InitController, RunController, FieldView, StatView and screen.
-	 * It sets the values (title, layout, size) for this screen, fills it and then makes it visible. 
+	 * The constructor creates instances of CarParkingLogic, Controller, CarParkView, Screen.
 	 */
+    
 	public CarParkingSimulator() {
 		carParking = new CarParkingLogic(3, 6, 30);
 		controller = new Controller(carParking);
