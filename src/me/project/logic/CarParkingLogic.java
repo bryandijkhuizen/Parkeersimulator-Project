@@ -357,9 +357,7 @@ public class CarParkingLogic extends AbstractModel {
         
         total = totalCars + totalPassHolders;
         super.notifyViews();
-        System.out.println("Regular Cars: " + totalCars);
-        System.out.println("ParkingPass Cars: " + totalPassHolders);
-        System.out.println("Total Cars: " + total + "/" + totalSpace);
+
         
     }
     
@@ -557,5 +555,11 @@ public class CarParkingLogic extends AbstractModel {
     
     public void quit() {
     	System.exit(0);
+    }
+    
+    public void printCarParkingDetails() {
+        System.out.println("Regular Cars: " + totalCars);
+        System.out.println("ParkingPass Cars: " + totalPassHolders);
+        System.out.println("Total Cars: " + total + "/" + totalSpace);
     }
 }
