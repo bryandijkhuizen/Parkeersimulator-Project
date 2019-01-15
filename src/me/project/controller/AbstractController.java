@@ -14,7 +14,6 @@ import me.project.logic.CarParkingLogic;
 public abstract class AbstractController extends JPanel {
 	protected CarParkingLogic carParkingLogic;
 	
-	
 	/**
 	 * AbstractController Constructor
 	 */
