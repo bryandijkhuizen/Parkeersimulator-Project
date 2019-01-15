@@ -1,100 +1,152 @@
 package me.project.model;
 
 import java.awt.*;
+import java.util.Random;
+
 
 /*
  * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
  */
 
 public abstract class Car extends AbstractModel {
-
-    private Location location;
+	private Location location;
     private int minutesLeft;
     private boolean isPaying;
-    private boolean hasToPay;
+    //voor de opdracht
+    private boolean isMember;
+    private boolean hasReservation;
+    
+    //test to see if this fixes crashing
+    private boolean isNormalCustomer;
 
+    protected int minutesStay; 
+    
     /**
-     * Car constructor
+     * Constructor for objects of class Car
      */
     public Car() {
-
+    	//default van het membership is false (voor normalCustomer)
+    	isMember = false; 
     }
-    
+
     /**
-     * returns the location of the car
-     * @return location
+     * @return location Return the location where the particular car is parked
      */
-    
     public Location getLocation() {
         return location;
     }
 
     /**
-     * sets the location of the car to the specified location
-     * @param location
+     * Store the location the particular car is parked in.
+     * @param location The location the particular car is parked
      */
-    
     public void setLocation(Location location) {
         this.location = location;
     }
 
     /**
-     * Returns the amount of minutes the car has left to stay
-     * @return minutesLeft
+     * @return minutesLeft Return how much minutes a particular car will be parked.
      */
-    
     public int getMinutesLeft() {
         return minutesLeft;
     }
 
     /**
-     * Sets the amount of minutes which te car wil stay
-     * @param minutesLeft
+     * Keep track of how many minutes a car should be parked.
+     * @param minutesLeft The amount of minutes the car should be parked
      */
-    
     public void setMinutesLeft(int minutesLeft) {
         this.minutesLeft = minutesLeft;
     }
     
     /**
-     * Returns if a car is paying
-     * @return isPaying
+     * @return isPaying	Return whether the particular car is paying
      */
-    
     public boolean getIsPaying() {
         return isPaying;
     }
-    
+
     /**
-     * Sets if the car is paying
+     * Change when a particular car is paying.
      * @param isPaying
      */
-    
     public void setIsPaying(boolean isPaying) {
         this.isPaying = isPaying;
     }
 
-    public boolean getHasToPay() {
-        return hasToPay;
-    }
-
-    public void setHasToPay(boolean hasToPay) {
-        this.hasToPay = hasToPay;
-    }
-
+    @Override
     /**
-     * subtracts one minute from the time the car is staying
+     * Whenever a minute (tick) passes, the car will stay one minute less before leaving.
      */
-    
     public void tick() {
         minutesLeft--;
     }
     
     /**
-     * does nothing, ReservationCar implements this method.
+     * Make a car a member.
      */
+    public void setIsMember(){
+    	isMember = true; 
+    }
     
-    public void removeArrivalTime(){}
-    
-    public abstract Color getColor();
+    /**
+    * Check if isMember is true in the simulator class, then let it skip payment if true. 
+    */
+	public boolean getIsMember(){
+		return isMember; 
+	}
+	
+	/**
+	 * Make a car have a reservation.
+	 */
+	public void setHasReservation(){
+		hasReservation = true; 
+	}
+	
+	/**
+	 * @return hasReservation	Return whether the particular car has a reservation
+	 */
+	public boolean getHasReservation(){
+		return hasReservation; 
+	}
+	
+	/**
+	 * If it is not a pass holder or somebody with a reservation, use this method.
+	 */
+	public void setIsNormalCustomer(){
+		isNormalCustomer = true;
+	}
+	
+	/**
+	 * @return isNormalCustomer Return whether a particular car is a normal customer
+	 */
+	public boolean getIsNormalCustomer(){
+		return isNormalCustomer; 
+	}
+
+	/**
+	 * @return minutesStay The amount of time a particular car is parked
+	 */
+	public int getStayTime(){
+		return minutesStay; 
+	}
+	   
+    /**
+     * This method creates a random number, where min and max are the boundries between which the
+     * random number should lie.
+     * @param max
+     * @param min
+     * @return returns a random number between the max and min value 
+     */
+	public int randInt(int max, int min){
+	    	Random rand;
+	    	rand = new Random();
+	    	
+	    	int randNum = rand.nextInt(max - min) + min; 
+	    	
+	    	return randNum;
+	    }
+
+	public abstract Color getColor();
+
 }

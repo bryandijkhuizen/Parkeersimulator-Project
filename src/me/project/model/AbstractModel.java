@@ -32,4 +32,6 @@ public abstract class AbstractModel {
 	public void notifyViews() {
 		for(AbstractView v: AbstractViews) v.updateView();
 	}
+	public void tick() {
+	}
 }

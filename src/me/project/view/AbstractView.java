@@ -14,16 +14,14 @@ import me.project.model.AbstractModel;
  */
 
 public abstract class AbstractView extends JPanel {
-	
 	private static final long serialVersionUID = 6437976554496769048L;
-	private static List<AbstractView> views;
 	protected AbstractModel model;
 
     /**
-	 * Abstract view constructor
+     * The constructor initializes the instance variable model with a model that applies to this view.
+	 * 
      * @param model The model that applies to this view
      */
-	
     public AbstractView(AbstractModel model) {
         this.model = model;
         model.addView(this);
@@ -32,14 +30,15 @@ public abstract class AbstractView extends JPanel {
     /**
      * @return model Returns the model that belongs to this view
      */
-    
 	public AbstractModel getModel() {
 		return model;
 	}
 	
+	/**
+	 * Makes sure that when the view is updated, it will not be painted over the last painted view
+	 * but the View will first be cleared and then repainted with the updates.
+	 */
 	public void updateView() {
 		repaint();
 	}
-	
-	
 }

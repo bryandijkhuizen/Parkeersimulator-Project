@@ -14,13 +14,13 @@ import me.project.model.Location;
 import me.project.model.ParkingPassCar;
 
 /**
- * CarParkView Class contains all of the visual atributes of the simulator
+ * This class contains the carParkView
  * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
  *
  */
-public class CarParkView extends AbstractView {
-	
-	private JLabel title;
+public class CarParkView extends AbstractView{
+
+    private JLabel title;
     private Image carParkImage;
     private Dimension size;
 
@@ -39,13 +39,15 @@ public class CarParkView extends AbstractView {
         title.setFont(new Font("SansSerif", Font.BOLD, 14));
 
         add(title);
+        
+       // setLayout(null);
+       // title.setBounds(200, -5, 250, 10);
     }
 
-    
+    @Override
     /**
-     * Painting all the components
+     * Scaling the carParkImage.
      */
-    
     public void paintComponent(Graphics g) {
         if (carParkImage == null) {
             return;
@@ -62,13 +64,15 @@ public class CarParkView extends AbstractView {
     }
 
     /**
-     * The updateView() creates the actual image of the simulator
+     * Notify the model that applies to the view that the view should be updated.
+     * Creating a visual representation of the car park with cars entering and leaving
+     * when updateView() is called.
      */
-    
     public void updateView() {
 
         CarParkingLogic carPark = (CarParkingLogic) super.model;
         
+        // Create a new car park image if the size has changed.
         if (!size.equals(getSize())) {
             size = getSize();
             carParkImage = createImage(size.width, size.height);
@@ -83,8 +87,8 @@ public class CarParkView extends AbstractView {
                     Location location = new Location(floor, row, place);
                     Car car = carPark.getCarAt(location);
                     
-                    Color color = Color.WHITE; //The default color when no car is in the parking lot
-                    
+
+                    Color color = Color.WHITE;
                     if (car == null) {
                     	color = Color.WHITE;
                     } else if(car instanceof ParkingPassCar) {
@@ -102,9 +106,8 @@ public class CarParkView extends AbstractView {
     }
 
     /**
-     * Draws the parking spots on the GUI
+     * Paint a parking spot on the screen in a given color.
      */
-    
     private void drawPlace(Graphics graphics, Location location, Color color) {
         graphics.setColor(color);
         graphics.fillRect(

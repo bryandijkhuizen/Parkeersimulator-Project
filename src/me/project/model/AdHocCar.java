@@ -21,10 +21,11 @@ public class AdHocCar extends Car {
 	 */
 	
     public AdHocCar() {
-    	Random random = new Random();
-    	int stayMinutes = (int) (15 + random.nextFloat() * 3 * 60);
-        this.setMinutesLeft(stayMinutes);
-        this.setHasToPay(true);
+    	setIsNormalCustomer(); 
+		
+		Random random = new Random(); 
+		
+		minutesStay = (int) (15 + random.nextFloat() * 10 * 60);
     }
     
     public Color getColor(){
