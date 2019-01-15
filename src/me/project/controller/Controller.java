@@ -14,8 +14,8 @@ import me.project.logic.CarParkingLogic;
 	
 	@SuppressWarnings("serial")
 	public class Controller extends AbstractController implements ActionListener {
-		private JButton quitButton;
 		private JButton printCars;
+		private JButton btnQuit;
 		
 	/**
 	* Controller Constructor
@@ -25,31 +25,31 @@ import me.project.logic.CarParkingLogic;
 	public Controller(CarParkingLogic carParkingLogic) {
 		super(carParkingLogic);
 		
-		quitButton = new JButton("Quit");
-		quitButton.addActionListener(this);
-		add(quitButton);
-		
 		printCars = new JButton("Print CarParking information");
 		printCars.addActionListener(this);
 		add(printCars);
+		
+		btnQuit = new JButton("Quit");
+		btnQuit.addActionListener(this);
+		add(btnQuit);
 		
 	}
 	
 	public void actionPerformed(ActionEvent e) {
 		CarParkingLogic cpl = (CarParkingLogic) super.model;
-		
-		if (e.getSource() == quitButton) {
-			try {
-				cpl.quit();
-			} catch (Exception ex) {
-				ex.printStackTrace();
-			}
-			return;
-		}
 	
 	if (e.getSource() == printCars) {
 		try {
 			cpl.printCarParkingDetails();
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return;
+	}
+	
+	if (e.getSource() == btnQuit) {
+		try {
+			System.exit(0);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

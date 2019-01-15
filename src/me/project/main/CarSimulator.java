@@ -19,7 +19,7 @@ public class CarSimulator {
 	private AbstractView carParkView;
     private CarParkingLogic carParking;
     private AbstractController controller;
-    private AbstractView statView;
+    private StatisticView statView;
     
     private int tickPause;
     public static boolean run;
@@ -36,8 +36,11 @@ public CarSimulator() {
 		
 		carParking = new CarParkingLogic(3, 6, 30);
 		controller = new Controller(carParking);
+		controller.setBackground(Color.LIGHT_GRAY);
 		carParkView = new CarParkView(carParking);
+		carParkView.setBackground(Color.GRAY);
 		statView = new StatisticView(carParking);
+		statView.setBackground(Color.LIGHT_GRAY);
 		
 		
 		frame=new JFrame("CarParking Simulation");
@@ -49,9 +52,9 @@ public CarSimulator() {
 		frame.getContentPane().add(controller);
 		frame.getContentPane().add(statView);
 
-		carParkView.setBounds(50, 10, 700, 330);
+		carParkView.setBounds(27, 12, 737, 339);
 		controller.setBounds(200, 360, 400, 50);
-		statView.setBounds(275, 421, 275, 20);
+		statView.setBounds(275, 421, 275, 29);
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
