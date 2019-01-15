@@ -31,6 +31,11 @@ public class CarParkingSimulator {
 	 */
     
 	public CarParkingSimulator() {
+		
+		/** 
+		 * Here the Logic, View and controller are defined 
+		 */
+		
 		carParking = new CarParkingLogic(3, 6, 30);
 		controller = new Controller(carParking);
 		carParkView = new CarParkView(carParking);
