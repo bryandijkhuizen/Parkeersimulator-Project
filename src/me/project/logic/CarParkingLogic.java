@@ -25,6 +25,9 @@ public class CarParkingLogic extends AbstractModel {
     private static CarQueue exitCarQueue;
     private Car[][][] cars;
     
+    private boolean run = true;
+    private int tickPause = 500;
+    
     int amountOfPassHolders;
     
     private int day = 0;

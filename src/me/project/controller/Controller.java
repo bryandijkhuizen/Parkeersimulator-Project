@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import me.project.logic.CarParkingLogic;
+import me.project.main.CarSimulator;
 
 	/**
 	 * This is class Controller for Simulator 
@@ -16,6 +17,8 @@ import me.project.logic.CarParkingLogic;
 	public class Controller extends AbstractController implements ActionListener {
 		private JButton printCars;
 		private JButton btnQuit;
+		private JButton startSimulator;
+		private JButton pauseSimulator;
 		
 	/**
 	* Controller Constructor
@@ -32,6 +35,14 @@ import me.project.logic.CarParkingLogic;
 		btnQuit = new JButton("Quit");
 		btnQuit.addActionListener(this);
 		add(btnQuit);
+		
+		startSimulator = new JButton("Start Simulator");
+		startSimulator.addActionListener(this);
+		add(startSimulator);
+		
+		pauseSimulator = new JButton("Pause Simulator");
+		pauseSimulator.addActionListener(this);
+		add(pauseSimulator);
 		
 	}
 	
@@ -50,6 +61,24 @@ import me.project.logic.CarParkingLogic;
 	if (e.getSource() == btnQuit) {
 		try {
 			System.exit(0);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return;
+	}
+	
+	if (e.getSource() == startSimulator) {
+		try {
+			CarSimulator.run = true;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return;
+	}
+	
+	if (e.getSource() == pauseSimulator) {
+		try {
+			CarSimulator.run = false;
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

@@ -53,8 +53,8 @@ public CarSimulator() {
 		frame.getContentPane().add(statView);
 
 		carParkView.setBounds(27, 12, 737, 339);
-		controller.setBounds(200, 360, 400, 50);
-		statView.setBounds(275, 421, 275, 29);
+		controller.setBounds(27, 376, 400, 74);
+		statView.setBounds(448, 386, 275, 29);
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
