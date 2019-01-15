@@ -16,6 +16,7 @@ import me.project.logic.CarParkingLogic;
 	public class Controller extends AbstractController implements ActionListener {
 		private JButton quitButton;
 		private JButton printCars;
+		private JButton button;
 		
 	/**
 	* Controller Constructor
@@ -32,7 +33,7 @@ import me.project.logic.CarParkingLogic;
 		printCars = new JButton("Print CarParking information");
 		printCars.addActionListener(this);
 		add(printCars);
-
+		
 	}
 	
 	public void actionPerformed(ActionEvent e) {
