@@ -1,6 +1,6 @@
 package me.project.runner;
 
-import me.project.main.CarParkingSimulator;
+import me.project.main.CarSimulator;
 
 /**
  * Runner Class to run the simulator.
@@ -12,7 +12,7 @@ import me.project.main.CarParkingSimulator;
 public class Runner {
 
 	public static void main(String[] args) {
-		new CarParkingSimulator();
+		new CarSimulator();
 	}
 
 }

@@ -1,5 +1,7 @@
 package me.project.main;
 
+import java.awt.EventQueue;
+
 import javax.swing.JFrame;
 
 import me.project.controller.AbstractController;
@@ -8,16 +10,12 @@ import me.project.logic.CarParkingLogic;
 import me.project.view.AbstractView;
 import me.project.view.CarParkView;
 import me.project.view.StatisticView;
+import java.awt.BorderLayout;
+import java.awt.Color;
 
-/**
- * Main ParkingSimulator class
- * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
- *
- */
+public class CarSimulator {
 
-public class CarParkingSimulator {
-	
-	private JFrame screen;
+	private JFrame frame;
 	private AbstractView carParkView;
     private CarParkingLogic carParking;
     private AbstractController controller;
@@ -25,12 +23,12 @@ public class CarParkingSimulator {
     
     private int tickPause;
     public static boolean run;
-	
+
 	/**
 	 * The constructor creates instances of CarParkingLogic, Controller, CarParkView, Screen.
 	 */
-    
-	public CarParkingSimulator() {
+	
+public CarSimulator() {
 		
 		/** 
 		 * Here the Logic, View and controller are defined 
@@ -42,19 +40,21 @@ public class CarParkingSimulator {
 		statView = new StatisticView(carParking);
 		
 		
-		screen=new JFrame("CarParking Simulation");
-		screen.setSize(1200, 500);
-		screen.setLayout(null);
-		screen.getContentPane().add(carParkView);
-		screen.getContentPane().add(controller);
-		screen.getContentPane().add(statView);
+		frame=new JFrame("CarParking Simulation");
+		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
+		
+		frame.setSize(811, 500);
+		frame.getContentPane().setLayout(null);
+		frame.getContentPane().add(carParkView);
+		frame.getContentPane().add(controller);
+		frame.getContentPane().add(statView);
 
 		carParkView.setBounds(50, 10, 700, 330);
-		controller.setBounds(0, 360, 750, 80);
-		statView.setBounds(800, 10, 400, 20);
+		controller.setBounds(200, 360, 400, 50);
+		statView.setBounds(275, 421, 275, 20);
 
-		screen.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		screen.setVisible(true);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setVisible(true);
 		
 		carParkView.updateView();
 
