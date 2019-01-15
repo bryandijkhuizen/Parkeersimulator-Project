@@ -2,7 +2,6 @@ package me.project.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -18,6 +17,7 @@ import me.project.model.ParkingPassCar;
  * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
  *
  */
+@SuppressWarnings("serial")
 public class CarParkView extends AbstractView{
 
     private JLabel titleLabel;

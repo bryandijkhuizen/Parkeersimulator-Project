@@ -53,7 +53,8 @@ public class CarParkingLogic extends AbstractModel {
      * @param numberOfRows   The number of rows per floor of the car park
      * @param numberOfPlaces The number of parking spots per row of the car park
      */
-    public CarParkingLogic(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
+    @SuppressWarnings("static-access")
+	public CarParkingLogic(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;

@@ -1,8 +1,6 @@
 package me.project.view;
 
-import java.util.List;
-
-import javax.swing.*;
+import javax.swing.JPanel;
 
 import me.project.model.AbstractModel;
 
