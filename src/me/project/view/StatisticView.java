@@ -11,41 +11,36 @@ import me.project.logic.CarParkingLogic;
 
 public class StatisticView extends AbstractView {
 	
-	private JLabel title;
-	private JTextField carCount;
+	private JLabel carCounterLabel;
+	private JTextField totalCarCount;
+	
 	private int totalCars;
 	
 	public StatisticView(CarParkingLogic model) {
 		super(model);
-
 		this.setLayout(null);
 
+		carCounterLabel = new JLabel("Current Amount of Cars: ");
 		
-		title = new JLabel("Live car park information:");
+		totalCarCount = new JTextField();    
+		
         
-        carCount = new JTextField();
-        carCount.setText(model.getTotalCars() + "");       
+        carCounterLabel.setBounds(5, 0, 220, 20);
+        totalCarCount.setBounds(180, 0, 100, 20);
         
+        add(carCounterLabel);
+        add(totalCarCount);
         
-        title.setBounds(5, 0, 220, 20);
-        carCount.setBounds(180, 0, 100, 20);
-        
-        add(title);
-        add(carCount);
-        
-        
-			
+        totalCarCount.setEditable(false);
+	
 	}
 	
 	public void updateView(){
 
         CarParkingLogic carPark = (CarParkingLogic) super.model;
 
-        
-        
         totalCars = carPark.getTotalCars();
-        carCount.setText("" + totalCars);
-
+        totalCarCount.setText("" + totalCars);
 
         setVisible(true);
         super.updateView();

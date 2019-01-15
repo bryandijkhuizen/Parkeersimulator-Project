@@ -553,6 +553,7 @@ public class CarParkingLogic extends AbstractModel {
     	return amountOfPassHolders;
     }
     
+    
     public void quit() {
     	System.exit(0);
     }
