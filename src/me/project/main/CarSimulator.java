@@ -28,7 +28,7 @@ public class CarSimulator {
 	 * The constructor creates instances of CarParkingLogic, Controller, CarParkView, Screen.
 	 */
 	
-public CarSimulator() {
+    public CarSimulator() {
 		
 		/** 
 		 * Here the Logic, View and controller are defined 

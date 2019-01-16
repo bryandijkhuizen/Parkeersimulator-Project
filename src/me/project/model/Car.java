@@ -14,12 +14,21 @@ public abstract class Car extends AbstractModel {
     private boolean isPaying;
     private boolean isMember;
     protected int minutesStay; 
+    private boolean hasToPay;
     
     /**
      * Constructor for objects of class Car
      */
     public Car() {
     	isMember = false; 
+    }
+    
+    public boolean getHasToPay() {
+        return hasToPay;
+    }
+
+    public void setHasToPay(boolean hasToPay) {
+        this.hasToPay = hasToPay;
     }
 
     /**
