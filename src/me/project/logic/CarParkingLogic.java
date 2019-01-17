@@ -37,34 +37,34 @@ public class CarParkingLogic extends AbstractModel {
     private int numberOfPayingCars; 
     private int numberOfExitingCars; 
     private int numberOfMembersExiting;
-    
+
     private int totalRegularCars, totalPassHolders, totalCars; 
-    
     private int totalSpace;
     
-    
     /**
-     * Constructor of the CarParkingLogic. 
-     * @param numberOfFloors The number of floors of the car park
-     * @param numberOfRows   The number of rows per floor of the car park
-     * @param numberOfPlaces The number of parking spots per row of the car park
+     * CarParkingLogic Constructor 
+     * @param numberOfFloors 
+     * @param numberOfRows   
+     * @param numberOfPlaces 
      */
+    
     @SuppressWarnings("static-access")
 	public CarParkingLogic(int numberOfFloors, int numberOfRows, int numberOfPlaces) {
         this.numberOfFloors = numberOfFloors;
         this.numberOfRows = numberOfRows;
         this.numberOfPlaces = numberOfPlaces;
         
-
+        cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
+        
         entranceCarQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
         membersCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
         
-        enterSpeed = 3; // number of cars that can enter per minute
-        paymentSpeed = 10; // number of cars that can pay per minute
-        exitSpeed = 9; // number of cars that can leave per minute
-        totalSpace = numberOfPlaces * numberOfRows * numberOfFloors;
+        enterSpeed = 3; 
+        paymentSpeed = 10; 
+        exitSpeed = 9; 
+        totalSpace = numberOfPlaces * numberOfRows * numberOfFloors; 
         amountOfPassHolders = 150;
 
         numberOfEnteringCars = 0;
@@ -75,12 +75,8 @@ public class CarParkingLogic extends AbstractModel {
         totalRegularCars = 0;
         totalPassHolders = 0;
         totalCars = 0;
-       
-
-        cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
-        
-        
     }
+    
 
     /**
      * This method creates a random number.
@@ -88,6 +84,7 @@ public class CarParkingLogic extends AbstractModel {
      * @param max
      * @return returns a random integer 
      */
+    
     
     public int getRandInt(int max, int min){
     	
@@ -108,46 +105,56 @@ public class CarParkingLogic extends AbstractModel {
         return numberOfFloors;
     }
 
+    
     /**
      * Get number of rows at the car park.
      * @return numberOfRows
      */
     
+    
     public int getNumberOfRows() {
         return numberOfRows;
     }
 
+    
     /**
      * Get number of parking spots in the car park.
      * @return numberOfPlaces 
      */
     
+    
     public int getNumberOfPlaces() {
         return numberOfPlaces;
     }
 
+    
     /**
      * Get the cars array
      * @return cars 
      */
     
+    
     public Car[][][] getCars() {
         return cars;
     }
 
+    
     /**
      * Get queue of all cars that are entering
      * @return cars 
      */
     
+    
     public CarQueue getEntranceCarQueue() {
         return entranceCarQueue;
     }
 
+    
     /**
      * Get queue of the cars that are paying
      * @return cars in the payment car queue
      */
+    
     
     public CarQueue getPaymentCarQueue() {
         return paymentCarQueue;
@@ -226,6 +233,7 @@ public class CarParkingLogic extends AbstractModel {
         return totalRegularCars;
     }
 
+   
     /**
      * @return totalCars 
      */
@@ -251,9 +259,11 @@ public class CarParkingLogic extends AbstractModel {
     	return entranceCarQueue.carsInQueue();
     }
     
-	/**
+	
+    /**
 	 * This method simulates 'x' times
 	 */
+    
 	
 	public void steps(int x) {
 		for(int i = 0; i < x; i++) {
@@ -261,9 +271,11 @@ public class CarParkingLogic extends AbstractModel {
 		}
 	}
 	
-    /**
+    
+	/**
      * Simulates one step, it advances the time by one minute.
      */
+	
 	
     public void tick() {
     	
