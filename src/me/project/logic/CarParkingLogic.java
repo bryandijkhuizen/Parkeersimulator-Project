@@ -40,7 +40,7 @@ public class CarParkingLogic extends AbstractModel {
     
     private int totalRegularCars, totalPassHolders, totalCars; 
     
-    private int totalSpace = 0;
+    private int totalSpace;
     
     /**
      * Constructor of the CarParkingLogic. 
@@ -72,6 +72,7 @@ public class CarParkingLogic extends AbstractModel {
         numberOfMembersExiting = 0;
         totalRegularCars = 0;
         totalPassHolders = 0;
+        totalCars = 0;
        
 
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
@@ -311,16 +312,13 @@ public class CarParkingLogic extends AbstractModel {
         		Car car = entranceCarQueue.removeCar();
                 numberOfEnteringCars--;
 
-            Location freeLocation = this.getFirstFreeLocation();
-            if (freeLocation != null) {
-                this.setCarAt(freeLocation, car);
                 if(car instanceof AdHocCar || car instanceof ParkingPassCar) {
                 		car.setMinutesLeft(car.getStayTime());
-              }
+              
             }
             super.notifyViews();
         }
-        }
+      }
         this.tickCars();
 
         while (true) {
