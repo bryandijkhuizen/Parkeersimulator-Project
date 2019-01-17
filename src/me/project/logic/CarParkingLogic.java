@@ -45,9 +45,11 @@ public class CarParkingLogic extends AbstractModel {
     int numberOfPayingCars; 
     int numberOfExitingCars; 
     int numberOfMembersExiting;
+    
     int totalCars; 
     int totalPassHolders; 
     int total; 
+    
     int totalSpace;
     
     /**
@@ -245,10 +247,8 @@ public class CarParkingLogic extends AbstractModel {
 
         Random random = new Random();
 
-        int averageNumberOfCarsPerHour = day < 5
-                ? weekDayArrivals
-                : weekendArrivals;
-
+        int averageNumberOfCarsPerHour = day < 5 ? weekDayArrivals : weekendArrivals;
+                
         double standardDeviation = averageNumberOfCarsPerHour * 0.1;
         double numberOfCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
         int numberOfCarsPerMinute = (int)Math.round(numberOfCarsPerHour / 60);
@@ -263,25 +263,26 @@ public class CarParkingLogic extends AbstractModel {
                 numberOfEnteringCars++;
                 totalCars++;
                 entranceCarQueue.addCar(car);
-            }
+            
+          }
             
             for (int i = 0; i < numberOfMembersPerMinute ; i++) {
                 Car car = new ParkingPassCar();
                 numberOfEnteringCars++;
                 totalPassHolders++;
                 entranceCarQueue.addCar(car);
-            }
+            
+          }
 
             super.notifyViews();
         }
 
         for (int i = 0; i < enterSpeed; i++) {
             Car car = entranceCarQueue.removeCar();
+            numberOfEnteringCars--;
 
             if (car == null) {
                 break;
-            } else {
-            	numberOfEnteringCars--;
             }
 
             Location freeLocation = this.getFirstFreeLocation();
