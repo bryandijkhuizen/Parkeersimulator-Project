@@ -257,35 +257,47 @@ public class CarParkingLogic extends AbstractModel {
         double numberOfCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
         int numberOfCarsPerMinute = (int)Math.round(numberOfCarsPerHour / 60);
  
-        double numberOfMembersPerHour = (amountOfPassHolders / 6) + random.nextGaussian() * standardDeviation;
-        int numberOfMembersPerMinute = (int)Math.round(numberOfMembersPerHour / 60);
-        int numberTotalCarsPerMinute = numberOfCarsPerMinute + numberOfMembersPerMinute;
+        double numberOfParkingPassHoldersPerHour = (amountOfPassHolders / 6) + random.nextGaussian() * standardDeviation;
+        int numberOfParkingPassHoldersPerMinute = (int)Math.round(numberOfParkingPassHoldersPerHour / 60);
+        int numberTotalCarsPerMinute = numberOfCarsPerMinute + numberOfParkingPassHoldersPerMinute;
         
         /**
          * Here will the Car Park be simulated.
          */
 
-        for (int j = 0; j < numberTotalCarsPerMinute; j++) { 	/** The cars will enter until 
-        													 	 * the maximum amount of cars per minute was reached
-        													 	 */
+        
+        /**
+		 * The cars will enter until 
+	 	 * the maximum amount of cars per minute was reached
+	 	 */
+        
+        for (int j = 0; j < numberTotalCarsPerMinute; j++) { 	
         	
-            for (int i = 0; i < numberOfCarsPerMinute; i++) {
+        		/** 
+				 * As long as the maximum of regular cars entering the 
+				 * parking hasn't been reached regular cars will enter
+				 */
+        	
+            for (int i = 0; i < numberOfCarsPerMinute; i++) {	
                 Car car = new AdHocCar();
                 numberOfEnteringCars++;
                 totalRegularCars++;
                 entranceCarQueue.addCar(car);
             
           }
+            	/** 
+            	 * As long as the maximum of ParkingPassHolders cars entering the 
+            	 * parking hasn't been reached regular cars will enter
+            	 */
             
-            for (int i = 0; i < numberOfMembersPerMinute ; i++) {
+            for (int i = 0; i < numberOfParkingPassHoldersPerMinute ; i++) {
                 Car car = new ParkingPassCar();
                 numberOfEnteringCars++;
                 totalPassHolders++;
                 entranceCarQueue.addCar(car);
             
           }
-
-            super.notifyViews();
+            super.notifyViews(); //updates the CarParkView
         }
 
         for (int i = 0; i < enterSpeed; i++) {
