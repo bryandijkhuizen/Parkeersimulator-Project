@@ -26,10 +26,9 @@ public class CarParkView extends AbstractView{
 
     /**
      * Constructor creates an instance of the CarParkView.
-     * It stores its data to the given model.
-     *
-     * @param model The model that applies to this view
+     * @param model
      */
+    
     public CarParkView(CarParkingLogic model) {
         super(model);
         
@@ -41,10 +40,11 @@ public class CarParkView extends AbstractView{
 
     }
 
-    @Override
+    
     /**
      * Scaling the carParkImage.
      */
+    
     public void paintComponent(Graphics g) {
         if (carParkImage == null) {
             return;
@@ -61,22 +61,19 @@ public class CarParkView extends AbstractView{
     }
 
     /**
-     * Notify the model that applies to the view that the view should be updated.
-     * Creating a visual representation of the car park with cars entering and leaving
-     * when updateView() is called.
+     * Updates the CarParkView screen when changes happened.
      */
+    
     public void updateView() {
 
         CarParkingLogic carPark = (CarParkingLogic) super.model;
         
-        // Create a new car park image if the size has changed.
         if (!size.equals(getSize())) {
             size = getSize();
             carParkImage = createImage(size.width, size.height);
         }
 
         Graphics graphics = carParkImage.getGraphics();
-
 
         for (int floor = 0; floor < carPark.getNumberOfFloors(); floor++) {
             for (int row = 0; row < carPark.getNumberOfRows(); row++) {
@@ -103,8 +100,9 @@ public class CarParkView extends AbstractView{
     }
 
     /**
-     * Paint a parking spot on the screen in a given color.
+     * Paint a parking spot on the screen.
      */
+    
     private void drawPlace(Graphics graphics, Location location, Color color) {
         graphics.setColor(color);
         graphics.fillRect(

@@ -13,14 +13,14 @@ import me.project.main.CarSimulator;
 	 *
 	 */
 	
-	@SuppressWarnings("serial")
-	public class Controller extends AbstractController implements ActionListener {
-		private JButton printCars;
-		private JButton btnQuit;
-		private JButton startSimulator;
-		private JButton pauseSimulator;
-		private JButton tenSteps;
-		private JButton oneHundredSteps;
+@SuppressWarnings("serial")
+public class Controller extends AbstractController implements ActionListener {
+	private JButton printCars;
+	private JButton btnQuit;
+	private JButton startSimulator;
+	private JButton pauseSimulator;
+	private JButton tenSteps;
+	private JButton oneHundredSteps;
 		
 	/**
 	* Controller Constructor

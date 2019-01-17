@@ -1,7 +1,5 @@
 package me.project.main;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 
 import me.project.controller.AbstractController;
@@ -10,9 +8,13 @@ import me.project.logic.CarParkingLogic;
 import me.project.view.AbstractView;
 import me.project.view.CarParkView;
 import me.project.view.totalCarsView;
-import java.awt.BorderLayout;
 import java.awt.Color;
-import javax.swing.JButton;
+
+/**
+ * This class combines all of the functions
+ * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
+ *
+ */
 
 public class CarSimulator {
 

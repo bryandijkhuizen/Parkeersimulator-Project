@@ -121,6 +121,11 @@ public abstract class Car extends AbstractModel {
 	    	
 	    	return randNum;
 	    }
+	
+	 /**
+	  * gets the car's color
+	  * @return color
+	  */
 
 	public abstract Color getColor();
 

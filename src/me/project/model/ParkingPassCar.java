@@ -28,6 +28,11 @@ public class ParkingPassCar extends Car {
 		minutesStay = (int) (15 + random.nextFloat() * 10 * 60);
     }
     
+    /**
+   	 * gets the car's color
+   	 * @return color
+   	 */
+    
     public Color getColor(){
     	return COLOR;
     }

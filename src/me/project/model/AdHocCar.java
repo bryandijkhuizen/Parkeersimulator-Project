@@ -6,11 +6,11 @@ import me.project.view.Colors;
 
 import java.awt.Color;
 
-/**
- * Class for adHocCar when they enter an how long the stay
- * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
- *
- */
+	/**
+	 * Class for adHocCar when they enter an how long the stay
+	 * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
+	 *
+	 */
 
 public class AdHocCar extends Car {
 	

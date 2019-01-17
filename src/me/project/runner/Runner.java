@@ -10,6 +10,10 @@ import me.project.main.CarSimulator;
  */
 
 public class Runner {
+	
+	/**
+	 * Main Method; starts the program.
+	 */
 
 	public static void main(String[] args) {
 		new CarSimulator();

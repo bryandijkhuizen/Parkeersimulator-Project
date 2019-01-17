@@ -34,7 +34,7 @@ public class CarQueue {
 
     /**
      * returns carsInQueue 
-     * @return carqueue in size
+     * @return car queue in size
      */
     
     public int carsInQueue(){

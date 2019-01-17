@@ -4,11 +4,11 @@ import java.util.*;
 
 import me.project.view.AbstractView;
 
-/**
- * Abstract Class for the model subclasses
- * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
- *
- */
+	/**
+	 * Abstract Class for the model subclasses
+	 * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
+	 *
+	 */
 
 public abstract class AbstractModel {
 	private List<AbstractView> AbstractViews;
@@ -29,9 +29,18 @@ public abstract class AbstractModel {
 		AbstractViews.add(AbstractView);
 	}
 	
+	/**
+	 * updates the views
+	 */
+
 	public void notifyViews() {
 		for(AbstractView v: AbstractViews) v.updateView();
 	}
+	
+	/**
+	 * Tick()
+	 */
+	
 	public void tick() {
 	}
 }
