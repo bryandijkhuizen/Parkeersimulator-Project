@@ -26,8 +26,8 @@ public class CarParkingLogic extends AbstractModel {
     private int hour = 0;
     private int minute = 0;
 
-    private int weekDayArrivals= 90; 
-    private int weekendArrivals = 50; 
+    private int weekDayArrivals= 100; 
+    private int weekendArrivals = 200; 
 
     private int enterSpeed;
     private int paymentSpeed;
@@ -41,6 +41,7 @@ public class CarParkingLogic extends AbstractModel {
     private int totalRegularCars, totalPassHolders, totalCars; 
     
     private int totalSpace;
+    
     
     /**
      * Constructor of the CarParkingLogic. 
@@ -70,12 +71,14 @@ public class CarParkingLogic extends AbstractModel {
         numberOfPayingCars = 0;
         numberOfExitingCars = 0;
         numberOfMembersExiting = 0;
+        
         totalRegularCars = 0;
         totalPassHolders = 0;
         totalCars = 0;
        
 
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
+        
         
     }
 
@@ -218,6 +221,14 @@ public class CarParkingLogic extends AbstractModel {
 	public int getExitSpeed(){
 		return exitSpeed;
 	}
+	
+	public void steps(int x) {
+		for(int i = 0; i < x; i++) {
+			tick();
+		}
+	}
+	
+	
 
     /**
      * Executes one simulation step, it advances the time by one minute.
@@ -282,7 +293,6 @@ public class CarParkingLogic extends AbstractModel {
             for (int i = 0; i < numberOfCarsPerMinute; i++) {	
                 Car car = new AdHocCar();
                 numberOfEnteringCars++;
-                totalRegularCars++;
                 entranceCarQueue.addCar(car);
             
           }
@@ -294,7 +304,6 @@ public class CarParkingLogic extends AbstractModel {
             for (int i = 0; i < numberOfParkingPassHoldersPerMinute ; i++) {
                 Car car = new ParkingPassCar();
                 numberOfEnteringCars++;
-                totalPassHolders++;
                 entranceCarQueue.addCar(car);
             
           }
@@ -308,17 +317,32 @@ public class CarParkingLogic extends AbstractModel {
          */
 
         for (int i = 0; i < enterSpeed; i++) {
-        	while(totalCars < totalSpace) {
+        	if(totalCars < totalSpace) {
         		Car car = entranceCarQueue.removeCar();
                 numberOfEnteringCars--;
-
+                
+                if(car == null) {
+                	break;
+                }else {
+                	
+                if(getFirstFreeLocation() != null) {
+                this.setCarAt(getFirstFreeLocation(), car);
+                
+                if(car instanceof AdHocCar) {
+                	totalRegularCars++;
+                }else if (car instanceof ParkingPassCar) {
+                	totalPassHolders++;
+                }
+                
                 if(car instanceof AdHocCar || car instanceof ParkingPassCar) {
                 		car.setMinutesLeft(car.getStayTime());
-              
+                }
             }
+       }
             super.notifyViews();
         }
-      }
+     }
+   
         this.tickCars();
 
         while (true) {
@@ -337,10 +361,6 @@ public class CarParkingLogic extends AbstractModel {
                 numberOfMembersExiting++;
             	membersCarQueue.addCar(car);
                 this.removeCarAt(car.getLocation());
-                if (car instanceof ParkingPassCar) {
-                	totalPassHolders--;
-                } 
-                break;
             }
             
             super.notifyViews();
@@ -357,7 +377,6 @@ public class CarParkingLogic extends AbstractModel {
             this.removeCarAt(car.getLocation());
             exitCarQueue.addCar(car);
             numberOfExitingCars++;
-            totalRegularCars--;
             super.notifyViews(); 
         }
         
@@ -367,6 +386,7 @@ public class CarParkingLogic extends AbstractModel {
                 break;
             } else {
                 numberOfExitingCars--;	
+                totalRegularCars--;
             }
             super.notifyViews();
  
@@ -378,6 +398,7 @@ public class CarParkingLogic extends AbstractModel {
                 break;
             } else {
             	numberOfMembersExiting--;
+            	totalPassHolders--;
             }
             super.notifyViews(); 
 
@@ -407,12 +428,12 @@ public class CarParkingLogic extends AbstractModel {
      * For every car call the tick method by looping through the car park.
      */
     
-    private void tickCars() {
+    public void tickCars() {
         for (int floor = 0; floor < getNumberOfFloors(); floor++) {
             for (int row = 0; row < getNumberOfRows(); row++) {
                 for (int place = 0; place < getNumberOfPlaces(); place++) {
                     Location location = new Location(floor, row, place);
-                    Car car = this.getCarAt(location);
+                    Car car = getCarAt(location);
                     if (car != null) {
                         car.tick();
                     }

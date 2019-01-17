@@ -19,6 +19,8 @@ import me.project.main.CarSimulator;
 		private JButton btnQuit;
 		private JButton startSimulator;
 		private JButton pauseSimulator;
+		private JButton tenSteps;
+		private JButton oneHundredSteps;
 		
 	/**
 	* Controller Constructor
@@ -43,6 +45,14 @@ import me.project.main.CarSimulator;
 		pauseSimulator = new JButton("Pause Simulator");
 		pauseSimulator.addActionListener(this);
 		add(pauseSimulator);
+		
+		tenSteps = new JButton("tenSteps");
+		tenSteps.addActionListener(this);
+		add(tenSteps);
+		
+		oneHundredSteps = new JButton("oneHundredSteps");
+		oneHundredSteps.addActionListener(this);
+		add(oneHundredSteps);
 		
 	}
 	
@@ -79,6 +89,24 @@ import me.project.main.CarSimulator;
 	if (e.getSource() == pauseSimulator) {
 		try {
 			CarSimulator.run = false;
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return;
+	}
+	
+	if (e.getSource() == tenSteps) {
+		try {
+			cpl.steps(10);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return;
+	}
+	
+	if (e.getSource() == oneHundredSteps) {
+		try {
+			cpl.steps(100);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}
