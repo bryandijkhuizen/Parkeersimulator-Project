@@ -1,8 +1,6 @@
-package me.project.model;
+package me.project.abstracts;
 
 import java.util.*;
-
-import me.project.view.AbstractView;
 
 	/**
 	 * Abstract Class for the model subclasses

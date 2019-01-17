@@ -3,6 +3,7 @@ package me.project.model;
 
 import java.util.Random;
 
+import me.project.abstracts.Car;
 import me.project.view.Colors;
 
 import java.awt.*;

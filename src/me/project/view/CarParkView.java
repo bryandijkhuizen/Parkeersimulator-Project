@@ -7,8 +7,9 @@ import java.awt.Image;
 
 import javax.swing.JLabel;
 
+import me.project.abstracts.AbstractView;
+import me.project.abstracts.Car;
 import me.project.logic.CarParkingLogic;
-import me.project.model.Car;
 import me.project.model.Location;
 import me.project.model.ParkingPassCar;
 

@@ -1,8 +1,6 @@
-package me.project.view;
+package me.project.abstracts;
 
 import javax.swing.JPanel;
-
-import me.project.model.AbstractModel;
 
 	/**
 	 * All views should extend AbstractView.

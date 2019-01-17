@@ -3,6 +3,7 @@ package me.project.view;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
+import me.project.abstracts.AbstractView;
 import me.project.logic.CarParkingLogic;
 
 	/**

@@ -1,8 +1,6 @@
-package me.project.controller;
+package me.project.abstracts;
 
 import javax.swing.JPanel;
-
-import me.project.model.AbstractModel;
 
 	/**
 	 * Abstract Class for the controller

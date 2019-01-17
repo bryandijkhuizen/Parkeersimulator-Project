@@ -2,9 +2,9 @@ package me.project.logic;
 
 import java.util.Random;
 
-import me.project.model.AbstractModel;
+import me.project.abstracts.AbstractModel;
+import me.project.abstracts.Car;
 import me.project.model.AdHocCar;
-import me.project.model.Car;
 import me.project.model.CarQueue;
 import me.project.model.Location;
 import me.project.model.ParkingPassCar;
@@ -260,17 +260,6 @@ public class CarParkingLogic extends AbstractModel {
     }
     
 	
-    /**
-	 * This method simulates 'x' times
-	 */
-    
-	
-	public void steps(int x) {
-		for(int i = 0; i < x; i++) {
-			tick();
-		}
-	}
-	
     
 	/**
      * Simulates one step, it advances the time by one minute.
@@ -368,8 +357,10 @@ public class CarParkingLogic extends AbstractModel {
                 	break;
                 }else {
                 	
-                if(getFirstFreeLocation() != null) { //firstFreeLocation has to exist
-                this.setCarAt(getFirstFreeLocation(), car); //car gets put in firstFreeLocation
+                if(getFirstFreeLocation() == null) { //firstFreeLocation has to exist
+                	break;
+                } else {
+                	this.setCarAt(getFirstFreeLocation(), car); //car gets put in firstFreeLocation
                 
                 if(car instanceof AdHocCar) {
                 	totalRegularCars++; //if the car is a regular car that amount will be increased by 1
@@ -384,6 +375,7 @@ public class CarParkingLogic extends AbstractModel {
        }
             super.notifyViews();
         }
+        	
      }
    
         this.tickCars();
@@ -405,14 +397,13 @@ public class CarParkingLogic extends AbstractModel {
                 break;
             }
             
-            while(car.getMinutesLeft() == 0) {
 
-            if(car instanceof AdHocCar){
+            if(car instanceof AdHocCar && car.getMinutesLeft() == 0){
             	numberOfPayingCars++;
             	paymentCarQueue.addCar(car); // Car gets added to the payment Queue
             	break;
 	
-            } else if(car instanceof ParkingPassCar) { 
+            } else if(car instanceof ParkingPassCar && car.getMinutesLeft() == 0) { 
                 numberOfMembersExiting++;
             	membersCarQueue.addCar(car); // Car gets added to the membersCarQueue to leave
                 this.removeCarAt(car.getLocation()); //Car gets removed from it's location
@@ -421,7 +412,7 @@ public class CarParkingLogic extends AbstractModel {
             
             super.notifyViews();
         }
-     }
+     
         
         /*
          * 
@@ -484,6 +475,17 @@ public class CarParkingLogic extends AbstractModel {
 
         
     }
+    
+    /**
+	 * This method simulates 'x' times
+	 */
+    
+	
+	public void steps(int x) {
+		for(int i = 0; i < x; i++) {
+			tick();
+		}
+	}
     
     /**
      * This method finds the first free location in the car park and returns it.

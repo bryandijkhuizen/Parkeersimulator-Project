@@ -2,10 +2,10 @@ package me.project.main;
 
 import javax.swing.JFrame;
 
-import me.project.controller.AbstractController;
+import me.project.abstracts.AbstractController;
+import me.project.abstracts.AbstractView;
 import me.project.controller.Controller;
 import me.project.logic.CarParkingLogic;
-import me.project.view.AbstractView;
 import me.project.view.CarParkView;
 import me.project.view.totalCarsView;
 import java.awt.Color;

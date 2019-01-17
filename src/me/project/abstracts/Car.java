@@ -1,7 +1,9 @@
-package me.project.model;
+package me.project.abstracts;
 
 import java.awt.*;
 import java.util.Random;
+
+import me.project.model.Location;
 
 
 /*
