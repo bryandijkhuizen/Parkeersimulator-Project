@@ -12,11 +12,12 @@ import me.project.model.Car;
 import me.project.model.Location;
 import me.project.model.ParkingPassCar;
 
-/**
- * This class contains the carParkView
- * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
- *
- */
+	/**
+	 * This class contains the carParkView
+	 * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
+	 *
+	 */
+
 @SuppressWarnings("serial")
 public class CarParkView extends AbstractView{
 
