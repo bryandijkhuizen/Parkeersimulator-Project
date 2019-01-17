@@ -21,8 +21,11 @@ public class Controller extends AbstractController implements ActionListener {
 	private JButton btnQuit;
 	private JButton startSimulator;
 	private JButton pauseSimulator;
+	private JButton oneStep;
 	private JButton tenSteps;
 	private JButton oneHundredSteps;
+	private JButton oneHour;
+	private JButton oneDay;
 		
 	/**
 	* Controller Constructor
@@ -55,6 +58,18 @@ public class Controller extends AbstractController implements ActionListener {
 		oneHundredSteps = new JButton("oneHundredSteps");
 		oneHundredSteps.addActionListener(this);
 		add(oneHundredSteps);
+		
+		oneStep = new JButton("oneStep");
+		oneStep.addActionListener(this);
+		add(oneStep);
+		
+		oneHour = new JButton("oneHour");
+		oneHour.addActionListener(this);
+		add(oneHour);
+		
+		oneDay = new JButton("oneDay");
+		oneDay.addActionListener(this);
+		add(oneDay);
 		
 	}
 	
@@ -109,6 +124,33 @@ public class Controller extends AbstractController implements ActionListener {
 	if (e.getSource() == oneHundredSteps) {
 		try {
 			cpl.steps(100);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return;
+	}
+	
+	if (e.getSource() == oneStep) {
+		try {
+			cpl.steps(1);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return;
+	}
+	
+	if (e.getSource() == oneHour) {
+		try {
+			cpl.steps(60);
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return;
+	}
+	
+	if (e.getSource() == oneDay) {
+		try {
+			cpl.steps(1440);
 		} catch (Exception ex) {
 			ex.printStackTrace();
 		}

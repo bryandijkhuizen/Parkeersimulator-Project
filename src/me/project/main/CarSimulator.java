@@ -56,7 +56,7 @@ public class CarSimulator {
 		frame.getContentPane().add(totalCars);
 
 		carParkView.setBounds(27, 12, 737, 339);
-		controller.setBounds(27, 376, 400, 74);
+		controller.setBounds(27, 376, 400, 101);
 		totalCars.setBounds(437, 421, 275, 29);
 		
 

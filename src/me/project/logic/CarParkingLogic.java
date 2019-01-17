@@ -26,8 +26,8 @@ public class CarParkingLogic extends AbstractModel {
     private int hour = 0;
     private int minute = 0;
 
-    private int weekDayArrivals= 100; 
-    private int weekendArrivals = 200; 
+    private int weekDayArrivals= 50; 
+    private int weekendArrivals = 90; 
 
     private int enterSpeed;
     private int paymentSpeed;
@@ -65,7 +65,7 @@ public class CarParkingLogic extends AbstractModel {
         paymentSpeed = 10; 
         exitSpeed = 9; 
         totalSpace = numberOfPlaces * numberOfRows * numberOfFloors; 
-        amountOfPassHolders = 150;
+        amountOfPassHolders = 108;
 
         numberOfEnteringCars = 0;
         numberOfPayingCars = 0;
@@ -297,13 +297,15 @@ public class CarParkingLogic extends AbstractModel {
 
         int averageNumberOfCarsPerHour = day < 5 ? weekDayArrivals : weekendArrivals;
         
-        double standardDeviation = averageNumberOfCarsPerHour * 0.1;
-        double numberOfCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
-        int numberOfCarsPerMinute = (int)Math.round(numberOfCarsPerHour / 60);
+        double standardDeviation = averageNumberOfCarsPerHour * 0.3;
+        double numberOfRegularCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
+        int numberOfRegularCarsPerMinute = (int)Math.round(numberOfRegularCarsPerHour / 60);
  
-        double numberOfParkingPassHoldersPerHour = (amountOfPassHolders / 6) + random.nextGaussian() * standardDeviation;
+        double numberOfParkingPassHoldersPerHour = (amountOfPassHolders / 20) + random.nextGaussian() * standardDeviation;
         int numberOfParkingPassHoldersPerMinute = (int)Math.round(numberOfParkingPassHoldersPerHour / 60);
-        int numberTotalCarsPerMinute = numberOfCarsPerMinute + numberOfParkingPassHoldersPerMinute;
+        int numberTotalCarsPerMinute = numberOfRegularCarsPerMinute + numberOfParkingPassHoldersPerMinute;
+        
+        
         
         /**
          * Here will the Car Park be simulated.
@@ -322,7 +324,7 @@ public class CarParkingLogic extends AbstractModel {
 				 * parking hasn't been reached regular cars will enter
 				 */
         	
-            for (int i = 0; i < numberOfCarsPerMinute; i++) {	
+            for (int i = 0; i < numberOfRegularCarsPerMinute; i++) {	
                 Car car = new AdHocCar();
                 numberOfEnteringCars++;
                 entranceCarQueue.addCar(car);
@@ -391,20 +393,21 @@ public class CarParkingLogic extends AbstractModel {
          * 
          */
 
+        
         while (true) {
-            Car car = this.getFirstLeavingCar();
+           Car car = this.getFirstLeavingCar();
+           
             
             if (car == null) {
                 break;
             }
-            
 
-            if(car instanceof AdHocCar){
+            if(car instanceof AdHocCar && car.getMinutesLeft() <= 0){
             	numberOfPayingCars++;
             	paymentCarQueue.addCar(car); // Car gets added to the payment Queue
             	break;
 	
-            } else if(car instanceof ParkingPassCar) { 
+            } else if(car instanceof ParkingPassCar && car.getMinutesLeft() <= 0) { 
                 numberOfMembersExiting++;
             	membersCarQueue.addCar(car); // Car gets added to the membersCarQueue to leave
                 this.removeCarAt(car.getLocation()); //Car gets removed from it's location
