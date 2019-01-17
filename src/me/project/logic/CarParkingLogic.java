@@ -40,7 +40,7 @@ public class CarParkingLogic extends AbstractModel {
     
     private int totalRegularCars, totalPassHolders, totalCars; 
     
-    private int totalSpace;
+    private int totalSpace = 0;
     
     /**
      * Constructor of the CarParkingLogic. 
@@ -299,14 +299,17 @@ public class CarParkingLogic extends AbstractModel {
           }
             super.notifyViews(); //updates the CarParkView
         }
+        
+        /*
+         * For as long as the maximum enterSpeed hasn't been reached
+         * The Car will be removed from the EntranceQueue and the NumberOfEnteringCars will be decreased 
+         * by 1.
+         */
 
         for (int i = 0; i < enterSpeed; i++) {
-            Car car = entranceCarQueue.removeCar();
-            numberOfEnteringCars--;
-
-            if (car == null) {
-                break;
-            }
+        	while(totalCars < totalSpace) {
+        		Car car = entranceCarQueue.removeCar();
+                numberOfEnteringCars--;
 
             Location freeLocation = this.getFirstFreeLocation();
             if (freeLocation != null) {
@@ -317,7 +320,7 @@ public class CarParkingLogic extends AbstractModel {
             }
             super.notifyViews();
         }
-
+        }
         this.tickCars();
 
         while (true) {
