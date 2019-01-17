@@ -286,6 +286,22 @@ public class CarParkingLogic extends AbstractModel {
         }
         
         /*
+         * BEGIN VAN DE SWITCH VOOR HET TELLEN VAN DAGEN
+         * DEFINIEËR EEN STRING: 'CURRENTDAY'
+         * INITIALISEER DEZE MET CURRENTDAY = 'MONDAY'
+         * VERVOLGENS MAAK JE EEN SWITCH OVER DAY
+         * 
+         * 
+         * 
+         * 
+         * switch (day){
+         * 	case 0: currentDay = "Monday";
+         * 	break;
+         * 	case 1: currentDay etc.....
+         * }
+         */
+        
+        /*
          * A random object gets defined here.
          */
 
