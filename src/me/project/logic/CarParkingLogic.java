@@ -316,7 +316,7 @@ public class CarParkingLogic extends AbstractModel {
         int numberOfParkingPassHoldersPerMinute = (int)Math.round(numberOfParkingPassHoldersPerHour / 60);
         int numberTotalCarsPerMinute = numberOfCarsPerMinute + numberOfParkingPassHoldersPerMinute;
         
-        /*
+        /**
          * Here will the Car Park be simulated.
          */
 
@@ -418,7 +418,6 @@ public class CarParkingLogic extends AbstractModel {
                 this.removeCarAt(car.getLocation()); //Car gets removed from it's location
                 break;
             }
-            
             
             super.notifyViews();
         }
