@@ -357,11 +357,12 @@ public class CarParkingLogic extends AbstractModel {
                 	break;
                 }else {
                 	
-                if(getFirstFreeLocation() == null) { //firstFreeLocation has to exist
-                	break;
-                } else {
+                if(getFirstFreeLocation() != null) { //firstFreeLocation has to exist
                 	this.setCarAt(getFirstFreeLocation(), car); //car gets put in firstFreeLocation
                 
+                }else {
+                	break;
+                }
                 if(car instanceof AdHocCar) {
                 	totalRegularCars++; //if the car is a regular car that amount will be increased by 1
                 }else if (car instanceof ParkingPassCar) {
@@ -376,7 +377,7 @@ public class CarParkingLogic extends AbstractModel {
             super.notifyViews();
         }
         	
-     }
+     
    
         this.tickCars();
         
@@ -398,12 +399,12 @@ public class CarParkingLogic extends AbstractModel {
             }
             
 
-            if(car instanceof AdHocCar && car.getMinutesLeft() == 0){
+            if(car instanceof AdHocCar){
             	numberOfPayingCars++;
             	paymentCarQueue.addCar(car); // Car gets added to the payment Queue
             	break;
 	
-            } else if(car instanceof ParkingPassCar && car.getMinutesLeft() == 0) { 
+            } else if(car instanceof ParkingPassCar) { 
                 numberOfMembersExiting++;
             	membersCarQueue.addCar(car); // Car gets added to the membersCarQueue to leave
                 this.removeCarAt(car.getLocation()); //Car gets removed from it's location
