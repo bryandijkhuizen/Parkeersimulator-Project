@@ -396,6 +396,19 @@ public class CarParkingLogic extends AbstractModel {
         
         for (int j = 0; j < numberTotalCarsPerMinute; j++) { 	
         	
+        	/*
+        	 * This will remove the cars from the entrance queue
+        	 * if the queue gets too long
+        	 * 
+        	 * 
+        	 */
+        	
+        	for(int i = 0; i < entranceCarQueue.carsInQueue(); i++) {
+        		if(entranceCarQueue.carsInQueue() > 25) {
+        			@SuppressWarnings("unused")
+					Car car = entranceCarQueue.removeCar();
+        		}
+        	}
         		/*
 				 * As long as the maximum of regular cars entering the 
 				 * parking hasn't been reached regular cars will enter

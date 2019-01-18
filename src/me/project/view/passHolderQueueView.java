@@ -15,11 +15,11 @@ import me.project.logic.CarParkingLogic;
 	@SuppressWarnings("serial")
 	public class passHolderQueueView extends AbstractView {
 		
-		private JLabel currentAmountOfWaitingPassHoldersLabel;
+		private JLabel currentCarsInQueueLabel;
 
-		private JTextField currentAmountOfWaitingPassHolders;
+		private JTextField currentCarsInQueue;
 
-		private int currentAmountOfWaitingPassHoldersNumber;
+		private int currentCarsInQueueNumber;
 		
 		/**
 		 * This is the totalCarsView Constructor
@@ -29,17 +29,17 @@ import me.project.logic.CarParkingLogic;
 			super(model);
 			this.setLayout(null);
 
-			currentAmountOfWaitingPassHoldersLabel = new JLabel("Current PassHolder Queue: ");
+			currentCarsInQueueLabel = new JLabel("Current PassHolder Queue: ");
 			
-			currentAmountOfWaitingPassHolders = new JTextField();    
+			currentCarsInQueue = new JTextField();    
 	        
-			currentAmountOfWaitingPassHoldersLabel.setBounds(5, 0, 200, 20);
-			currentAmountOfWaitingPassHolders.setBounds(180, 3, 75, 20);
+			currentCarsInQueueLabel.setBounds(5, 0, 200, 20);
+			currentCarsInQueue.setBounds(180, 3, 75, 20);
 	       
-	        add(currentAmountOfWaitingPassHoldersLabel);
-	        add(currentAmountOfWaitingPassHolders);
+	        add(currentCarsInQueueLabel);
+	        add(currentCarsInQueue);
        
-	        currentAmountOfWaitingPassHolders.setEditable(false);
+	        currentCarsInQueue.setEditable(false);
 		
 		}
 		
@@ -51,8 +51,8 @@ import me.project.logic.CarParkingLogic;
 
 	        CarParkingLogic carPark = (CarParkingLogic) super.model;
 
-	        currentAmountOfWaitingPassHoldersNumber = carPark.getPassHoldersQueue().carsInQueue();
-	        currentAmountOfWaitingPassHolders.setText("" + currentAmountOfWaitingPassHoldersNumber);
+	        currentCarsInQueueNumber = carPark.getPassHoldersQueue().carsInQueue();
+	        currentCarsInQueue.setText("" + currentCarsInQueueNumber);
 	        
 
 	        setVisible(true);
