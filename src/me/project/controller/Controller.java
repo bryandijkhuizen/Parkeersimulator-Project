@@ -17,7 +17,6 @@ import me.project.main.CarSimulator;
 	
 @SuppressWarnings("serial")
 public class Controller extends AbstractController implements ActionListener {
-	private JButton printCars;
 	private JButton btnQuit;
 	private JButton startSimulator;
 	private JButton pauseSimulator;
@@ -34,10 +33,6 @@ public class Controller extends AbstractController implements ActionListener {
 	
 	public Controller(CarParkingLogic carParkingLogic) {
 		super(carParkingLogic);
-		
-		printCars = new JButton("Print CarParking information");
-		printCars.addActionListener(this);
-		add(printCars);
 		
 		btnQuit = new JButton("Quit");
 		btnQuit.addActionListener(this);
@@ -75,15 +70,6 @@ public class Controller extends AbstractController implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		CarParkingLogic cpl = (CarParkingLogic) super.model;
-	
-	if (e.getSource() == printCars) {
-		try {
-			cpl.printCarParkingDetails();
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-		return;
-	}
 	
 	if (e.getSource() == btnQuit) {
 		try {

@@ -72,7 +72,7 @@ public class CarSimulator {
 		frame.getContentPane().add(CurrentTimeView);
 
 		carParkView.setBounds(27, 12, 737, 339);
-		controller.setBounds(225, 393, 400, 101);
+		controller.setBounds(125, 379, 511, 101);
 		totalCars.setBounds(806, 31, 275, 29);
 		currentDay.setBounds(806, 78, 275, 29);
 		passHoldersQueueView.setBounds(806, 134, 275, 29);
