@@ -285,7 +285,7 @@ public class CarParkingLogic extends AbstractModel {
             day -= 7;
         }
         
-        /*
+        /**
          * BEGIN VAN DE SWITCH VOOR HET TELLEN VAN DAGEN
          * DEFINIEËR EEN STRING: 'CURRENTDAY'
          * INITIALISEER DEZE MET CURRENTDAY = 'MONDAY'
