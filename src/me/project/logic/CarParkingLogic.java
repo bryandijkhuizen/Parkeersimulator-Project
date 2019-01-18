@@ -17,7 +17,7 @@ import me.project.model.ParkingPassCar;
 
 public class CarParkingLogic extends AbstractModel {
     private static int numberOfFloors, numberOfRows, numberOfPlaces;
-    private static CarQueue entranceCarQueue, paymentCarQueue, membersCarQueue, exitCarQueue, secondEntranceCarQueue ;
+    private static CarQueue entranceCarQueue /*VOOR ALLE AUTOS */,  paymentCarQueue /*VOOR NORMALE AUTO'S */, membersCarQueue /*UITGANG VOOR MEMBERS */, exitCarQueue /*UITGANG VOOR NORMALE AUTO'S */, secondEntranceCarQueue /*INGANG VOOR MEMBERS EN RES */ ;
     private Car[][][] cars;
     
     private int amountOfPassHolders;
