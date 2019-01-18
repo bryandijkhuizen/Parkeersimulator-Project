@@ -13,7 +13,10 @@ import me.project.view.currentDayView;
 import me.project.view.currentTimeView;
 import me.project.view.entranceQueueView;
 import me.project.view.passHolderQueueView;
+import me.project.view.totalCarPercentageView;
 import me.project.view.totalCarsView;
+import me.project.view.totalPassHoldersView;
+import me.project.view.totalRegularCarsView;
 
 	/**
 	 * This class combines all of the functions
@@ -32,6 +35,9 @@ public class CarSimulator {
     private passHolderQueueView passHoldersQueueView;
     private currentTimeView CurrentTimeView;
     private entranceQueueView EntranceCarQueueView;
+    private totalPassHoldersView tphv;
+    private totalRegularCarsView rcv;
+    private totalCarPercentageView tcpv;
     
     private int tickPause;
     public static boolean run;
@@ -61,6 +67,12 @@ public class CarSimulator {
 		CurrentTimeView.setBackground(Color.LIGHT_GRAY);
 		EntranceCarQueueView = new entranceQueueView(carParking);
 		EntranceCarQueueView.setBackground(Color.LIGHT_GRAY);
+		tphv = new totalPassHoldersView(carParking);
+		tphv.setBackground(Color.LIGHT_GRAY);
+		rcv = new totalRegularCarsView(carParking);
+		rcv.setBackground(Color.LIGHT_GRAY);
+		tcpv= new totalCarPercentageView(carParking);
+		tcpv.setBackground(Color.LIGHT_GRAY);
 		
 		
 		frame=new JFrame("CarParking Simulation");
@@ -75,15 +87,21 @@ public class CarSimulator {
 		frame.getContentPane().add(passHoldersQueueView);
 		frame.getContentPane().add(CurrentTimeView);
 		frame.getContentPane().add(EntranceCarQueueView);
+		frame.getContentPane().add(tphv);
+		frame.getContentPane().add(rcv);
+		frame.getContentPane().add(tcpv);
 
 		carParkView.setBounds(27, 12, 737, 339);
 		controller.setBounds(125, 379, 511, 101);
 		totalCars.setBounds(806, 31, 275, 29);
-		currentDay.setBounds(806, 78, 275, 29);
-		passHoldersQueueView.setBounds(806, 134, 275, 29);
-		CurrentTimeView.setBounds(806, 233, 275, 29);
-		EntranceCarQueueView.setBounds(806, 187, 275, 29);
-
+		currentDay.setBounds(806, 393, 275, 29);
+		passHoldersQueueView.setBounds(806, 295, 275, 29);
+		CurrentTimeView.setBounds(806, 435, 275, 29);
+		EntranceCarQueueView.setBounds(806, 255, 275, 29);
+		tphv.setBounds(806, 111, 275, 29);
+		rcv.setBounds(806, 151, 275, 29);
+		tcpv.setBounds(806, 71, 275, 29);
+		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		

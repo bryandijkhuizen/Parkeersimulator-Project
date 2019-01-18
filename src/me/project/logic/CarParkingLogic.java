@@ -44,6 +44,7 @@ public class CarParkingLogic extends AbstractModel {
     
     private String currentDay;
     private String currentTime;
+   
 
     
     /**
@@ -249,7 +250,7 @@ public class CarParkingLogic extends AbstractModel {
      * @return totalCars 
      */
     
-    public int getTotalCars() {
+    public int getTotalRegularCars() {
         return totalRegularCarsInPark;
     }
 
@@ -349,7 +350,7 @@ public class CarParkingLogic extends AbstractModel {
         }else {
         	currentTime = hour + ":" + minute;
         }
-        
+        	
         
         
         switch (day) {
@@ -374,9 +375,8 @@ public class CarParkingLogic extends AbstractModel {
         case 6:
         	currentDay = "Sunday";
         	break;
-        
-       
         }
+
         
         /*
          * A random object gets defined here.
@@ -388,7 +388,9 @@ public class CarParkingLogic extends AbstractModel {
          * The average numbers are calculated here.
          */
 
-        int averageNumberOfCarsPerHour = day < 5 ? weekDayArrivals : weekendArrivals;
+        int averageNumberOfCarsPerHour = day < 5
+                ? weekDayArrivals
+                : weekendArrivals;
         
         double standardDeviation = averageNumberOfCarsPerHour * 0.3;
         double numberOfRegularCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
