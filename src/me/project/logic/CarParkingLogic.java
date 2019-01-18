@@ -9,15 +9,16 @@ import me.project.model.CarQueue;
 import me.project.model.Location;
 import me.project.model.ParkingPassCar;
 
-/**
- * This class contains all the logic for the simulator
- * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
- *
- */
+	/**
+	 * This class contains all the logic for the simulator
+	 * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
+	 *
+	 */
 
 public class CarParkingLogic extends AbstractModel {
     private static int numberOfFloors, numberOfRows, numberOfPlaces;
-    private static CarQueue entranceCarQueue /*VOOR ALLE AUTOS */,  paymentCarQueue /*VOOR NORMALE AUTO'S */, membersCarQueue /*UITGANG VOOR MEMBERS */, exitCarQueue /*UITGANG VOOR NORMALE AUTO'S */, secondEntranceCarQueue /*INGANG VOOR MEMBERS EN RES */ ;
+    private static CarQueue entranceCarQueue /*VOOR ALLE AUTOS */,  paymentCarQueue /*VOOR NORMALE AUTO'S */, membersCarQueue /*UITGANG VOOR MEMBERS */, exitCarQueue /*UITGANG VOOR NORMALE AUTO'S */, secondEntranceCarQueue /*INGANG VOOR MEMBERS EN RES */, passHolderQueue ;
+
     private Car[][][] cars;
     
     private int amountOfPassHolders;
@@ -27,7 +28,7 @@ public class CarParkingLogic extends AbstractModel {
     private int minute = 0;
 
     private int weekDayArrivals= 50; 
-    private int weekendArrivals = 90; 
+    private int weekendArrivals = 90;
 
     private int enterSpeed;
     private int paymentSpeed;
@@ -38,10 +39,12 @@ public class CarParkingLogic extends AbstractModel {
     private int numberOfExitingCars; 
     private int numberOfMembersExiting;
 
-    private int totalRegularCars, totalPassHolders, totalCars; 
+    private int totalRegularCarsInPark, totalPassHoldersInPark, totalCars; 
     private int totalSpace;
     
     private String currentDay;
+    private String currentTime;
+
     
     /**
      * CarParkingLogic Constructor 
@@ -63,6 +66,7 @@ public class CarParkingLogic extends AbstractModel {
         paymentCarQueue = new CarQueue();
         membersCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
+        passHolderQueue = new CarQueue();
         
         enterSpeed = 3; 
         paymentSpeed = 10; 
@@ -75,11 +79,14 @@ public class CarParkingLogic extends AbstractModel {
         numberOfExitingCars = 0;
         numberOfMembersExiting = 0;
         
-        totalRegularCars = 0;
-        totalPassHolders = 0;
+        totalRegularCarsInPark = 0;
+        totalPassHoldersInPark = 0;
         totalCars = 0;
+
         
         currentDay = "Monday";
+        
+        currentTime = hour + ":" + minute;
     }
     
 
@@ -243,7 +250,7 @@ public class CarParkingLogic extends AbstractModel {
      */
     
     public int getTotalCars() {
-        return totalRegularCars;
+        return totalRegularCarsInPark;
     }
 
    
@@ -252,7 +259,7 @@ public class CarParkingLogic extends AbstractModel {
      */
     
     public int getTotalPassHolders() {
-        return totalPassHolders;
+        return totalPassHoldersInPark;
     }
     
     /**
@@ -275,11 +282,40 @@ public class CarParkingLogic extends AbstractModel {
      * @return carsInSecondQueue
      */
     
+
     public int getCarsInSecondEntranceQueue() {
     	return secondEntranceCarQueue.carsInQueue();
     }
-	
+
+    /**
+     * Gets the current day
+     * @return currentDay
+     */
     
+    public String getCurrentDay() {
+    	return currentDay;
+    }
+    
+    /**
+     * 
+     * 
+     * @return queue
+     */
+    
+    public CarQueue getPassHoldersQueue() {
+    	return passHolderQueue;
+    }
+    
+    /**
+     * 
+     * 
+     * 
+     */
+    
+    public String getCurrentTime() {
+    	return currentTime;
+    }
+	
 	/**
      * Simulates one step, it advances the time by one minute.
      */
@@ -304,22 +340,17 @@ public class CarParkingLogic extends AbstractModel {
             day -= 7;
         }
         
-        /**
-         * BEGIN VAN DE SWITCH VOOR HET TELLEN VAN DAGEN
-         * DEFINIEËR EEN STRING: 'CURRENTDAY'
-         * INITIALISEER DEZE MET CURRENTDAY = 'MONDAY'
-         * VERVOLGENS MAAK JE EEN SWITCH OVER DAY
-         * 
-         * 
-         * 
-         * 
-         * switch (day){
-         * 	case 0: currentDay = "Monday";
-         * 	break;
-         * 	case 1: currentDay etc.....
-         * }
-         * 
-         */
+        if(hour < 10) {
+        	currentTime = "0"+ hour + ":" + minute;
+        }
+        
+        if (minute < 10) {
+        	currentTime = hour + ":" + "0" + minute;
+        }else {
+        	currentTime = hour + ":" + minute;
+        }
+        
+        
         
         switch (day) {
         case 0: 
@@ -381,6 +412,19 @@ public class CarParkingLogic extends AbstractModel {
         
         for (int j = 0; j < numberTotalCarsPerMinute; j++) { 	
         	
+        	/*
+        	 * This will remove the cars from the entrance queue
+        	 * if the queue gets too long
+        	 * 
+        	 * 
+        	 */
+        	
+        	for(int i = 0; i < entranceCarQueue.carsInQueue(); i++) {
+        		if(entranceCarQueue.carsInQueue() > 25) {
+        			@SuppressWarnings("unused")
+					Car car = entranceCarQueue.removeCar();
+        		}
+        	}
         		/*
 				 * As long as the maximum of regular cars entering the 
 				 * parking hasn't been reached regular cars will enter
@@ -390,19 +434,20 @@ public class CarParkingLogic extends AbstractModel {
                 Car car = new AdHocCar();
                 numberOfEnteringCars++;
                 entranceCarQueue.addCar(car);
-            
           }
             	/*
             	 * As long as the maximum of ParkingPassHolders cars entering the 
             	 * parking hasn't been reached regular cars will enter
             	 */
             
+
             for (int i = 0; i < numberOfParkingPassHoldersPerMinute ; i++) {
-                Car car = new ParkingPassCar();
-                numberOfEnteringCars++;
+            	Car car = new ParkingPassCar();
+            	numberOfEnteringCars++;
                 entranceCarQueue.addCar(car);
-            
           }
+            
+            
             super.notifyViews(); //updates the CarParkView
         }
         
@@ -428,9 +473,9 @@ public class CarParkingLogic extends AbstractModel {
                 	break;
                 }
                 if(car instanceof AdHocCar) {
-                	totalRegularCars++; //if the car is a regular car that amount will be increased by 1
+                	totalRegularCarsInPark++; //if the car is a regular car that amount will be increased by 1
                 }else if (car instanceof ParkingPassCar) {
-                	totalPassHolders++; //if the car is a parking pass car that amount will be increased by 1
+                	totalPassHoldersInPark++; //if the car is a parking pass car that amount will be increased by 1
                 }
                 
                 if(car instanceof AdHocCar || car instanceof ParkingPassCar) {
@@ -455,7 +500,6 @@ public class CarParkingLogic extends AbstractModel {
          * 
          */
 
-        
         while (true) {
            Car car = this.getFirstLeavingCar();
            
@@ -478,10 +522,8 @@ public class CarParkingLogic extends AbstractModel {
             
             super.notifyViews();
         }
-     
-        
+       
         /*
-         * 
          * Here will the payments be done.
          * This will happen until the maximum amount of 'payers' has been reached
          * 
@@ -520,7 +562,7 @@ public class CarParkingLogic extends AbstractModel {
                 break;
             } else {
                 numberOfExitingCars--;	 //exiting car queue will me decreased by 1
-                totalRegularCars--;	     //total regular car count will be decreased by 1
+                totalRegularCarsInPark--;	     //total regular car count will be decreased by 1
             }
             super.notifyViews();
  
@@ -538,13 +580,13 @@ public class CarParkingLogic extends AbstractModel {
                 break;
             } else {
             	numberOfMembersExiting--; //exiting car queue will be decreased by 1
-            	totalPassHolders--; //total passholder count will be decreased by 1
+            	totalPassHoldersInPark--; //total passholder count will be decreased by 1
             }
             super.notifyViews();  //view gets updated
 
         }
         
-        totalCars = totalRegularCars + totalPassHolders; //total cars calculation
+        totalCars = totalRegularCarsInPark + totalPassHoldersInPark; //total cars calculation
         super.notifyViews(); //view gets updated
 
         
@@ -699,8 +741,8 @@ public class CarParkingLogic extends AbstractModel {
      */
     
     public void printCarParkingDetails() {
-        System.out.println("Regular Cars: " + totalRegularCars);
-        System.out.println("ParkingPass Cars: " + totalPassHolders);
+        System.out.println("Regular Cars: " + totalRegularCarsInPark);
+        System.out.println("ParkingPass Cars: " + totalPassHoldersInPark);
         System.out.println("Total Cars: " + totalCars + "/" + totalSpace);
     }
 }
