@@ -403,6 +403,18 @@ public class CarParkingLogic extends AbstractModel {
                 entranceCarQueue.addCar(car);
             
           }
+            
+            /*
+             * Here the members/parking pass holders will be entering in their entrance
+             * until the maximum amount of cars has been reached
+             */
+            
+            for (int i = 0; i < numberOfParkingPassHoldersPerMinute; i++) {
+            	Car car = new ParkingPassCar();
+            	numberOfEnteringCars++;
+            	secondEntranceCarQueue.addCar(car);
+            }
+            
             super.notifyViews(); //updates the CarParkView
         }
         
@@ -501,14 +513,6 @@ public class CarParkingLogic extends AbstractModel {
             super.notifyViews(); //view gets updated
         }
         
-        /**
-         * Here the members/parkingpass holders will be entering in their entrance
-         * until the maximum amount of cars has been reached
-         */
-        
-        for (int i = 0; i < enterSpeed; i++) {
-        	
-        }
         /*
          * Here the regular cars will be leaving
          * until the maximum amount of cars has been reached
@@ -527,7 +531,7 @@ public class CarParkingLogic extends AbstractModel {
         }
         
         /*
-         * Here the members/Parkingpassholder will be leaving
+         * Here the members/Parking pass holder will be leaving
          * Until the maximum amount of cars has been reached
          */
         
