@@ -15,11 +15,11 @@ import me.project.view.entranceQueueView;
 import me.project.view.passHolderQueueView;
 import me.project.view.totalCarsView;
 
-/**
- * This class combines all of the functions
- * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
- *
- */
+	/**
+	 * This class combines all of the functions
+	 * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
+	 *
+	 */
 
 public class CarSimulator {
 

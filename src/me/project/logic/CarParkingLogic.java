@@ -9,11 +9,11 @@ import me.project.model.CarQueue;
 import me.project.model.Location;
 import me.project.model.ParkingPassCar;
 
-/**
- * This class contains all the logic for the simulator
- * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
- *
- */
+	/**
+	 * This class contains all the logic for the simulator
+	 * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
+	 *
+	 */
 
 public class CarParkingLogic extends AbstractModel {
     private static int numberOfFloors, numberOfRows, numberOfPlaces;
