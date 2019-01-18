@@ -40,9 +40,10 @@ public class CarParkingLogic extends AbstractModel {
 
     private int totalRegularCarsInPark, totalPassHoldersInPark, totalCars; 
     private int totalSpace;
-    private int totalActivePassHolders;
     
     private String currentDay;
+    private String currentTime;
+
     
     /**
      * CarParkingLogic Constructor 
@@ -79,10 +80,11 @@ public class CarParkingLogic extends AbstractModel {
         totalRegularCarsInPark = 0;
         totalPassHoldersInPark = 0;
         totalCars = 0;
-        
-        totalActivePassHolders = 0;
+
         
         currentDay = "Monday";
+        
+        currentTime = hour + ":" + minute;
     }
     
 
@@ -286,6 +288,16 @@ public class CarParkingLogic extends AbstractModel {
     	return passHoldersQueue;
     }
     
+    /**
+     * 
+     * 
+     * 
+     */
+    
+    public String getCurrentTime() {
+    	return currentTime;
+    }
+    
 	
     
 	/**
@@ -311,6 +323,17 @@ public class CarParkingLogic extends AbstractModel {
         while (day > 6) {
             day -= 7;
         }
+        
+        if(hour < 10) {
+        	currentTime = "0"+ hour + ":" + minute;
+        }
+        
+        if (minute < 10) {
+        	currentTime = hour + ":" + "0" + minute;
+        }else {
+        	currentTime = hour + ":" + minute;
+        }
+        
         
         
         switch (day) {
@@ -393,10 +416,6 @@ public class CarParkingLogic extends AbstractModel {
             	Car car = new ParkingPassCar();
             	numberOfEnteringCars++;
                 entranceCarQueue.addCar(car);
-            	
-                
-                    
-
           }
             
             

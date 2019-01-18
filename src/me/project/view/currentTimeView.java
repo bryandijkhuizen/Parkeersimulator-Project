@@ -13,33 +13,33 @@ import me.project.logic.CarParkingLogic;
 	 */
 
 	@SuppressWarnings("serial")
-	public class currentDayView extends AbstractView {
+	public class currentTimeView extends AbstractView {
 		
-		private JLabel currentDayLabel;
+		private JLabel currentTimeLabel;
 
-		private JTextField currentDayView;
+		private JTextField currentTimeView;
 
-		private String currentDay;
+		private String currentTime;
 		
 		/**
 		 * This is the totalCarsView Constructor
 		 */
 		
-		public currentDayView(CarParkingLogic model) {
+		public currentTimeView(CarParkingLogic model) {
 			super(model);
 			this.setLayout(null);
 
-			currentDayLabel = new JLabel("Current Day: ");
+			currentTimeLabel = new JLabel("Current Time: ");
 			
-			currentDayView = new JTextField();    
+			currentTimeView = new JTextField();    
 	        
-			currentDayLabel.setBounds(5, 0, 200, 20);
-			currentDayView.setBounds(180, 3, 75, 20);
+			currentTimeLabel.setBounds(5, 0, 200, 20);
+			currentTimeView.setBounds(180, 3, 75, 20);
 	       
-	        add(currentDayLabel);
-	        add(currentDayView);
+	        add(currentTimeLabel);
+	        add(currentTimeView);
        
-	        currentDayView.setEditable(false);
+	        currentTimeView.setEditable(false);
 		
 		}
 		
@@ -51,10 +51,9 @@ import me.project.logic.CarParkingLogic;
 
 	        CarParkingLogic carPark = (CarParkingLogic) super.model;
 
-	        currentDay = carPark.getCurrentDay();
-	        currentDayView.setText("" + currentDay);
+	        currentTime = carPark.getCurrentTime();
+	        currentTimeView.setText("" + currentTime);
 	        
-
 	        setVisible(true);
 	        super.updateView();
 	    }

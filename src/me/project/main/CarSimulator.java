@@ -10,6 +10,7 @@ import me.project.controller.Controller;
 import me.project.logic.CarParkingLogic;
 import me.project.view.CarParkView;
 import me.project.view.currentDayView;
+import me.project.view.currentTimeView;
 import me.project.view.passHolderQueueView;
 import me.project.view.totalCarsView;
 
@@ -28,6 +29,7 @@ public class CarSimulator {
     private totalCarsView totalCars;
     private currentDayView currentDay;
     private passHolderQueueView passHoldersQueueView;
+    private currentTimeView CurrentTimeView;
     
     private int tickPause;
     public static boolean run;
@@ -53,24 +55,28 @@ public class CarSimulator {
 		currentDay.setBackground(Color.LIGHT_GRAY);
 		passHoldersQueueView = new passHolderQueueView(carParking);
 		passHoldersQueueView.setBackground(Color.LIGHT_GRAY);
+		CurrentTimeView = new currentTimeView(carParking);
+		CurrentTimeView.setBackground(Color.LIGHT_GRAY);
 		
 		
 		frame=new JFrame("CarParking Simulation");
 		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
 		
-		frame.setSize(811, 560);
+		frame.setSize(1142, 587);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(carParkView);
 		frame.getContentPane().add(controller);
 		frame.getContentPane().add(totalCars);
 		frame.getContentPane().add(currentDay);
 		frame.getContentPane().add(passHoldersQueueView);
+		frame.getContentPane().add(CurrentTimeView);
 
 		carParkView.setBounds(27, 12, 737, 339);
-		controller.setBounds(27, 376, 400, 101);
-		totalCars.setBounds(437, 421, 275, 29);
-		currentDay.setBounds(437, 450, 275, 29);
-		passHoldersQueueView.setBounds(437, 470, 275, 29);
+		controller.setBounds(225, 393, 400, 101);
+		totalCars.setBounds(806, 31, 275, 29);
+		currentDay.setBounds(806, 78, 275, 29);
+		passHoldersQueueView.setBounds(806, 134, 275, 29);
+		CurrentTimeView.setBounds(806, 187, 275, 29);
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
