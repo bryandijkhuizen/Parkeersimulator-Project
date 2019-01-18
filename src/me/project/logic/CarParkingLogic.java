@@ -27,7 +27,7 @@ public class CarParkingLogic extends AbstractModel {
     private int minute = 0;
 
     private int weekDayArrivals= 50; 
-    private int weekendArrivals = 90; 
+    private int weekendArrivals = 90;
 
     private int enterSpeed;
     private int paymentSpeed;
@@ -484,7 +484,6 @@ public class CarParkingLogic extends AbstractModel {
          * 
          */
 
-        
         while (true) {
            Car car = this.getFirstLeavingCar();
            
