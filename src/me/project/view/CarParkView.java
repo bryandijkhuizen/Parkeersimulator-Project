@@ -101,7 +101,7 @@ public class CarParkView extends AbstractView{
         super.updateView();
     }
 
-    /**currentTime = "0"+ hour + ":" + minute;
+    /**
      * Paint a parking spot on the screen.
      */
     
