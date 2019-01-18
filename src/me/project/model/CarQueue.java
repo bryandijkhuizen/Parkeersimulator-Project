@@ -5,11 +5,11 @@ import java.util.Queue;
 
 import me.project.abstracts.Car;
 
-/**
- * Class for the queue's of cars
- * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
- *
- */
+	/**
+	 * Class for the queue's of cars
+	 * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
+	 *
+	 */
 
 public class CarQueue {
     private Queue<Car> queue = new LinkedList<>();

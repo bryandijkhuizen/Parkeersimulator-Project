@@ -8,11 +8,11 @@ import me.project.view.Colors;
 
 import java.awt.*;
 
-/*
- * This is class ParkingPassCar
- * This Class creates the parkingpasses
- * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
- */
+	/*
+	 * This is class ParkingPassCar
+	 * This Class creates the parkingpasses
+	 * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
+	 */
 
 public class ParkingPassCar extends Car {
 	private static final Color COLOR=Colors.PASTEL_BLUE;

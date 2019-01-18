@@ -6,9 +6,9 @@ import java.util.Random;
 import me.project.model.Location;
 
 
-/*
- * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
- */
+	/*
+	 * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
+	 */
 
 public abstract class Car extends AbstractModel {
 	private Location location;
