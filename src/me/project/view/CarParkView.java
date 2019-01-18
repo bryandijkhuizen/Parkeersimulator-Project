@@ -1,4 +1,4 @@
-package src.me.project.view;
+package me.project.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -113,7 +113,7 @@ public class CarParkView extends AbstractView{
                 20 - 1,
                 10 - 1); 
     }
-    
+
     /**
      * Paint the entrance on the screen.
      

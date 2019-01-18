@@ -1,4 +1,4 @@
-package src.me.project.model;
+package me.project.model;
 
 import java.util.LinkedList;
 import java.util.Queue;
@@ -43,12 +43,5 @@ public class CarQueue {
     	return queue.size();
     }
     
-    /**
-     * return carsInSecondQueue
-     * @return cars in second queue in size
-     */
-    
-    public int carsInSecondQueue() {
-    	return queue.size
-    }
+
 }

@@ -1,4 +1,4 @@
-package src.me.project.controller;
+package me.project.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
