@@ -1,4 +1,4 @@
-package me.project.logic;
+package src.me.project.logic;
 
 import java.util.Random;
 
@@ -17,7 +17,7 @@ import me.project.model.ParkingPassCar;
 
 public class CarParkingLogic extends AbstractModel {
     private static int numberOfFloors, numberOfRows, numberOfPlaces;
-    private static CarQueue entranceCarQueue, paymentCarQueue, membersCarQueue, exitCarQueue ;
+    private static CarQueue entranceCarQueue, paymentCarQueue, membersCarQueue, exitCarQueue, secondEntranceCarQueue ;
     private Car[][][] cars;
     
     private int amountOfPassHolders;
@@ -57,6 +57,7 @@ public class CarParkingLogic extends AbstractModel {
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         
         entranceCarQueue = new CarQueue();
+        secondEntranceCarQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
         membersCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
@@ -148,7 +149,15 @@ public class CarParkingLogic extends AbstractModel {
     public CarQueue getEntranceCarQueue() {
         return entranceCarQueue;
     }
-
+    
+    /**
+     * Get the second queue of all cars that are entering
+     * @return cars of second queue
+     */
+    
+    public CarQueue getSecondEntranceCarQueue() {
+    	return secondEntranceCarQueue;
+    }
     
     /**
      * Get queue of the cars that are paying
@@ -258,7 +267,13 @@ public class CarParkingLogic extends AbstractModel {
     public int getCarsInEntranceQueue() {
     	return entranceCarQueue.carsInQueue();
     }
+    /**
+     * @return carsInSecondQueue
+     */
     
+    public int getCarsInSecondEntranceQueue() {
+    	return secondEntranceCarQueue.carsInQueue();
+    }
 	
     
 	/**
@@ -456,6 +471,14 @@ public class CarParkingLogic extends AbstractModel {
             super.notifyViews(); //view gets updated
         }
         
+        /**
+         * Here the members/parkingpass holders will be entering in their entrance
+         * until the maximum amount of cars has been reached
+         */
+        
+        for (int i = 0; i < enterSpeed; i++) {
+        	
+        }
         /*
          * Here the regular cars will be leaving
          * until the maximum amount of cars has been reached

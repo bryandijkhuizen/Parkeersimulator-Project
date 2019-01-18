@@ -1,4 +1,4 @@
-package me.project.model;
+package src.me.project.model;
 
 /*
  * This is the location class

@@ -1,4 +1,4 @@
-package me.project.model;
+package src.me.project.model;
 
 
 import java.util.Random;

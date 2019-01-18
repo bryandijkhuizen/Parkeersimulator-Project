@@ -1,4 +1,4 @@
-package me.project.runner;
+package src.me.project.runner;
 
 import me.project.main.CarSimulator;
 
