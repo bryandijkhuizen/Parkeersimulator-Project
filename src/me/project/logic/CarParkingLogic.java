@@ -17,7 +17,8 @@ import me.project.model.ParkingPassCar;
 
 public class CarParkingLogic extends AbstractModel {
     private static int numberOfFloors, numberOfRows, numberOfPlaces;
-    private static CarQueue entranceCarQueue, paymentCarQueue, membersCarQueue, exitCarQueue, passHoldersQueue ;
+    private static CarQueue entranceCarQueue /*VOOR ALLE AUTOS */,  paymentCarQueue /*VOOR NORMALE AUTO'S */, membersCarQueue /*UITGANG VOOR MEMBERS */, exitCarQueue /*UITGANG VOOR NORMALE AUTO'S */, secondEntranceCarQueue /*INGANG VOOR MEMBERS EN RES */, passHolderQueue ;
+
     private Car[][][] cars;
     
     private int amountOfPassHolders;
@@ -61,10 +62,11 @@ public class CarParkingLogic extends AbstractModel {
         cars = new Car[numberOfFloors][numberOfRows][numberOfPlaces];
         
         entranceCarQueue = new CarQueue();
+        secondEntranceCarQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
         membersCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
-        passHoldersQueue = new CarQueue();
+        passHolderQueue = new CarQueue();
         
         enterSpeed = 3; 
         paymentSpeed = 10; 
@@ -158,7 +160,15 @@ public class CarParkingLogic extends AbstractModel {
     public CarQueue getEntranceCarQueue() {
         return entranceCarQueue;
     }
-
+    
+    /**
+     * Get the second queue of all cars that are entering
+     * @return cars of second queue
+     */
+    
+    public CarQueue getSecondEntranceCarQueue() {
+    	return secondEntranceCarQueue;
+    }
     
     /**
      * Get queue of the cars that are paying
@@ -268,7 +278,15 @@ public class CarParkingLogic extends AbstractModel {
     public int getCarsInEntranceQueue() {
     	return entranceCarQueue.carsInQueue();
     }
+    /**
+     * @return carsInSecondQueue
+     */
     
+
+    public int getCarsInSecondEntranceQueue() {
+    	return secondEntranceCarQueue.carsInQueue();
+    }
+
     /**
      * Gets the current day
      * @return currentDay
@@ -285,7 +303,7 @@ public class CarParkingLogic extends AbstractModel {
      */
     
     public CarQueue getPassHoldersQueue() {
-    	return passHoldersQueue;
+    	return passHolderQueue;
     }
     
     /**
@@ -297,9 +315,7 @@ public class CarParkingLogic extends AbstractModel {
     public String getCurrentTime() {
     	return currentTime;
     }
-    
 	
-    
 	/**
      * Simulates one step, it advances the time by one minute.
      */
@@ -527,6 +543,14 @@ public class CarParkingLogic extends AbstractModel {
             super.notifyViews(); //view gets updated
         }
         
+        /**
+         * Here the members/parkingpass holders will be entering in their entrance
+         * until the maximum amount of cars has been reached
+         */
+        
+        for (int i = 0; i < enterSpeed; i++) {
+        	
+        }
         /*
          * Here the regular cars will be leaving
          * until the maximum amount of cars has been reached
