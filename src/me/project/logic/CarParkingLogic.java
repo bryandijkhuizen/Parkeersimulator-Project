@@ -41,6 +41,8 @@ public class CarParkingLogic extends AbstractModel {
     private int totalRegularCars, totalPassHolders, totalCars; 
     private int totalSpace;
     
+    private String currentDay;
+    
     /**
      * CarParkingLogic Constructor 
      * @param numberOfFloors 
@@ -75,6 +77,8 @@ public class CarParkingLogic extends AbstractModel {
         totalRegularCars = 0;
         totalPassHolders = 0;
         totalCars = 0;
+        
+        currentDay = "Monday";
     }
     
 
@@ -301,6 +305,32 @@ public class CarParkingLogic extends AbstractModel {
          * }
          * 
          */
+        
+        switch (day) {
+        case 0: 
+        	currentDay = "Monday";
+        	break;
+        case 1:
+        	currentDay = "Tuesday";
+        	break;
+        case 2:
+        	currentDay = "Wednesday";
+        	break;
+        case 3:
+        	currentDay = "Thursday";
+        	break;
+        case 4: 
+        	currentDay = "Friday";
+        	break;
+        case 5:
+        	currentDay = "Saturday";
+        	break;
+        case 6:
+        	currentDay = "Sunday";
+        	break;
+        
+       
+        }
         
         /*
          * A random object gets defined here.
