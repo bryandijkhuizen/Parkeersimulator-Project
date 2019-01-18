@@ -506,10 +506,8 @@ public class CarParkingLogic extends AbstractModel {
             
             super.notifyViews();
         }
-     
-        
+       
         /*
-         * 
          * Here will the payments be done.
          * This will happen until the maximum amount of 'payers' has been reached
          * 
