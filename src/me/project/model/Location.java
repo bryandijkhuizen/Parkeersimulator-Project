@@ -45,5 +45,9 @@ public class Location {
     public int getPlace() {
         return place;
     }
+    
+    public void setRow(int row) {
+    	this.row = row;
+    }
 
 }

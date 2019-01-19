@@ -66,7 +66,8 @@ public class CarParkView extends AbstractView{
      * Updates the CarParkView screen when changes happened.
      */
     
-    public void updateView() {
+   
+	public void updateView() {
 
         CarParkingLogic carPark = (CarParkingLogic) super.model;
         
@@ -83,11 +84,23 @@ public class CarParkView extends AbstractView{
                     Location location = new Location(floor, row, place);
                     Car car = carPark.getCarAt(location);
                     
-
                     Color color = Color.WHITE;
-                    if (car == null) {
-                    	color = Color.WHITE;
-                    } else if(car instanceof ParkingPassCar) {
+                    
+                   /* if (car == null && floor != 0 && floor != 1) {
+                    	color = Colors.RESERVATION_GREEN;
+                    } else if(car == null && floor !=0 && floor != 2) {
+                    	color = Colors.MEMBER_BLUE;
+                    } else if (car == null) {
+                    	color = Colors.REGULAR_RED;
+                    	*/
+                    if(car == null) {
+                    	color = color.GRAY;
+                    }
+                    
+                    
+                    
+                    
+                    else if(car instanceof ParkingPassCar) {
                     	color = car.getColor();
                     } else {
                     	color = car.getColor();
@@ -100,12 +113,8 @@ public class CarParkView extends AbstractView{
         setVisible(true);
         super.updateView();
     }
-
-    /**currentTime = "0"+ hour + ":" + minute;
-     * Paint a parking spot on the screen.
-     */
     
-    private void drawPlace(Graphics graphics, Location location, Color color) {
+	public void drawPlace(Graphics graphics, Location location, Color color) {
         graphics.setColor(color);
         graphics.fillRect(
                 (location.getFloor() * 260 + (1 + (int) Math.floor(location.getRow() * 0.5)) * 60 + (location.getRow() % 2) * 20) -59,
@@ -113,6 +122,8 @@ public class CarParkView extends AbstractView{
                 20 - 1,
                 10 - 1); 
     }
+
+    
 
     /**
      * Paint the entrance on the screen.

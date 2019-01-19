@@ -15,5 +15,8 @@ public class Colors {
 	public static final Color PASTEL_YELLOW = new Color(253, 253, 150);
 	public static final Color PASTEL_GREEN = new Color(119, 221, 119);
 	public static final Color PASTEL_PINK = new Color(255, 209, 220);
+	public static final Color RESERVATION_GREEN = new Color(28, 88, 16);
+	public static final Color MEMBER_BLUE = new Color(21, 33, 148);
+	public static final Color REGULAR_RED = new Color(110, 7, 11);
 
 }

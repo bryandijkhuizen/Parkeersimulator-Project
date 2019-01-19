@@ -1,6 +1,7 @@
 package me.project.main;
 
 import java.awt.Color;
+import java.awt.Component;
 
 import javax.swing.JFrame;
 
@@ -81,7 +82,7 @@ public class CarSimulator {
 		frame=new JFrame("CarParking Simulation");
 		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
 		
-		frame.setSize(1142, 587);
+		frame.setSize(1394, 632);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(carParkView);
 		frame.getContentPane().add(controller);
@@ -95,17 +96,17 @@ public class CarSimulator {
 		frame.getContentPane().add(totalRes);
 		frame.getContentPane().add(totalRevenue);
 
-		carParkView.setBounds(27, 12, 737, 339);
-		controller.setBounds(125, 379, 511, 101);
+		carParkView.setBounds(25, 114, 759, 339);
+		controller.setBounds(123, 481, 511, 101);
 		totalCars.setBounds(806, 31, 275, 29);
-		currentDay.setBounds(806, 393, 275, 29);
-		CurrentTimeView.setBounds(806, 435, 275, 29);
-		EntranceCarQueueView.setBounds(806, 255, 275, 29);
+		currentDay.setBounds(123, 43, 275, 29);
+		CurrentTimeView.setBounds(419, 43, 275, 29);
+		EntranceCarQueueView.setBounds(806, 191, 275, 29);
 		tphv.setBounds(806, 111, 275, 29);
 		rcv.setBounds(806, 151, 275, 29);
-		tcpv.setBounds(806, 188, 275, 29);
+		tcpv.setBounds(1091, 31, 275, 29);
 		totalRes.setBounds(806, 71, 275, 29);
-		totalRevenue.setBounds(806, 508, 275, 29);
+		totalRevenue.setBounds(1053, 553, 275, 29);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
