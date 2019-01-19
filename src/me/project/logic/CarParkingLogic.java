@@ -49,7 +49,10 @@ public class CarParkingLogic extends AbstractModel {
     
     private String currentDay;
     private String currentTime;
-   
+    
+    private double pricePerMinute = 0.16;
+    private double memberRevenue = 0;
+    private double totalRevenue = 0 + memberRevenue;
 
     
     /**
@@ -373,6 +376,14 @@ public class CarParkingLogic extends AbstractModel {
 	}
 	
 	/**
+	 * @return totalRevenu
+	 */
+	
+	public int getTotalRevenue() {
+		return (int) Math.round(totalRevenue);
+	}
+	
+	/**
 	 * 
 	 * Tick method actually simulates the
 	 * carpark
@@ -506,7 +517,6 @@ public class CarParkingLogic extends AbstractModel {
         while (hour > 23) {
             hour -= 24;
             day++;  
-            	
         }
         while (day > 6) {
             day -= 7;
@@ -516,6 +526,7 @@ public class CarParkingLogic extends AbstractModel {
         while (week > 3) {
         	week -= 4;
         	month++;
+        	memberRevenue += 100 * amountOfPassHolders;
         }
         
         while (month > 11) {
@@ -732,6 +743,7 @@ public class CarParkingLogic extends AbstractModel {
             if(car instanceof AdHocCar && car.getMinutesLeft() <= 0){
             	numberOfPayingCars++;
             	paymentCarQueue.addCar(car); // Car gets added to the payment Queue
+            	totalRevenue += car.getStayTime() * pricePerMinute;
             	break;
 	
             } else if(car instanceof ParkingPassCar && car.getMinutesLeft() <= 0) { 
@@ -742,6 +754,7 @@ public class CarParkingLogic extends AbstractModel {
             } else if(car instanceof ReservationCar && car.getMinutesLeft() <= 0) {
             	setNumberOfReservationsExiting(getNumberOfReservationsExiting() + 1);
             	paymentCarQueue.addCar(car);
+            	totalRevenue += car.getStayTime() * pricePerMinute;
             	break;
             	
             	
@@ -771,6 +784,7 @@ public class CarParkingLogic extends AbstractModel {
             }
 
             this.removeCarAt(car.getLocation()); //car gets removed from it's location
+            
             
             
             super.notifyViews(); //view gets updated

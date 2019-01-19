@@ -17,6 +17,7 @@ import me.project.view.totalCarsView;
 import me.project.view.totalPassHoldersView;
 import me.project.view.totalRegularCarsView;
 import me.project.view.totalReservationsCarsView;
+import me.project.view.totalRevenueView;
 
 	/**
 	 * This class combines all of the functions
@@ -38,6 +39,7 @@ public class CarSimulator {
     private totalRegularCarsView rcv;
     private totalCarPercentageView tcpv;
     private totalReservationsCarsView totalRes;
+    private totalRevenueView totalRevenue;
     
     private int tickPause;
     public static boolean run;
@@ -73,6 +75,8 @@ public class CarSimulator {
 		tcpv.setBackground(Color.LIGHT_GRAY);
 		totalRes = new totalReservationsCarsView(carParking);
 		totalRes.setBackground(Color.LIGHT_GRAY);
+		totalRevenue = new totalRevenueView(carParking);
+		totalRevenue.setBackground(Color.LIGHT_GRAY);
 		
 		frame=new JFrame("CarParking Simulation");
 		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
@@ -89,6 +93,7 @@ public class CarSimulator {
 		frame.getContentPane().add(rcv);
 		frame.getContentPane().add(tcpv);
 		frame.getContentPane().add(totalRes);
+		frame.getContentPane().add(totalRevenue);
 
 		carParkView.setBounds(27, 12, 737, 339);
 		controller.setBounds(125, 379, 511, 101);
@@ -100,6 +105,7 @@ public class CarSimulator {
 		rcv.setBounds(806, 151, 275, 29);
 		tcpv.setBounds(806, 188, 275, 29);
 		totalRes.setBounds(806, 71, 275, 29);
+		totalRevenue.setBounds(806, 508, 275, 29);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
