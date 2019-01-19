@@ -12,7 +12,6 @@ import me.project.view.CarParkView;
 import me.project.view.currentDayView;
 import me.project.view.currentTimeView;
 import me.project.view.entranceQueueView;
-import me.project.view.passHolderQueueView;
 import me.project.view.totalCarPercentageView;
 import me.project.view.totalCarsView;
 import me.project.view.totalPassHoldersView;
@@ -33,7 +32,6 @@ public class CarSimulator {
     private AbstractController controller;
     private totalCarsView totalCars;
     private currentDayView currentDay;
-    private passHolderQueueView passHoldersQueueView;
     private currentTimeView CurrentTimeView;
     private entranceQueueView EntranceCarQueueView;
     private totalPassHoldersView tphv;
@@ -63,8 +61,6 @@ public class CarSimulator {
 		totalCars.setBackground(Color.LIGHT_GRAY);
 		currentDay = new currentDayView(carParking);
 		currentDay.setBackground(Color.LIGHT_GRAY);
-		passHoldersQueueView = new passHolderQueueView(carParking);
-		passHoldersQueueView.setBackground(Color.LIGHT_GRAY);
 		CurrentTimeView = new currentTimeView(carParking);
 		CurrentTimeView.setBackground(Color.LIGHT_GRAY);
 		EntranceCarQueueView = new entranceQueueView(carParking);
@@ -87,7 +83,6 @@ public class CarSimulator {
 		frame.getContentPane().add(controller);
 		frame.getContentPane().add(totalCars);
 		frame.getContentPane().add(currentDay);
-		frame.getContentPane().add(passHoldersQueueView);
 		frame.getContentPane().add(CurrentTimeView);
 		frame.getContentPane().add(EntranceCarQueueView);
 		frame.getContentPane().add(tphv);
@@ -99,7 +94,6 @@ public class CarSimulator {
 		controller.setBounds(125, 379, 511, 101);
 		totalCars.setBounds(806, 31, 275, 29);
 		currentDay.setBounds(806, 393, 275, 29);
-		passHoldersQueueView.setBounds(806, 295, 275, 29);
 		CurrentTimeView.setBounds(806, 435, 275, 29);
 		EntranceCarQueueView.setBounds(806, 255, 275, 29);
 		tphv.setBounds(806, 111, 275, 29);
