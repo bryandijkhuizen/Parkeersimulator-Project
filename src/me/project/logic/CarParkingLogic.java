@@ -784,6 +784,7 @@ public class CarParkingLogic extends AbstractModel {
 			tick();
 		}
 	}
+
     
     /**
      * This method finds the first free location in the car park and returns it.
