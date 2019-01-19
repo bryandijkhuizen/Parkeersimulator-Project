@@ -8,6 +8,7 @@ import me.project.model.AdHocCar;
 import me.project.model.CarQueue;
 import me.project.model.Location;
 import me.project.model.ParkingPassCar;
+import me.project.model.ReservationCar;
 
 	/**
 	 * This class contains all the logic for the simulator
@@ -17,18 +18,21 @@ import me.project.model.ParkingPassCar;
 
 public class CarParkingLogic extends AbstractModel {
     private static int numberOfFloors, numberOfRows, numberOfPlaces;
-    private static CarQueue entranceCarQueue /*VOOR ALLE AUTOS */,  paymentCarQueue /*VOOR NORMALE AUTO'S */, membersCarQueue /*UITGANG VOOR MEMBERS */, exitCarQueue /*UITGANG VOOR NORMALE AUTO'S */, secondEntranceCarQueue /*INGANG VOOR MEMBERS EN RES */, passHolderQueue ;
+    private static CarQueue entranceCarQueue /*VOOR ALLE AUTOS */,  paymentCarQueue /*VOOR NORMALE AUTO'S */, membersCarQueue /*UITGANG VOOR MEMBERS */, exitCarQueue /*UITGANG VOOR NORMALE AUTO'S */, secondEntranceCarQueue /*INGANG VOOR MEMBERS EN RES */, passHolderQueue, reservationQueue ;
 
     private Car[][][] cars;
     
     private int amountOfPassHolders;
+    private int amountOfReservations;
     
+    private int month = 0;
+    private int week = 0;
     private int day = 0;
     private int hour = 0;
     private int minute = 0;
 
-    private int weekDayArrivals= 50; 
-    private int weekendArrivals = 90;
+    private int weekDayArrivals= 0; 
+    private int weekendArrivals = 0;
 
     private int enterSpeed;
     private int paymentSpeed;
@@ -38,8 +42,9 @@ public class CarParkingLogic extends AbstractModel {
     private int numberOfPayingCars; 
     private int numberOfExitingCars; 
     private int numberOfMembersExiting;
+    private int numberOfReservationsExiting;
 
-    private int totalRegularCarsInPark, totalPassHoldersInPark, totalCars; 
+    private int totalRegularCarsInPark, totalPassHoldersInPark, totalCars, totalReservationsInPark; 
     private int totalSpace;
     
     private String currentDay;
@@ -68,6 +73,7 @@ public class CarParkingLogic extends AbstractModel {
         membersCarQueue = new CarQueue();
         exitCarQueue = new CarQueue();
         passHolderQueue = new CarQueue();
+        reservationQueue = new CarQueue();
         
         enterSpeed = 3; 
         paymentSpeed = 10; 
@@ -79,10 +85,13 @@ public class CarParkingLogic extends AbstractModel {
         numberOfPayingCars = 0;
         numberOfExitingCars = 0;
         numberOfMembersExiting = 0;
+        setNumberOfReservationsExiting(0);
         
         totalRegularCarsInPark = 0;
         totalPassHoldersInPark = 0;
         totalCars = 0;
+        
+        amountOfReservations = 20;
 
         
         currentDay = "Monday";
@@ -321,6 +330,23 @@ public class CarParkingLogic extends AbstractModel {
      * Simulates one step, it advances the time by one minute.
      */
 	
+    public int getAmountOfReservations() {
+		return amountOfReservations;
+	}
+
+
+	public void setAmountOfReservations(int amountOfReservations) {
+		this.amountOfReservations = amountOfReservations;
+	}
+	
+	public int getNumberOfReservationsExiting() {
+		return numberOfReservationsExiting;
+	}
+
+
+	public void setNumberOfReservationsExiting(int numberOfReservationsExiting) {
+		this.numberOfReservationsExiting = numberOfReservationsExiting;
+	}
 	
     public void tick() {
     	
@@ -328,17 +354,116 @@ public class CarParkingLogic extends AbstractModel {
          * The time will be advanced.
          */
     	
-        minute++;
+    	if(day >=0 && day <=2) {
+    		
+    	if(hour > 0 && hour < 7) {
+        	weekDayArrivals = 20;
+        	weekendArrivals = 21;
+        } else if(hour > 5 && hour < 7) {
+    		weekDayArrivals = 20;
+        	weekendArrivals = 30;
+    	} else if (hour >= 7 && hour < 9) {
+    		weekDayArrivals = 75;
+        	weekendArrivals = 100;
+    	} else if (hour >= 9 && hour < 17) {
+    		weekDayArrivals = 40;
+        	weekendArrivals = 80;
+    	} else if (hour >= 17 && hour < 23) {
+    		weekDayArrivals = 30;
+        	weekendArrivals = 40;
+    	} 
+    }
+    	
+    	if(day == 3) {
+    		if(hour > 0 && hour < 7) {
+            	weekDayArrivals = 20;
+            	weekendArrivals = 21;
+            } else if(hour > 5 && hour < 7) {
+        		weekDayArrivals = 20;
+            	weekendArrivals = 30;
+        	} else if (hour >= 7 && hour < 9) {
+        		weekDayArrivals = 75;
+            	weekendArrivals = 100;
+        	} else if (hour >= 9 && hour < 17) {
+        		weekDayArrivals = 40;
+            	weekendArrivals = 80;
+        	} else if (hour >= 17 && hour < 21) {
+        		weekDayArrivals = 100;
+            	weekendArrivals = 200;
+        	} else if (hour >= 21 && hour < 23) {
+        		weekDayArrivals = 20;
+            	weekendArrivals = 21;
+        	}
+    	}
+    	
+    	if(day >= 4 && day <= 5) {
+    		if(hour > 0 && hour < 7) {
+            	weekDayArrivals = 20;
+            	weekendArrivals = 21;
+            } else if(hour > 5 && hour < 7) {
+        		weekDayArrivals = 20;
+            	weekendArrivals = 30;
+        	} else if (hour >= 7 && hour < 9) {
+        		weekDayArrivals = 75;
+            	weekendArrivals = 100;
+        	} else if (hour >= 9 && hour < 17) {
+        		weekDayArrivals = 60;
+            	weekendArrivals = 140;
+        	} else if (hour >= 17 && hour < 21) {
+        		weekDayArrivals = 150;
+            	weekendArrivals = 250;
+        	} else if (hour >= 21 && hour < 23) {
+        		weekDayArrivals = 40;
+            	weekendArrivals = 60;
+        	}
+    	}
+    	
+    	if(day == 6) {
+    		if(hour > 0 && hour < 7) {
+            	weekDayArrivals = 20;
+            	weekendArrivals = 21;
+            } else if(hour > 5 && hour < 7) {
+        		weekDayArrivals = 20;
+            	weekendArrivals = 30;
+        	} else if (hour >= 7 && hour < 9) {
+        		weekDayArrivals = 20;
+            	weekendArrivals = 30;
+        	} else if (hour >= 9 && hour < 17) {
+        		weekDayArrivals = 60;
+            	weekendArrivals = 140;
+        	} else if (hour >= 17 && hour < 21) {
+        		weekDayArrivals = 20;
+            	weekendArrivals = 30;
+        	} else if (hour >= 21 && hour < 23) {
+        		weekDayArrivals = 20;
+            	weekendArrivals = 30;
+        	}
+    	}
+
+    	
+    	minute++;
         while (minute > 59) {
             minute -= 60;
             hour++;
         }
         while (hour > 23) {
             hour -= 24;
-            day++;
+            day++;  
+            	
         }
         while (day > 6) {
             day -= 7;
+            week++;
+        }
+        
+        while (week > 3) {
+        	week -= 4;
+        	month++;
+        }
+        
+        while (month > 11) {
+        	month -= 12;
+        	
         }
         
         if(hour < 10) {
@@ -376,6 +501,8 @@ public class CarParkingLogic extends AbstractModel {
         	currentDay = "Sunday";
         	break;
         }
+        
+        
 
         
         /*
@@ -387,6 +514,7 @@ public class CarParkingLogic extends AbstractModel {
         /*
          * The average numbers are calculated here.
          */
+        
 
         int averageNumberOfCarsPerHour = day < 5
                 ? weekDayArrivals
@@ -395,10 +523,15 @@ public class CarParkingLogic extends AbstractModel {
         double standardDeviation = averageNumberOfCarsPerHour * 0.3;
         double numberOfRegularCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
         int numberOfRegularCarsPerMinute = (int)Math.round(numberOfRegularCarsPerHour / 60);
+        
+        double numberOfReservationsPerHour = amountOfReservations + random.nextGaussian() * standardDeviation;
+        int numberOfReservationsPerMinute = (int)Math.round(numberOfReservationsPerHour / 60);
  
         double numberOfParkingPassHoldersPerHour = (amountOfPassHolders / 20) + random.nextGaussian() * standardDeviation;
         int numberOfParkingPassHoldersPerMinute = (int)Math.round(numberOfParkingPassHoldersPerHour / 60);
-        int numberTotalCarsPerMinute = numberOfRegularCarsPerMinute + numberOfParkingPassHoldersPerMinute;
+        int numberTotalCarsPerMinute = numberOfRegularCarsPerMinute + numberOfParkingPassHoldersPerMinute + numberOfReservationsPerMinute;
+        
+        
         
         
         
@@ -443,11 +576,26 @@ public class CarParkingLogic extends AbstractModel {
             	 */
             
 
-            for (int i = 0; i < numberOfParkingPassHoldersPerMinute ; i++) {
+            for (int i = 0; i < numberOfParkingPassHoldersPerMinute; i++) {
             	Car car = new ParkingPassCar();
             	numberOfEnteringCars++;
                 entranceCarQueue.addCar(car);
           }
+            
+            /*
+             * 
+             * 
+             * 
+             */
+            
+            for (int i = 0; i < numberOfReservationsPerMinute; i++) {
+            	if(totalReservationsInPark < amountOfReservations) {
+            	Car car = new ReservationCar();
+            	numberOfEnteringCars++;
+            	entranceCarQueue.addCar(car);
+            }
+            	
+        }
             
             
             super.notifyViews(); //updates the CarParkView
@@ -478,9 +626,11 @@ public class CarParkingLogic extends AbstractModel {
                 	totalRegularCarsInPark++; //if the car is a regular car that amount will be increased by 1
                 }else if (car instanceof ParkingPassCar) {
                 	totalPassHoldersInPark++; //if the car is a parking pass car that amount will be increased by 1
+                }else if (car instanceof ReservationCar) {
+                	totalReservationsInPark++;
                 }
                 
-                if(car instanceof AdHocCar || car instanceof ParkingPassCar) {
+                if(car instanceof AdHocCar || car instanceof ParkingPassCar || car instanceof ReservationCar) {
                 		car.setMinutesLeft(car.getStayTime()); //sets the minutes left for the car
                 }
             }
@@ -520,6 +670,12 @@ public class CarParkingLogic extends AbstractModel {
             	membersCarQueue.addCar(car); // Car gets added to the membersCarQueue to leave
                 this.removeCarAt(car.getLocation()); //Car gets removed from it's location
                 break;
+            } else if(car instanceof ReservationCar && car.getMinutesLeft() <= 0) {
+            	setNumberOfReservationsExiting(getNumberOfReservationsExiting() + 1);
+            	paymentCarQueue.addCar(car);
+            	break;
+            	
+            	
             }
             
             super.notifyViews();
@@ -535,13 +691,19 @@ public class CarParkingLogic extends AbstractModel {
             Car car = paymentCarQueue.removeCar();  //car will be removed from the payment Queue
             if (car == null) { //car has to exist else there will be a break
                 break;
-            } else {
+            } else if(car instanceof AdHocCar){
                 numberOfPayingCars--;
+                exitCarQueue.addCar(car); //car will be added to the exiting car queue
+                numberOfExitingCars++;
+            } else if (car instanceof ReservationCar) {
+            	numberOfPayingCars--;
+            	reservationQueue.addCar(car);
+            	setNumberOfReservationsExiting(getNumberOfReservationsExiting() + 1);
             }
 
             this.removeCarAt(car.getLocation()); //car gets removed from it's location
-            exitCarQueue.addCar(car); //car will be added to the exiting car queue
-            numberOfExitingCars++;
+            
+            
             super.notifyViews(); //view gets updated
         }
         
@@ -586,6 +748,16 @@ public class CarParkingLogic extends AbstractModel {
             }
             super.notifyViews();  //view gets updated
 
+        }
+        
+        for (int i = 0; i < exitSpeed; i++) {
+        	Car car = reservationQueue.removeCar();
+        	if(car == null) {
+        		break;
+        	} else {
+        		setNumberOfReservationsExiting(getNumberOfReservationsExiting() - 1);
+        		totalReservationsInPark--;
+        	}
         }
         
         totalCars = totalRegularCarsInPark + totalPassHoldersInPark; //total cars calculation
@@ -747,4 +919,10 @@ public class CarParkingLogic extends AbstractModel {
         System.out.println("ParkingPass Cars: " + totalPassHoldersInPark);
         System.out.println("Total Cars: " + totalCars + "/" + totalSpace);
     }
+
+
+	
+
+
+	
 }
