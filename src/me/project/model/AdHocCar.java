@@ -25,7 +25,7 @@ public class AdHocCar extends Car {
 		
 		Random random = new Random(); 
 		
-		minutesStay = (int) (15 + random.nextFloat() * 10 * 60);
+		minutesStay = (int) (random.nextFloat() * 10 * 60);
     }
     
     /**

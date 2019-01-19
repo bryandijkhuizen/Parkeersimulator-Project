@@ -85,7 +85,7 @@ public class CarParkingLogic extends AbstractModel {
         numberOfPayingCars = 0;
         numberOfExitingCars = 0;
         numberOfMembersExiting = 0;
-        setNumberOfReservationsExiting(0);
+        
         
         totalRegularCarsInPark = 0;
         totalPassHoldersInPark = 0;
@@ -307,9 +307,7 @@ public class CarParkingLogic extends AbstractModel {
     }
     
     /**
-     * 
-     * 
-     * @return queue
+     * @return passHolderQueue
      */
     
     public CarQueue getPassHoldersQueue() {
@@ -317,9 +315,7 @@ public class CarParkingLogic extends AbstractModel {
     }
     
     /**
-     * 
-     * 
-     * 
+     * @return currenTime
      */
     
     public String getCurrentTime() {
@@ -333,34 +329,63 @@ public class CarParkingLogic extends AbstractModel {
     public int getAmountOfReservations() {
 		return amountOfReservations;
 	}
+    
+    /**
+     * @param amountOfReservations
+     */
 
 
 	public void setAmountOfReservations(int amountOfReservations) {
 		this.amountOfReservations = amountOfReservations;
 	}
 	
+	/**
+	 * @return numberOfReservationsExiting
+	 */
+	
 	public int getNumberOfReservationsExiting() {
 		return numberOfReservationsExiting;
 	}
 
+	/**
+	 * 
+	 * @param numberOfReservationsExiting
+	 */
 
 	public void setNumberOfReservationsExiting(int numberOfReservationsExiting) {
 		this.numberOfReservationsExiting = numberOfReservationsExiting;
 	}
 	
+	/**
+	 * @return totalReservationsInPark
+	 */
+	
 	public int getTotalReservations() {
 		return totalReservationsInPark;
 	}
+	
+	/** 
+	 * @return totalCars
+	 */
 	
 	public int getTotalCars() {
 		return totalCars;
 	}
 	
+	/**
+	 * 
+	 * Tick method actually simulates the
+	 * carpark
+	 * 
+	 */
+	
     public void tick() {
     	
     	/*
-         * The time will be advanced.
-         */
+    	 * 
+    	 * All the regular amount of cars in the 
+    	 * carpark
+    	 */
     	
     	if(day >=0 && day <=2) {
     		
@@ -376,11 +401,20 @@ public class CarParkingLogic extends AbstractModel {
     	} else if (hour >= 9 && hour < 17) {
     		weekDayArrivals = 40;
         	weekendArrivals = 80;
-    	} else if (hour >= 17 && hour < 23) {
+    	} else if (hour >= 17 && hour < 21) {
     		weekDayArrivals = 30;
         	weekendArrivals = 40;
-    	} 
+    	} else if (hour >= 21 && hour < 23) {
+    		weekDayArrivals = 20;
+        	weekendArrivals = 21;
+    	}
     }
+    	
+    	/*
+    	 * 
+    	 * Thursdaynight will be busy
+    	 * 
+    	 */
     	
     	if(day == 3) {
     		if(hour > 0 && hour < 7) {
@@ -404,6 +438,11 @@ public class CarParkingLogic extends AbstractModel {
         	}
     	}
     	
+    	/*
+    	 * Friday & Saturday will be busy
+    	 * 
+    	 */
+    	
     	if(day >= 4 && day <= 5) {
     		if(hour > 0 && hour < 7) {
             	weekDayArrivals = 20;
@@ -426,6 +465,12 @@ public class CarParkingLogic extends AbstractModel {
         	}
     	}
     	
+    	/*
+    	 * 
+    	 * 
+    	 * Sunday in the afternoon will be busy
+    	 */
+    	
     	if(day == 6) {
     		if(hour > 0 && hour < 7) {
             	weekDayArrivals = 20;
@@ -444,10 +489,14 @@ public class CarParkingLogic extends AbstractModel {
             	weekendArrivals = 30;
         	} else if (hour >= 21 && hour < 23) {
         		weekDayArrivals = 20;
-            	weekendArrivals = 30;
+            	weekendArrivals = 21;
         	}
     	}
 
+    	/*
+    	 * The time will be advanced here
+    	 * 
+    	 */
     	
     	minute++;
         while (minute > 59) {
@@ -474,6 +523,13 @@ public class CarParkingLogic extends AbstractModel {
         	
         }
         
+        /*
+         * 
+         * these if statments will make sure the time will
+         * be displayed
+         * 
+         */
+        
         if(hour < 10) {
         	currentTime = "0"+ hour + ":" + minute;
         }
@@ -484,6 +540,11 @@ public class CarParkingLogic extends AbstractModel {
         	currentTime = hour + ":" + minute;
         }
         	
+        
+        /*
+         * The Switch case that creates the days
+         * 
+         */
         
         
         switch (day) {
@@ -563,7 +624,7 @@ public class CarParkingLogic extends AbstractModel {
         	 */
         	
         	for(int i = 0; i < entranceCarQueue.carsInQueue(); i++) {
-        		if(entranceCarQueue.carsInQueue() > 25) {
+        		if(entranceCarQueue.carsInQueue() > 10) {
         			@SuppressWarnings("unused")
 					Car car = entranceCarQueue.removeCar();
         		}
@@ -580,7 +641,7 @@ public class CarParkingLogic extends AbstractModel {
           }
             	/*
             	 * As long as the maximum of ParkingPassHolders cars entering the 
-            	 * parking hasn't been reached regular cars will enter
+            	 * parking hasn't been reached ParkingPassHolders cars will enter
             	 */
             
 
@@ -591,8 +652,8 @@ public class CarParkingLogic extends AbstractModel {
           }
             
             /*
-             * 
-             * 
+             * As long as the maximum of Reservations cars entering the parking hasn't
+             * been reached, they will enter
              * 
              */
             
