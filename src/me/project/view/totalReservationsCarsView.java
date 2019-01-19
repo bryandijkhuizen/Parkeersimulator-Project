@@ -13,33 +13,33 @@ import me.project.logic.CarParkingLogic;
 	 */
 
 	@SuppressWarnings("serial")
-	public class totalCarsView extends AbstractView {
+	public class totalReservationsCarsView extends AbstractView {
 		
-		private JLabel carCounterLabel;
+		private JLabel reservationsLabel;
 
-		private JTextField totalCarCount;
+		private JTextField reservations;
 
-		private int totalCars;
+		private int totalReservations;
 		
 		/**
 		 * This is the totalCarsView Constructor
 		 */
 		
-		public totalCarsView(CarParkingLogic model) {
+		public totalReservationsCarsView(CarParkingLogic model) {
 			super(model);
 			this.setLayout(null);
 
-			carCounterLabel = new JLabel("Current Amount of Cars: ");
+			reservationsLabel = new JLabel("Current Reservation Cars: ");
 			
-			totalCarCount = new JTextField();    
+			reservations = new JTextField();    
 	        
-	        carCounterLabel.setBounds(5, 0, 200, 20);
-	        totalCarCount.setBounds(180, 3, 50, 20);
+			reservationsLabel.setBounds(5, 0, 200, 20);
+			reservations.setBounds(180, 3, 50, 20);
 	       
-	        add(carCounterLabel);
-	        add(totalCarCount);
+	        add(reservationsLabel);
+	        add(reservations);
        
-	        totalCarCount.setEditable(false);
+	        reservations.setEditable(false);
 		
 		}
 		
@@ -51,8 +51,8 @@ import me.project.logic.CarParkingLogic;
 
 	        CarParkingLogic carPark = (CarParkingLogic) super.model;
 
-	        totalCars = carPark.getTotalCars();
-	        totalCarCount.setText("" + totalCars);
+	        totalReservations = carPark.getTotalReservations();
+	        reservations.setText("" + totalReservations);
 	        
 
 	        setVisible(true);

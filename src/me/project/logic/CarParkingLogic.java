@@ -348,6 +348,14 @@ public class CarParkingLogic extends AbstractModel {
 		this.numberOfReservationsExiting = numberOfReservationsExiting;
 	}
 	
+	public int getTotalReservations() {
+		return totalReservationsInPark;
+	}
+	
+	public int getTotalCars() {
+		return totalCars;
+	}
+	
     public void tick() {
     	
     	/*
@@ -760,7 +768,7 @@ public class CarParkingLogic extends AbstractModel {
         	}
         }
         
-        totalCars = totalRegularCarsInPark + totalPassHoldersInPark; //total cars calculation
+        totalCars = getTotalRegularCars() + getTotalPassHolders() + getTotalReservations(); //total cars calculation
         super.notifyViews(); //view gets updated
 
         
