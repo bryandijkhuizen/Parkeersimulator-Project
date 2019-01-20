@@ -19,7 +19,7 @@ import me.project.model.ReservationCar;
 
 public class CarParkingLogic extends AbstractModel {
     private static int numberOfFloors, numberOfRows, numberOfPlaces;
-    private static CarQueue entranceCarQueue /*VOOR ALLE AUTOS */,  paymentCarQueue /*VOOR NORMALE AUTO'S */, membersCarQueue /*UITGANG VOOR MEMBERS */, exitCarQueue /*UITGANG VOOR NORMALE AUTO'S */, secondEntranceCarQueue /*INGANG VOOR MEMBERS EN RES */, passHolderQueue, reservationQueue ;
+    private static CarQueue entranceCarQueue,  paymentCarQueue, membersCarQueue, exitCarQueue, secondEntranceCarQueue, passHolderQueue, reservationQueue ;
 
     private Car[][][] cars;
     
@@ -674,7 +674,7 @@ public class CarParkingLogic extends AbstractModel {
             for (int i = 0; i < numberOfParkingPassHoldersPerMinute; i++) {
             	Car car = new ParkingPassCar();
             	numberOfEnteringCars++;
-                entranceCarQueue.addCar(car);
+                secondEntranceCarQueue.addCar(car);
           }
             
             /*
@@ -687,7 +687,7 @@ public class CarParkingLogic extends AbstractModel {
             	if(totalReservationsInPark < amountOfReservations) {
             	Car car = new ReservationCar();
             	numberOfEnteringCars++;
-            	entranceCarQueue.addCar(car);
+            	secondEntranceCarQueue.addCar(car);
             }
          }
             	
@@ -732,21 +732,48 @@ public class CarParkingLogic extends AbstractModel {
                 }
                 if(car instanceof AdHocCar) {
                 	totalRegularCarsInPark++; //if the car is a regular car that amount will be increased by 1
-                }else if (car instanceof ParkingPassCar) {
-                	totalPassHoldersInPark++; //if the car is a parking pass car that amount will be increased by 1
-                }else if (car instanceof ReservationCar) {
-                	totalReservationsInPark++;
                 }else if (car instanceof ElectricalCar) {
                 	totalElectricalsInPark++;
                 }
                 
-                if(car instanceof AdHocCar || car instanceof ParkingPassCar || car instanceof ReservationCar || car instanceof ElectricalCar) {
+                if(car instanceof AdHocCar || car instanceof ElectricalCar) {
                 		car.setMinutesLeft(car.getStayTime()); //sets the minutes left for the car
                 }
             }
        }
             super.notifyViews();
         }
+        
+        for (int i = 0; i < enterSpeed; i++) {
+        	if(totalCars < totalSpace) { //car can't enter if the car park is full
+        		Car car = secondEntranceCarQueue.removeCar(); //car removed from entranceQueue
+                numberOfEnteringCars--; 
+                
+                if(car == null) { //if car doesn't exist; stop
+                	break;
+                }else {
+                	
+                if(getFirstFreeLocation() != null) { //firstFreeLocation has to exist
+                	this.setCarAt(getFirstFreeLocation(), car); //car gets put in firstFreeLocation
+                
+                }else {
+                	break;
+                }
+                if (car instanceof ParkingPassCar) {
+                	totalPassHoldersInPark++; //if the car is a parking pass car that amount will be increased by 1
+                }else if (car instanceof ReservationCar) {
+                	totalReservationsInPark++;
+                }
+                
+                if(car instanceof ParkingPassCar || car instanceof ReservationCar) {
+                		car.setMinutesLeft(car.getStayTime()); //sets the minutes left for the car
+                }
+            }
+       }
+            super.notifyViews();
+        }
+        
+        
         	
      
    
