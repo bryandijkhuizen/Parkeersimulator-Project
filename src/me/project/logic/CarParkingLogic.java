@@ -6,6 +6,7 @@ import me.project.abstracts.AbstractModel;
 import me.project.abstracts.Car;
 import me.project.model.AdHocCar;
 import me.project.model.CarQueue;
+import me.project.model.ElectricalCar;
 import me.project.model.Location;
 import me.project.model.ParkingPassCar;
 import me.project.model.ReservationCar;
@@ -24,6 +25,7 @@ public class CarParkingLogic extends AbstractModel {
     
     private int amountOfPassHolders;
     private int amountOfReservations;
+    private int amountOfElectricals;
     
     private int month = 0;
     private int week = 0;
@@ -44,7 +46,7 @@ public class CarParkingLogic extends AbstractModel {
     private int numberOfMembersExiting;
     private int numberOfReservationsExiting;
 
-    private int totalRegularCarsInPark, totalPassHoldersInPark, totalCars, totalReservationsInPark; 
+    private int totalRegularCarsInPark, totalPassHoldersInPark, totalCars, totalReservationsInPark, totalElectricalsInPark; 
     private int totalSpace;
     
     private String currentDay;
@@ -92,9 +94,11 @@ public class CarParkingLogic extends AbstractModel {
         
         totalRegularCarsInPark = 0;
         totalPassHoldersInPark = 0;
+        totalElectricalsInPark = 0;
         totalCars = 0;
         
         amountOfReservations = 20;
+        amountOfElectricals = 5;
 
         
         currentDay = "Monday";
@@ -384,6 +388,14 @@ public class CarParkingLogic extends AbstractModel {
 	}
 	
 	/**
+	 * @return totalElectricalsInPark
+	 */
+	
+	public int getTotalElectricals() {
+		return totalElectricalsInPark;
+	}
+	
+	/**
 	 * 
 	 * Tick method actually simulates the
 	 * carpark
@@ -606,10 +618,13 @@ public class CarParkingLogic extends AbstractModel {
         
         double numberOfReservationsPerHour = amountOfReservations + random.nextGaussian() * standardDeviation;
         int numberOfReservationsPerMinute = (int)Math.round(numberOfReservationsPerHour / 60);
+        
+        double numberOfElectricalsPerHour = amountOfElectricals + random.nextGaussian() * standardDeviation;
+        int numberOfElectricalsPerMinute = (int)Math.round(numberOfElectricalsPerHour / 60);
  
         double numberOfParkingPassHoldersPerHour = (amountOfPassHolders / 20) + random.nextGaussian() * standardDeviation;
         int numberOfParkingPassHoldersPerMinute = (int)Math.round(numberOfParkingPassHoldersPerHour / 60);
-        int numberTotalCarsPerMinute = numberOfRegularCarsPerMinute + numberOfParkingPassHoldersPerMinute + numberOfReservationsPerMinute;
+        int numberTotalCarsPerMinute = numberOfRegularCarsPerMinute + numberOfParkingPassHoldersPerMinute + numberOfReservationsPerMinute + numberOfElectricalsPerMinute;
         
         
         
@@ -674,7 +689,20 @@ public class CarParkingLogic extends AbstractModel {
             	numberOfEnteringCars++;
             	entranceCarQueue.addCar(car);
             }
+         }
             	
+            	/*
+            	 * As long as the maximum of Electrical cars entering the parking hasn't
+            	 * been reached, they will enter
+            	 */
+            	
+            	for(int i = 0; i < numberOfElectricalsPerMinute; i++) {
+            		if(totalElectricalsInPark < amountOfElectricals) {
+        				Car car = new ElectricalCar();
+        				numberOfEnteringCars++;
+        				entranceCarQueue.addCar(car);
+        			
+            		}
         }
             
             
@@ -708,9 +736,11 @@ public class CarParkingLogic extends AbstractModel {
                 	totalPassHoldersInPark++; //if the car is a parking pass car that amount will be increased by 1
                 }else if (car instanceof ReservationCar) {
                 	totalReservationsInPark++;
+                }else if (car instanceof ElectricalCar) {
+                	totalElectricalsInPark++;
                 }
                 
-                if(car instanceof AdHocCar || car instanceof ParkingPassCar || car instanceof ReservationCar) {
+                if(car instanceof AdHocCar || car instanceof ParkingPassCar || car instanceof ReservationCar || car instanceof ElectricalCar) {
                 		car.setMinutesLeft(car.getStayTime()); //sets the minutes left for the car
                 }
             }
@@ -745,6 +775,12 @@ public class CarParkingLogic extends AbstractModel {
             	paymentCarQueue.addCar(car); // Car gets added to the payment Queue
             	totalRevenue += car.getStayTime() * pricePerMinute;
             	break;
+            	
+            } else if (car instanceof ElectricalCar && car.getMinutesLeft() <= 0) {
+            	numberOfPayingCars++;
+            	paymentCarQueue.addCar(car);
+            	totalRevenue += car.getStayTime() * pricePerMinute;
+            	break;
 	
             } else if(car instanceof ParkingPassCar && car.getMinutesLeft() <= 0) { 
                 numberOfMembersExiting++;
@@ -752,12 +788,12 @@ public class CarParkingLogic extends AbstractModel {
                 this.removeCarAt(car.getLocation()); //Car gets removed from it's location
                 break;
             } else if(car instanceof ReservationCar && car.getMinutesLeft() <= 0) {
+            	numberOfPayingCars++;
             	setNumberOfReservationsExiting(getNumberOfReservationsExiting() + 1);
             	paymentCarQueue.addCar(car);
             	totalRevenue += car.getStayTime() * pricePerMinute;
             	break;
-            	
-            	
+            
             }
             
             super.notifyViews();
@@ -781,6 +817,10 @@ public class CarParkingLogic extends AbstractModel {
             	numberOfPayingCars--;
             	reservationQueue.addCar(car);
             	setNumberOfReservationsExiting(getNumberOfReservationsExiting() + 1);
+            } else if (car instanceof ElectricalCar) {
+            	numberOfPayingCars--;
+            	exitCarQueue.addCar(car); //car will be added to the exiting car queue
+            	numberOfExitingCars++;
             }
 
             this.removeCarAt(car.getLocation()); //car gets removed from it's location
@@ -799,7 +839,7 @@ public class CarParkingLogic extends AbstractModel {
         	
         }
         /*
-         * Here the regular cars will be leaving
+         * Here the regular & electrical cars will be leaving
          * until the maximum amount of cars has been reached
          */
         
@@ -807,10 +847,14 @@ public class CarParkingLogic extends AbstractModel {
             Car car = exitCarQueue.removeCar(); //car gets removed from exiting car queue
             if (car == null) { //car has to exist else there will be a break
                 break;
-            } else {
+            } else if(car instanceof AdHocCar){
                 numberOfExitingCars--;	 //exiting car queue will me decreased by 1
                 totalRegularCarsInPark--;	     //total regular car count will be decreased by 1
+            } else if(car instanceof ElectricalCar) {
+            	numberOfExitingCars--;
+            	totalElectricalsInPark--;
             }
+            
             super.notifyViews();
  
         }

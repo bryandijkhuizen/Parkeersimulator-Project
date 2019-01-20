@@ -15,7 +15,7 @@ import java.awt.*;
 	 */
 
 public class ParkingPassCar extends Car {
-	private static final Color COLOR=Colors.PASTEL_BLUE;
+	private static final Color COLOR=Colors.MEMBER_BLUE;
 	
 	/**
 	 * ParkingPassCar Constructor

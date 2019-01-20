@@ -16,6 +16,7 @@ import me.project.view.currentTimeView;
 import me.project.view.entranceQueueView;
 import me.project.view.totalCarPercentageView;
 import me.project.view.totalCarsView;
+import me.project.view.totalElectricalsCarView;
 import me.project.view.totalPassHoldersView;
 import me.project.view.totalRegularCarsView;
 import me.project.view.totalReservationsCarsView;
@@ -56,6 +57,7 @@ public class CarSimulator {
     private totalCarPercentageView tcpv;
     private totalReservationsCarsView totalRes;
     private totalRevenueView totalRevenue;
+    private totalElectricalsCarView TotalElectricalsCarView;
     
     private JLabel carLogo;
     
@@ -106,6 +108,9 @@ public class CarSimulator {
 		totalRevenue.setBorder(new LineBorder(new Color(0, 0, 0)));
 		totalRevenue.setBackground(SystemColor.menu);
 		Image img = new ImageIcon(this.getClass().getResource("/logo.png")).getImage();
+		TotalElectricalsCarView = new totalElectricalsCarView(carParking);
+		TotalElectricalsCarView.setBorder(new LineBorder(new Color(0, 0, 0)));
+		TotalElectricalsCarView.setBackground(SystemColor.menu);
 		
 		
 		
@@ -125,6 +130,7 @@ public class CarSimulator {
 		frame.getContentPane().add(tcpv);
 		frame.getContentPane().add(totalRes);
 		frame.getContentPane().add(totalRevenue);
+		frame.getContentPane().add(TotalElectricalsCarView);
 		
 
 		carParkView.setBounds(29, 314, 759, 339);
@@ -132,12 +138,13 @@ public class CarSimulator {
 		totalCars.setBounds(806, 31, 275, 29);
 		currentDay.setBounds(65, 259, 275, 29);
 		CurrentTimeView.setBounds(482, 259, 275, 29);
-		EntranceCarQueueView.setBounds(806, 191, 275, 29);
+		EntranceCarQueueView.setBounds(806, 231, 275, 29);
 		tphv.setBounds(806, 111, 275, 29);
-		rcv.setBounds(806, 151, 275, 29);
+		rcv.setBounds(806, 191, 275, 29);
 		tcpv.setBounds(1091, 31, 275, 29);
 		totalRes.setBounds(806, 71, 275, 29);
-		totalRevenue.setBounds(1037, 553, 316, 29);
+		totalRevenue.setBounds(1018, 782, 316, 29);
+		TotalElectricalsCarView.setBounds(806, 151, 275, 29);
 		
 		carLogo = new JLabel("");
 		carLogo.setBounds(215, 36, 400, 155);
