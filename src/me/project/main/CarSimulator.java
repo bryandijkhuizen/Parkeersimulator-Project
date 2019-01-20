@@ -1,9 +1,10 @@
 package me.project.main;
 
 import java.awt.Color;
-import java.awt.Component;
+import java.awt.Image;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import me.project.abstracts.AbstractController;
 import me.project.abstracts.AbstractView;
@@ -19,6 +20,10 @@ import me.project.view.totalPassHoldersView;
 import me.project.view.totalRegularCarsView;
 import me.project.view.totalReservationsCarsView;
 import me.project.view.totalRevenueView;
+import java.awt.Canvas;
+
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
 
 	/**
 	 * This class combines all of the functions
@@ -41,6 +46,8 @@ public class CarSimulator {
     private totalCarPercentageView tcpv;
     private totalReservationsCarsView totalRes;
     private totalRevenueView totalRevenue;
+    
+    private JLabel carLogo;
     
     private int tickPause;
     public static boolean run;
@@ -78,11 +85,14 @@ public class CarSimulator {
 		totalRes.setBackground(Color.LIGHT_GRAY);
 		totalRevenue = new totalRevenueView(carParking);
 		totalRevenue.setBackground(Color.LIGHT_GRAY);
+		Image img = new ImageIcon(this.getClass().getResource("/logo.png")).getImage();
+		
+		
 		
 		frame=new JFrame("CarParking Simulation");
-		frame.getContentPane().setBackground(Color.LIGHT_GRAY);
+		frame.getContentPane().setBackground(new Color(192, 192, 192));
 		
-		frame.setSize(1394, 632);
+		frame.setSize(1394, 909);
 		frame.getContentPane().setLayout(null);
 		frame.getContentPane().add(carParkView);
 		frame.getContentPane().add(controller);
@@ -95,18 +105,24 @@ public class CarSimulator {
 		frame.getContentPane().add(tcpv);
 		frame.getContentPane().add(totalRes);
 		frame.getContentPane().add(totalRevenue);
+		
 
-		carParkView.setBounds(25, 114, 759, 339);
-		controller.setBounds(123, 481, 511, 101);
+		carParkView.setBounds(29, 314, 759, 339);
+		controller.setBounds(277, 706, 511, 101);
 		totalCars.setBounds(806, 31, 275, 29);
-		currentDay.setBounds(123, 43, 275, 29);
-		CurrentTimeView.setBounds(419, 43, 275, 29);
+		currentDay.setBounds(65, 259, 275, 29);
+		CurrentTimeView.setBounds(482, 259, 275, 29);
 		EntranceCarQueueView.setBounds(806, 191, 275, 29);
 		tphv.setBounds(806, 111, 275, 29);
 		rcv.setBounds(806, 151, 275, 29);
 		tcpv.setBounds(1091, 31, 275, 29);
 		totalRes.setBounds(806, 71, 275, 29);
-		totalRevenue.setBounds(1053, 553, 275, 29);
+		totalRevenue.setBounds(1070, 553, 275, 29);
+		
+		carLogo = new JLabel("");
+		carLogo.setBounds(206, 50, 400, 155);
+		frame.getContentPane().add(carLogo);
+		carLogo.setIcon(new ImageIcon(img));
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);

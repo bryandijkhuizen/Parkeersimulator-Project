@@ -34,7 +34,7 @@ import me.project.logic.CarParkingLogic;
 			totalRevenueView = new JTextField();    
 	        
 			revenueLabel.setBounds(5, 0, 200, 20);
-			totalRevenueView.setBounds(180, 3, 50, 20);
+			totalRevenueView.setBounds(180, 3, 120, 20);
 	       
 	        add(revenueLabel);
 	        add(totalRevenueView);

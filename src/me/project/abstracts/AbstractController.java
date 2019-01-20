@@ -16,6 +16,7 @@ public abstract class AbstractController extends JPanel {
 	 * The constructor initializes the instance variable model with a model that applies to this controller.
 	 * @param model Model life is ascribed to the instance variable life
 	 */
+	
 	public AbstractController(AbstractModel model) {
 		this.model = model;
 	}
