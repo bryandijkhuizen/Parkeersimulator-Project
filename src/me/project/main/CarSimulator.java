@@ -24,6 +24,16 @@ import java.awt.Canvas;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.border.LineBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.UIManager;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.BevelBorder;
+import java.awt.SystemColor;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
+
+import javax.swing.JScrollBar;
 
 	/**
 	 * This class combines all of the functions
@@ -66,25 +76,35 @@ public class CarSimulator {
 		controller = new Controller(carParking);
 		controller.setBackground(Color.LIGHT_GRAY);
 		carParkView = new CarParkView(carParking);
+		carParkView.setBorder(new LineBorder(new Color(0, 0, 0)));
 		carParkView.setBackground(Color.GRAY);
 		totalCars = new totalCarsView(carParking);
-		totalCars.setBackground(Color.LIGHT_GRAY);
+		totalCars.setBorder(new LineBorder(new Color(0, 0, 0)));
+		totalCars.setBackground(SystemColor.menu);
 		currentDay = new currentDayView(carParking);
-		currentDay.setBackground(Color.LIGHT_GRAY);
+		currentDay.setBorder(new LineBorder(new Color(0, 0, 0)));
+		currentDay.setBackground(SystemColor.menu);
 		CurrentTimeView = new currentTimeView(carParking);
-		CurrentTimeView.setBackground(Color.LIGHT_GRAY);
+		CurrentTimeView.setBorder(new LineBorder(new Color(0, 0, 0)));
+		CurrentTimeView.setBackground(SystemColor.menu);
 		EntranceCarQueueView = new entranceQueueView(carParking);
-		EntranceCarQueueView.setBackground(Color.LIGHT_GRAY);
+		EntranceCarQueueView.setBorder(new LineBorder(new Color(0, 0, 0)));
+		EntranceCarQueueView.setBackground(SystemColor.menu);
 		tphv = new totalPassHoldersView(carParking);
-		tphv.setBackground(Color.LIGHT_GRAY);
+		tphv.setBorder(new LineBorder(new Color(0, 0, 0)));
+		tphv.setBackground(SystemColor.menu);
 		rcv = new totalRegularCarsView(carParking);
-		rcv.setBackground(Color.LIGHT_GRAY);
+		rcv.setBorder(new LineBorder(new Color(0, 0, 0)));
+		rcv.setBackground(SystemColor.menu);
 		tcpv= new totalCarPercentageView(carParking);
-		tcpv.setBackground(Color.LIGHT_GRAY);
+		tcpv.setBorder(new LineBorder(new Color(0, 0, 0)));
+		tcpv.setBackground(SystemColor.menu);
 		totalRes = new totalReservationsCarsView(carParking);
-		totalRes.setBackground(Color.LIGHT_GRAY);
+		totalRes.setBorder(new LineBorder(new Color(0, 0, 0)));
+		totalRes.setBackground(SystemColor.menu);
 		totalRevenue = new totalRevenueView(carParking);
-		totalRevenue.setBackground(Color.LIGHT_GRAY);
+		totalRevenue.setBorder(new LineBorder(new Color(0, 0, 0)));
+		totalRevenue.setBackground(SystemColor.menu);
 		Image img = new ImageIcon(this.getClass().getResource("/logo.png")).getImage();
 		
 		
@@ -108,7 +128,7 @@ public class CarSimulator {
 		
 
 		carParkView.setBounds(29, 314, 759, 339);
-		controller.setBounds(277, 706, 511, 101);
+		controller.setBounds(105, 710, 511, 101);
 		totalCars.setBounds(806, 31, 275, 29);
 		currentDay.setBounds(65, 259, 275, 29);
 		CurrentTimeView.setBounds(482, 259, 275, 29);
@@ -117,12 +137,29 @@ public class CarSimulator {
 		rcv.setBounds(806, 151, 275, 29);
 		tcpv.setBounds(1091, 31, 275, 29);
 		totalRes.setBounds(806, 71, 275, 29);
-		totalRevenue.setBounds(1070, 553, 275, 29);
+		totalRevenue.setBounds(1037, 553, 316, 29);
 		
 		carLogo = new JLabel("");
 		carLogo.setBounds(215, 36, 400, 155);
 		frame.getContentPane().add(carLogo);
 		carLogo.setIcon(new ImageIcon(img));
+		
+		JScrollBar scrollBar = new JScrollBar();
+		scrollBar.setOrientation(JScrollBar.HORIZONTAL);
+		scrollBar.setBounds(29, 834, 792, 17);
+		scrollBar.setMinimum(0);
+		scrollBar.setMaximum(3600);
+		
+		scrollBar.addAdjustmentListener(new AdjustmentListener() {
+			
+			
+			@Override
+			public void adjustmentValueChanged(AdjustmentEvent e) {
+				carParking.steps(e.getValue());
+				
+			}
+		});
+		frame.getContentPane().add(scrollBar);
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);

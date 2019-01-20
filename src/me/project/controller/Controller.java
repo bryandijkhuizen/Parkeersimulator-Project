@@ -11,6 +11,9 @@ import javax.swing.JScrollPane;
 import me.project.abstracts.AbstractController;
 import me.project.logic.CarParkingLogic;
 import me.project.main.CarSimulator;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.SystemColor;
 
 	/**
 	 * This is class Controller for Simulator 
@@ -39,34 +42,58 @@ public class Controller extends AbstractController implements ActionListener {
 		super(carParkingLogic);
 		
 		btnQuit = new JButton("Quit");
+		btnQuit.setForeground(Color.WHITE);
+		btnQuit.setFont(new Font("Source Sans Pro SemiBold", Font.BOLD, 15));
+		btnQuit.setBackground(SystemColor.textHighlight);
 		btnQuit.addActionListener(this);
 		add(btnQuit);
 		
 		startSimulator = new JButton("Start Simulator");
+		startSimulator.setForeground(Color.WHITE);
+		startSimulator.setFont(new Font("Source Sans Pro SemiBold", Font.BOLD, 15));
+		startSimulator.setBackground(SystemColor.textHighlight);
 		startSimulator.addActionListener(this);
 		add(startSimulator);
 		
 		pauseSimulator = new JButton("Pause Simulator");
+		pauseSimulator.setForeground(Color.WHITE);
+		pauseSimulator.setFont(new Font("Source Sans Pro SemiBold", Font.BOLD, 15));
+		pauseSimulator.setBackground(SystemColor.textHighlight);
 		pauseSimulator.addActionListener(this);
 		add(pauseSimulator);
 		
 		tenSteps = new JButton("tenSteps");
+		tenSteps.setForeground(Color.WHITE);
+		tenSteps.setFont(new Font("Source Sans Pro SemiBold", Font.BOLD, 15));
+		tenSteps.setBackground(SystemColor.textHighlight);
 		tenSteps.addActionListener(this);
 		add(tenSteps);
 		
 		oneHundredSteps = new JButton("oneHundredSteps");
+		oneHundredSteps.setForeground(Color.WHITE);
+		oneHundredSteps.setFont(new Font("Source Sans Pro SemiBold", Font.BOLD, 15));
+		oneHundredSteps.setBackground(SystemColor.textHighlight);
 		oneHundredSteps.addActionListener(this);
 		add(oneHundredSteps);
 		
 		oneStep = new JButton("oneStep");
+		oneStep.setForeground(Color.WHITE);
+		oneStep.setFont(new Font("Source Sans Pro SemiBold", Font.BOLD, 15));
+		oneStep.setBackground(SystemColor.textHighlight);
 		oneStep.addActionListener(this);
 		add(oneStep);
 		
 		oneHour = new JButton("oneHour");
+		oneHour.setForeground(Color.WHITE);
+		oneHour.setFont(new Font("Source Sans Pro SemiBold", Font.BOLD, 15));
+		oneHour.setBackground(SystemColor.textHighlight);
 		oneHour.addActionListener(this);
 		add(oneHour);
 		
 		oneDay = new JButton("oneDay");
+		oneDay.setForeground(Color.WHITE);
+		oneDay.setFont(new Font("Source Sans Pro SemiBold", Font.BOLD, 15));
+		oneDay.setBackground(SystemColor.textHighlight);
 		oneDay.addActionListener(this);
 		add(oneDay);
 
