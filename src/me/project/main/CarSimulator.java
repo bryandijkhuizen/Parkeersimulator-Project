@@ -120,7 +120,7 @@ public class CarSimulator {
 		totalRevenue.setBounds(1070, 553, 275, 29);
 		
 		carLogo = new JLabel("");
-		carLogo.setBounds(206, 50, 400, 155);
+		carLogo.setBounds(215, 36, 400, 155);
 		frame.getContentPane().add(carLogo);
 		carLogo.setIcon(new ImageIcon(img));
 		
