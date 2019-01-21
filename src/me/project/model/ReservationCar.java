@@ -8,7 +8,7 @@ import me.project.view.Colors;
 import java.awt.Color;
 
 	/**
-	 * Class for adHocCar when they enter an how long the stay
+	 * Class for Reservation when they enter an how long the stay
 	 * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
 	 *
 	 */
