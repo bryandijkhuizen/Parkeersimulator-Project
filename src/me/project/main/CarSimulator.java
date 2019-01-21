@@ -53,6 +53,7 @@ public class CarSimulator {
     private totalElectricalsCarView TotalElectricalsCarView;
     
     private JLabel carLogo;
+    private JLabel legend;
     
     private int tickPause;
     public static boolean run;
@@ -104,6 +105,7 @@ public class CarSimulator {
 		TotalElectricalsCarView = new totalElectricalsCarView(carParking);
 		TotalElectricalsCarView.setBorder(new LineBorder(new Color(0, 0, 0)));
 		TotalElectricalsCarView.setBackground(SystemColor.menu);
+		Image legendImg = new ImageIcon(this.getClass().getResource("/legenda.png")).getImage();
 		
 		
 		
@@ -140,9 +142,14 @@ public class CarSimulator {
 		TotalElectricalsCarView.setBounds(806, 151, 275, 29);
 		
 		carLogo = new JLabel("");
-		carLogo.setBounds(215, 36, 400, 155);
+		carLogo.setBounds(238, 31, 400, 155);
 		frame.getContentPane().add(carLogo);
 		carLogo.setIcon(new ImageIcon(img));
+		
+		legend = new JLabel("");
+		legend.setBounds(821, 402, 162, 155);
+		frame.getContentPane().add(legend);
+		legend.setIcon(new ImageIcon(legendImg));
 		
 		JScrollBar scrollBar = new JScrollBar();
 		scrollBar.setOrientation(JScrollBar.HORIZONTAL);
