@@ -25,7 +25,7 @@ public class ReservationCar extends Car {
 		
 		Random random = new Random(); 
 		
-		minutesStay = (int) (15 + random.nextFloat() * 10 * 60);
+		minutesStay = (int) (15 + (random.nextFloat() * 10 * 60) + 30);
     }
     
     /**
