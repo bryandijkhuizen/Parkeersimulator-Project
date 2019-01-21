@@ -678,18 +678,6 @@ public class CarParkingLogic extends AbstractModel {
           }
             
             /*
-
-             * Here the members/parking pass holders will be entering in their entrance
-             * until the maximum amount of cars has been reached
-             */
-            
-            for (int i = 0; i < numberOfParkingPassHoldersPerMinute; i++) {
-            	Car car = new ParkingPassCar();
-            	numberOfEnteringCars++;
-            	secondEntranceCarQueue.addCar(car);
-            	
-            }
-            /*
              * As long as the maximum of Reservations cars entering the parking hasn't
              * been reached, they will enter
              * 
