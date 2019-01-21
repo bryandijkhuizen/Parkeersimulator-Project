@@ -435,7 +435,7 @@ public class CarParkingLogic extends AbstractModel {
     	
     	/*
     	 * 
-    	 * Thursdaynight will be busy
+    	 * Thursday night will be busy
     	 * 
     	 */
     	
@@ -616,7 +616,7 @@ public class CarParkingLogic extends AbstractModel {
         double numberOfRegularCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
         int numberOfRegularCarsPerMinute = (int)Math.round(numberOfRegularCarsPerHour / 60);
         
-        double numberOfReservationsPerHour = amountOfReservations + random.nextGaussian() * standardDeviation;
+        double numberOfReservationsPerHour = (amountOfReservations / 5)  + random.nextGaussian() * standardDeviation;
         int numberOfReservationsPerMinute = (int)Math.round(numberOfReservationsPerHour / 60);
         
         double numberOfElectricalsPerHour = amountOfElectricals + random.nextGaussian() * standardDeviation;
@@ -678,6 +678,7 @@ public class CarParkingLogic extends AbstractModel {
           }
             
             /*
+<<<<<<< HEAD
 
              * Here the members/parking pass holders will be entering in their entrance
              * until the maximum amount of cars has been reached
@@ -689,6 +690,8 @@ public class CarParkingLogic extends AbstractModel {
             	secondEntranceCarQueue.addCar(car);
             }
             /*
+=======
+>>>>>>> master
              * As long as the maximum of Reservations cars entering the parking hasn't
              * been reached, they will enter
              * 
@@ -715,7 +718,6 @@ public class CarParkingLogic extends AbstractModel {
         			
             		}
         }
-            
 
             
             super.notifyViews(); //updates the CarParkView
@@ -869,6 +871,14 @@ public class CarParkingLogic extends AbstractModel {
             super.notifyViews(); //view gets updated
         }
         
+        /**
+         * Here the members/parkingpass holders will be entering in their entrance
+         * until the maximum amount of cars has been reached
+         */
+        
+        for (int i = 0; i < enterSpeed; i++) {
+        	
+        }
         /*
          * Here the regular & electrical cars will be leaving
          * until the maximum amount of cars has been reached
@@ -891,7 +901,7 @@ public class CarParkingLogic extends AbstractModel {
         }
         
         /*
-         * Here the members/Parking pass holder will be leaving
+         * Here the members/Parkingpassholder will be leaving
          * Until the maximum amount of cars has been reached
          */
         
