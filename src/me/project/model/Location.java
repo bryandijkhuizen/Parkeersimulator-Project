@@ -1,10 +1,10 @@
 package me.project.model;
 
-/*
- * This is the location class
- * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
- * 
- */
+	/*
+	 * This is the location class
+	 * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
+	 * 
+	 */
 
 public class Location {
 
@@ -44,6 +44,10 @@ public class Location {
     
     public int getPlace() {
         return place;
+    }
+    
+    public void setRow(int row) {
+    	this.row = row;
     }
 
 }

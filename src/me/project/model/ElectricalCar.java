@@ -13,19 +13,19 @@ import java.awt.Color;
 	 *
 	 */
 
-public class AdHocCar extends Car {
+public class ElectricalCar extends Car {
 	
-	private static final Color COLOR=Colors.PASTEL_RED;
+	private static final Color COLOR=Colors.PASTEL_YELLOW;
 	
 	/**
 	 * creates an instance of AdHocCar
 	 */
 	
-    public AdHocCar() {
+    public ElectricalCar() {
 		
 		Random random = new Random(); 
 		
-		minutesStay = (int) (random.nextFloat() * 10 * 60);
+		minutesStay = (int) (15 + random.nextFloat() * 10 * 60);
     }
     
     /**

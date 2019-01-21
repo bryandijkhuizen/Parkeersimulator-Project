@@ -8,14 +8,14 @@ import me.project.view.Colors;
 
 import java.awt.*;
 
-/*
- * This is class ParkingPassCar
- * This Class creates the parkingpasses
- * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
- */
+	/*
+	 * This is class ParkingPassCar
+	 * This Class creates the parkingpasses
+	 * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
+	 */
 
 public class ParkingPassCar extends Car {
-	private static final Color COLOR=Colors.PASTEL_BLUE;
+	private static final Color COLOR=Colors.MEMBER_BLUE;
 	
 	/**
 	 * ParkingPassCar Constructor
@@ -26,7 +26,7 @@ public class ParkingPassCar extends Car {
 		  
 		Random random = new Random(); 
 			
-		minutesStay = (int) (15 + random.nextFloat() * 10 * 60);
+		minutesStay = (int) (random.nextFloat() * 10 * 60);
     }
     
     /**
