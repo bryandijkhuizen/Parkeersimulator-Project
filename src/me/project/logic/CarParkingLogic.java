@@ -26,6 +26,7 @@ public class CarParkingLogic extends AbstractModel {
     private int amountOfPassHolders;
     private int amountOfReservations;
     private int amountOfElectricals;
+    private int amountOfRegularCars;
     
     private int month = 0;
     private int week = 0;
@@ -84,7 +85,7 @@ public class CarParkingLogic extends AbstractModel {
         paymentSpeed = 10; 
         exitSpeed = 9; 
         totalSpace = numberOfPlaces * numberOfRows * numberOfFloors; 
-        amountOfPassHolders = 108;
+        
 
         numberOfEnteringCars = 0;
         numberOfPayingCars = 0;
@@ -97,8 +98,10 @@ public class CarParkingLogic extends AbstractModel {
         totalElectricalsInPark = 0;
         totalCars = 0;
         
-        amountOfReservations = 20;
-        amountOfElectricals = 5;
+        amountOfRegularCars = 320;
+        amountOfPassHolders = 120;
+        amountOfReservations = 60;
+        amountOfElectricals = 30;
 
         
         currentDay = "Monday";
@@ -675,7 +678,8 @@ public class CarParkingLogic extends AbstractModel {
             	Car car = new ParkingPassCar();
             	numberOfEnteringCars++;
                 secondEntranceCarQueue.addCar(car);
-          }
+          
+            }
             
             /*
              * As long as the maximum of Reservations cars entering the parking hasn't
@@ -684,11 +688,10 @@ public class CarParkingLogic extends AbstractModel {
              */
             
             for (int i = 0; i < numberOfReservationsPerMinute; i++) {
-            	if(totalReservationsInPark < amountOfReservations) {
             	Car car = new ReservationCar();
             	numberOfEnteringCars++;
             	secondEntranceCarQueue.addCar(car);
-            }
+            
          }
             	
             	/*
@@ -715,88 +718,128 @@ public class CarParkingLogic extends AbstractModel {
          * by 1.
          */
 
-        for (int i = 0; i < enterSpeed; i++) {
-        	if(totalCars < totalSpace) { //car can't enter if the car park is full
-        		Car car = entranceCarQueue.removeCar(); //car removed from entranceQueue
-                numberOfEnteringCars--; 
-                
-                if(car == null) { //if car doesn't exist; stop
-                	break;
-                }else {
-                	
-                if(getFirstFreeLocation() != null) { //firstFreeLocation has to exist
-                	this.setCarAt(getFirstFreeLocation(), car); //car gets put in firstFreeLocation
-                
-                }else {
-                	break;
-                }
-                if(car instanceof AdHocCar) {
-                	totalRegularCarsInPark++; //if the car is a regular car that amount will be increased by 1
-                }else if (car instanceof ElectricalCar) {
-                	totalElectricalsInPark++;
-                }
-                
-                if(car instanceof AdHocCar || car instanceof ElectricalCar) {
-                		car.setMinutesLeft(car.getStayTime()); //sets the minutes left for the car
-                }
-            }
-       }
-            super.notifyViews();
+        for(int i = 0; i < enterSpeed; i++){
+        	if(totalCars < totalSpace){
+        		if(totalRegularCarsInPark < amountOfRegularCars) {
+        		Car car = entranceCarQueue.removeCar();
+        		numberOfEnteringCars--;
+        		
+        		if(car == null){
+        			break;
+        		} else {
+        			if(car instanceof AdHocCar && getFirstFreeLocationForRegular() != null){
+        				this.setCarAt(getFirstFreeLocationForRegular(), car);
+        			} else {
+        				break;
+        			}
+        			
+        			if(car instanceof AdHocCar){
+        				totalRegularCarsInPark++;
+        			}
+        			
+        			if(car instanceof AdHocCar){
+        				car.setMinutesLeft(car.getStayTime());	
+        			}
+        		}
+        		super.notifyViews();
+        	}
+        	this.tickCars();
         }
+     }
         
-        for (int i = 0; i < enterSpeed; i++) {
-        	if(totalCars < totalSpace) { //car can't enter if the car park is full
-        		Car car = secondEntranceCarQueue.removeCar(); //car removed from entranceQueue
-                numberOfEnteringCars--; 
-                
-                if(car == null) { //if car doesn't exist; stop
-                	break;
-                }else {
-                	
-                if(getFirstFreeLocation() != null) { //firstFreeLocation has to exist
-                	this.setCarAt(getFirstFreeLocation(), car); //car gets put in firstFreeLocation
-                
-                }else {
-                	break;
-                }
-                if (car instanceof ParkingPassCar) {
-                	totalPassHoldersInPark++; //if the car is a parking pass car that amount will be increased by 1
-                }else if (car instanceof ReservationCar) {
-                	totalReservationsInPark++;
-                }
-                
-                if(car instanceof ParkingPassCar || car instanceof ReservationCar) {
-                		car.setMinutesLeft(car.getStayTime()); //sets the minutes left for the car
-                }
-            }
-       }
-            super.notifyViews();
+        for(int i = 0; i < enterSpeed; i++){
+        	if(totalCars < totalSpace){
+        		if(totalElectricalsInPark < amountOfElectricals) {
+        		Car car = entranceCarQueue.removeCar();
+        		numberOfEnteringCars--;
+        		
+        		if(car == null){
+        			break;
+        		} else {
+        			if(car instanceof ElectricalCar && getFirstFreeLocationForElec() != null){
+        				this.setCarAt(getFirstFreeLocationForElec(), car);
+        			} else {
+        				break;
+        			}
+        			
+        			if(car instanceof ElectricalCar){
+        				totalElectricalsInPark++;
+        			}
+        			
+        			if(car instanceof ElectricalCar){
+        				car.setMinutesLeft(car.getStayTime());	
+        			}
+        		}
+        		super.notifyViews();
+        	}
+        	this.tickCars();
         }
+    }
+        for(int i = 0; i < enterSpeed; i++){
+        	if(totalCars < totalSpace){
+        		if(totalPassHoldersInPark < amountOfPassHolders) {
+        		Car car = secondEntranceCarQueue.removeCar();
+        		numberOfEnteringCars--;
+        		
+        		if(car == null){
+        			break;
+        		} else {
+        			if(car instanceof ParkingPassCar && getFirstFreeLocationForPass() != null){
+        				this.setCarAt(getFirstFreeLocationForPass(), car);
+        			} else {
+        				break;
+        			}
+        			
+        			if(car instanceof ParkingPassCar){
+        				totalPassHoldersInPark++;
+        			}
+        			
+        			if(car instanceof ParkingPassCar){
+        				car.setMinutesLeft(car.getStayTime());	
+        			}
+        		}
+        		super.notifyViews();
+        	}
+        	this.tickCars();
+        }
+     }
+        for(int i = 0; i < enterSpeed; i++){
+        	if(totalCars < totalSpace){
+        		if(totalReservationsInPark < amountOfReservations) {
+        		Car car = secondEntranceCarQueue.removeCar();
+        		numberOfEnteringCars--;
+        		
+        		if(car == null){
+        			break;
+        		} else {
+        			if(car instanceof ReservationCar && getFirstFreeLocationForRes() != null){
+        				this.setCarAt(getFirstFreeLocationForRes(), car);
+        			} else {
+        				break;
+        			}
+        			
+        			if(car instanceof ReservationCar){
+        				totalReservationsInPark++;
+        			}
+        			
+        			if(car instanceof ReservationCar){
+        				car.setMinutesLeft(car.getStayTime());	
+        			}
+        		}
+        		super.notifyViews();
+        	}
+        	this.tickCars();
+        }
+      }
+      
+                
+        	while(true) {
+        		Car car = this.getFirstLeavingCar();
+        		
+        		if(car == null) {
+        			break;
+        		}
         
-        
-        	
-     
-   
-        this.tickCars();
-        
-        /*
-         * Gets the firstLeavingCar. If it doesn't exist then break
-         * 
-         * If the car is a Regular Car, the car will be added to the paymentQueue
-         * 
-         * if the car is a parkingpasscar the car will be added to the membersExitingQueue and will be 
-         * removed from it's current location
-         * 
-         */
-
-        while (true) {
-           Car car = this.getFirstLeavingCar();
-           
-            
-            if (car == null) {
-                break;
-            }
-
             if(car instanceof AdHocCar && car.getMinutesLeft() <= 0){
             	numberOfPayingCars++;
             	paymentCarQueue.addCar(car); // Car gets added to the payment Queue
@@ -825,6 +868,9 @@ public class CarParkingLogic extends AbstractModel {
             
             super.notifyViews();
         }
+    
+
+    
        
         /*
          * Here will the payments be done.
@@ -914,7 +960,7 @@ public class CarParkingLogic extends AbstractModel {
         	}
         }
         
-        totalCars = getTotalRegularCars() + getTotalPassHolders() + getTotalReservations(); //total cars calculation
+        totalCars = getTotalRegularCars() + getTotalPassHolders() + getTotalReservations() + getTotalElectricals(); //total cars calculation
         super.notifyViews(); //view gets updated
 
         
@@ -949,6 +995,66 @@ public class CarParkingLogic extends AbstractModel {
             }
         }
         return null;
+    }
+    
+    public Location getFirstFreeLocationForRes() {
+    	for (int floor = 2; floor < getNumberOfFloors(); floor++) {
+    		for (int row = 3; row <= 4 ; row++) {
+    			for(int place = 0; place < getNumberOfPlaces(); place++) {
+    				Location location = new Location(floor, row, place);
+    					if(getCarAt(location) == null) {
+    						return location;
+    					}
+    				}
+    			}
+    		}
+    	
+    	return null;
+    }
+    
+    public Location getFirstFreeLocationForPass() {
+    	for (int floor = 2; floor < getNumberOfFloors(); floor++) {
+    		for (int row = 0; row <= 4; row++) {
+    			for(int place = 0; place < getNumberOfPlaces(); place++) {
+    				Location location = new Location(floor, row, place);
+    					if(getCarAt(location) == null) {
+    						return location;
+    					}
+    				}
+    			}
+    		}
+    	
+    	return null;
+    }
+    
+    public Location getFirstFreeLocationForElec() {
+    	for (int floor = 2; floor < getNumberOfFloors(); floor++) {
+    		for (int row = 5; row <= 5 ; row++) {
+    			for(int place = 0; place < getNumberOfPlaces(); place++) {
+    				Location location = new Location(floor, row, place);
+    					if(getCarAt(location) == null) {
+    						return location;
+    					}
+    				}
+    			}
+    		}
+    	
+    	return null;
+    }
+    
+    public Location getFirstFreeLocationForRegular() {
+    	for (int floor = 0; floor < 2; floor++) {
+    		for (int row = 0; row < getNumberOfRows(); row++) {
+    			for(int place = 0; place < getNumberOfPlaces(); place++) {
+    				Location location = new Location(floor, row, place);
+    					if(getCarAt(location) == null) {
+    						return location;
+    					}
+    				}
+    			}
+    		}
+    	
+    	return null;
     }
     
     /**

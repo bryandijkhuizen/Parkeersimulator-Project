@@ -10,8 +10,11 @@ import javax.swing.JLabel;
 import me.project.abstracts.AbstractView;
 import me.project.abstracts.Car;
 import me.project.logic.CarParkingLogic;
+import me.project.model.AdHocCar;
+import me.project.model.ElectricalCar;
 import me.project.model.Location;
 import me.project.model.ParkingPassCar;
+import me.project.model.ReservationCar;
 
 	/**
 	 * This class contains the carParkView
@@ -86,23 +89,26 @@ public class CarParkView extends AbstractView{
                     
                     Color color = Color.WHITE;
                     
-                   /* if (car == null && floor != 0 && floor != 1) {
-                    	color = Colors.RESERVATION_GREEN;
-                    } else if(car == null && floor !=0 && floor != 2) {
-                    	color = Colors.MEMBER_BLUE;
-                    } else if (car == null) {
-                    	color = Colors.REGULAR_RED;
-                    	*/
-                    if(car == null) {
-                    	color = color.GRAY;
-                    }
-                    
-                    
-                    
+                    if (car == null) {
+                    	if(location.getFloor() == 0 || location.getFloor() == 1) {
+                    	color = Colors.PASTEL_RED;
+                    	}else if (location.getFloor() == 2 && location.getRow() >= 0 && location.getRow() <= 2 ) {
+                    		color = Colors.PASTEL_BLUE;
+                    	}else if (location.getFloor() == 2 && location.getRow() >= 2 && location.getRow() <= 4) {
+                    		color = Colors.PASTEL_GREEN;
+                    	}else if (location.getFloor() == 2 && location.getRow() >= 3 && location.getRow() <= 5) {
+                    		color = Colors.PASTEL_YELLOW;
+                    	}
+                    } 
                     
                     else if(car instanceof ParkingPassCar) {
                     	color = car.getColor();
-                    } else {
+                    } else if (car instanceof ElectricalCar) {
+                    	color = car.getColor();
+                    
+                    } else if (car instanceof ReservationCar) {
+                    	color = car.getColor();
+                    } else if (car instanceof AdHocCar) {
                     	color = car.getColor();
                     }
                     drawPlace(graphics, location, color);

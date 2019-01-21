@@ -15,7 +15,7 @@ import java.awt.Color;
 
 public class AdHocCar extends Car {
 	
-	private static final Color COLOR=Colors.PASTEL_RED;
+	private static final Color COLOR=Colors.DARK_RED;
 	
 	/**
 	 * creates an instance of AdHocCar

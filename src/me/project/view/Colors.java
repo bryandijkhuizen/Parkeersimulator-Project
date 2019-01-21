@@ -18,5 +18,8 @@ public class Colors {
 	public static final Color RESERVATION_GREEN = new Color(28, 88, 16);
 	public static final Color MEMBER_BLUE = new Color(21, 33, 148);
 	public static final Color REGULAR_RED = new Color(110, 7, 11);
+	public static final Color DARK_GREEN = new Color(2, 74, 0);
+	public static final Color DARK_YELLOW = new Color(228, 189, 14);
+	public static final Color DARK_RED = new Color(116, 0, 6);
 
 }
