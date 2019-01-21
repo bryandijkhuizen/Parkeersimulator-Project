@@ -21,15 +21,8 @@ import me.project.view.totalPassHoldersView;
 import me.project.view.totalRegularCarsView;
 import me.project.view.totalReservationsCarsView;
 import me.project.view.totalRevenueView;
-import java.awt.Canvas;
-
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.border.LineBorder;
-import javax.swing.border.EtchedBorder;
-import javax.swing.UIManager;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.BevelBorder;
 import java.awt.SystemColor;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;

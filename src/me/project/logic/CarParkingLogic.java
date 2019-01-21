@@ -687,6 +687,7 @@ public class CarParkingLogic extends AbstractModel {
             	Car car = new ParkingPassCar();
             	numberOfEnteringCars++;
             	secondEntranceCarQueue.addCar(car);
+            	
             }
             /*
              * As long as the maximum of Reservations cars entering the parking hasn't
