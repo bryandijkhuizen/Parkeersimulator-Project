@@ -98,8 +98,8 @@ public class CarParkingLogic extends AbstractModel {
         totalElectricalsInPark = 0;
         totalCars = 0;
         
-        amountOfRegularCars = 320;
-        amountOfPassHolders = 120;
+        amountOfRegularCars = 360;
+        amountOfPassHolders = 90;
         amountOfReservations = 60;
         amountOfElectricals = 30;
 

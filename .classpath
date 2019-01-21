@@ -3,5 +3,13 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="img"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="lib" path="C:/Users/dijkh/Downloads/xchart-3.5.2/xchart-3.5.2/xchart-3.5.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dijkh/Downloads/xchart-3.5.2/xchart-3.5.2/xchart-demo-3.5.2.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dijkh/OneDrive/Bureaublad/jfreechart-1.0.19-demo.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dijkh/Downloads/jfreechart-1.0.19.zip"/>
+	<classpathentry kind="lib" path="C:/Users/dijkh/OneDrive/Bureaublad/jcommon-1.0.23.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dijkh/OneDrive/Bureaublad/jfreechart-1.0.19.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dijkh/OneDrive/Bureaublad/jfreechart-1.0.19-swt.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

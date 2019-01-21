@@ -2,7 +2,7 @@ package me.project.runner;
 
 import me.project.main.CarSimulator;
 
-	/**
+/**
 	 * Runner Class to run the simulator.
 	 *
 	 * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
@@ -15,8 +15,10 @@ public class Runner {
 	 * Main Method; starts the program.
 	 */
 
+	@SuppressWarnings("static-access")
 	public static void main(String[] args) {
 		new CarSimulator();
+		
 	}
 
 }

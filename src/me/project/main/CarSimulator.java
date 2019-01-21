@@ -26,7 +26,6 @@ import javax.swing.border.LineBorder;
 import java.awt.SystemColor;
 import java.awt.event.AdjustmentEvent;
 import java.awt.event.AdjustmentListener;
-
 import javax.swing.JScrollBar;
 
 	/**
@@ -47,16 +46,14 @@ public class CarSimulator {
     private entranceQueueView EntranceCarQueueView;
     private totalPassHoldersView tphv;
     private totalRegularCarsView rcv;
-    private totalCarPercentageView tcpv;
     private totalReservationsCarsView totalRes;
     private totalRevenueView totalRevenue;
     private totalElectricalsCarView TotalElectricalsCarView;
-    
     private JLabel carLogo;
-    private JLabel legend;
     
     private int tickPause;
     public static boolean run;
+
 
 	/**
 	 * The constructor creates instances of CarParkingLogic, Controller, CarParkView, Screen.
@@ -69,43 +66,61 @@ public class CarSimulator {
 		 */
 		
 		carParking = new CarParkingLogic(3, 6, 30);
+		
 		controller = new Controller(carParking);
 		controller.setBackground(Color.LIGHT_GRAY);
+		
 		carParkView = new CarParkView(carParking);
 		carParkView.setBorder(new LineBorder(new Color(0, 0, 0)));
 		carParkView.setBackground(Color.GRAY);
+		
 		totalCars = new totalCarsView(carParking);
 		totalCars.setBorder(new LineBorder(new Color(0, 0, 0)));
 		totalCars.setBackground(SystemColor.menu);
+		
 		currentDay = new currentDayView(carParking);
 		currentDay.setBorder(new LineBorder(new Color(0, 0, 0)));
 		currentDay.setBackground(SystemColor.menu);
+		
 		CurrentTimeView = new currentTimeView(carParking);
 		CurrentTimeView.setBorder(new LineBorder(new Color(0, 0, 0)));
 		CurrentTimeView.setBackground(SystemColor.menu);
 		EntranceCarQueueView = new entranceQueueView(carParking);
 		EntranceCarQueueView.setBorder(new LineBorder(new Color(0, 0, 0)));
 		EntranceCarQueueView.setBackground(SystemColor.menu);
+		
 		tphv = new totalPassHoldersView(carParking);
 		tphv.setBorder(new LineBorder(new Color(0, 0, 0)));
 		tphv.setBackground(SystemColor.menu);
+		
 		rcv = new totalRegularCarsView(carParking);
 		rcv.setBorder(new LineBorder(new Color(0, 0, 0)));
 		rcv.setBackground(SystemColor.menu);
-		tcpv= new totalCarPercentageView(carParking);
-		tcpv.setBorder(new LineBorder(new Color(0, 0, 0)));
-		tcpv.setBackground(SystemColor.menu);
+		
 		totalRes = new totalReservationsCarsView(carParking);
 		totalRes.setBorder(new LineBorder(new Color(0, 0, 0)));
 		totalRes.setBackground(SystemColor.menu);
+		
 		totalRevenue = new totalRevenueView(carParking);
 		totalRevenue.setBorder(new LineBorder(new Color(0, 0, 0)));
 		totalRevenue.setBackground(SystemColor.menu);
+		
 		Image img = new ImageIcon(this.getClass().getResource("/logo.png")).getImage();
+		
 		TotalElectricalsCarView = new totalElectricalsCarView(carParking);
 		TotalElectricalsCarView.setBorder(new LineBorder(new Color(0, 0, 0)));
 		TotalElectricalsCarView.setBackground(SystemColor.menu);
+		
+		carLogo = new JLabel("");
+		carLogo.setIcon(new ImageIcon(img));
+		
+		JScrollBar scrollBar = new JScrollBar();
+		scrollBar.setOrientation(JScrollBar.HORIZONTAL);
+		scrollBar.setMinimum(0);
+		scrollBar.setMaximum(3600);
+		
 		Image legendImg = new ImageIcon(this.getClass().getResource("/legenda.png")).getImage();
+		
 		
 		
 		
@@ -114,6 +129,7 @@ public class CarSimulator {
 		
 		frame.setSize(1394, 909);
 		frame.getContentPane().setLayout(null);
+		
 		frame.getContentPane().add(carParkView);
 		frame.getContentPane().add(controller);
 		frame.getContentPane().add(totalCars);
@@ -122,12 +138,12 @@ public class CarSimulator {
 		frame.getContentPane().add(EntranceCarQueueView);
 		frame.getContentPane().add(tphv);
 		frame.getContentPane().add(rcv);
-		frame.getContentPane().add(tcpv);
 		frame.getContentPane().add(totalRes);
 		frame.getContentPane().add(totalRevenue);
 		frame.getContentPane().add(TotalElectricalsCarView);
+		frame.getContentPane().add(carLogo);
+		frame.getContentPane().add(scrollBar);
 		
-
 		carParkView.setBounds(29, 314, 759, 339);
 		controller.setBounds(105, 710, 511, 101);
 		totalCars.setBounds(806, 31, 275, 29);
@@ -136,26 +152,11 @@ public class CarSimulator {
 		EntranceCarQueueView.setBounds(806, 231, 275, 29);
 		tphv.setBounds(806, 111, 275, 29);
 		rcv.setBounds(806, 191, 275, 29);
-		tcpv.setBounds(1091, 31, 275, 29);
 		totalRes.setBounds(806, 71, 275, 29);
 		totalRevenue.setBounds(1018, 782, 316, 29);
 		TotalElectricalsCarView.setBounds(806, 151, 275, 29);
-		
-		carLogo = new JLabel("");
 		carLogo.setBounds(238, 31, 400, 155);
-		frame.getContentPane().add(carLogo);
-		carLogo.setIcon(new ImageIcon(img));
-		
-		legend = new JLabel("");
-		legend.setBounds(821, 402, 162, 155);
-		frame.getContentPane().add(legend);
-		legend.setIcon(new ImageIcon(legendImg));
-		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setOrientation(JScrollBar.HORIZONTAL);
 		scrollBar.setBounds(29, 834, 792, 17);
-		scrollBar.setMinimum(0);
-		scrollBar.setMaximum(3600);
 		
 		scrollBar.addAdjustmentListener(new AdjustmentListener() {
 			
@@ -166,7 +167,7 @@ public class CarSimulator {
 				
 			}
 		});
-		frame.getContentPane().add(scrollBar);
+		
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
