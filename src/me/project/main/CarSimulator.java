@@ -30,6 +30,7 @@ import me.project.view.totalPassHoldersView;
 import me.project.view.totalRegularCarsView;
 import me.project.view.totalReservationsCarsView;
 import me.project.view.entranceQueueView;
+import javax.swing.UIManager;
 
 	/**
 	 * This class combines all of the functions
@@ -75,11 +76,11 @@ public class CarSimulator {
 		carParking = new CarParkingLogic(3, 6, 30);
 		
 		controller = new Controller(carParking);
-		controller.setBackground(Color.LIGHT_GRAY);
+		controller.setBackground(SystemColor.inactiveCaption);
 		
 		carParkView = new CarParkView(carParking);
 		carParkView.setBorder(new LineBorder(new Color(0, 0, 0)));
-		carParkView.setBackground(Color.GRAY);
+		carParkView.setBackground(SystemColor.inactiveCaption);
 		
 		currentDay = new currentDayView(carParking);
 		currentDay.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -110,20 +111,20 @@ public class CarSimulator {
 		carLogo = new JLabel("");
 		carLogo.setIcon(new ImageIcon(img));
 		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setOrientation(JScrollBar.HORIZONTAL);
-		scrollBar.setMinimum(0);
-		scrollBar.setMaximum(3600);
-		
 		Image legendImg = new ImageIcon(this.getClass().getResource("/legenda.png")).getImage();
 		
 		BarGraph = new barChart(carParking);
+		BarGraph.setBackground(SystemColor.inactiveCaption);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
+		tabbedPane.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		tabbedPane.setBackground(SystemColor.inactiveCaption);
 		
 		slideController = new slideControl(carParking);
+		slideController.setBackground(SystemColor.inactiveCaption);
 		
 		QueueGraph = new queueGraph(carParking);
+		QueueGraph.setBackground(SystemColor.inactiveCaption);
 		
 		eq = new entranceQueueView(carParking);
 		eq.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -132,7 +133,7 @@ public class CarSimulator {
 		sq.setBorder(new LineBorder(new Color(0, 0, 0)));
 		
 		frame=new JFrame("CarParking Simulation");
-		frame.getContentPane().setBackground(new Color(192, 192, 192));
+		frame.getContentPane().setBackground(new Color(191, 205, 219));
 		
 		frame.setSize(1394, 909);
 		frame.getContentPane().setLayout(null);
@@ -146,30 +147,36 @@ public class CarSimulator {
 		frame.getContentPane().add(totalRes);
 		frame.getContentPane().add(TotalElectricalsCarView);
 		frame.getContentPane().add(carLogo);
-		frame.getContentPane().add(scrollBar);
 		frame.getContentPane().add(tabbedPane);
 		frame.getContentPane().add(eq);
 		frame.getContentPane().add(sq);
 		
-		carParkView.setBounds(29, 314, 759, 339);
-		controller.setBounds(105, 710, 511, 101);
-		currentDay.setBounds(65, 259, 275, 29);
-		CurrentTimeView.setBounds(482, 259, 275, 29);
+		carParkView.setBounds(53, 299, 813, 339);
+		controller.setBounds(220, 692, 511, 44);
+		currentDay.setBounds(75, 259, 275, 29);
+		CurrentTimeView.setBounds(559, 259, 275, 29);
 		tphv.setBounds(970, 559, 143, 29);
 		rcv.setBounds(970, 441, 143, 29);
 		totalRes.setBounds(970, 482, 143, 29);
 		TotalElectricalsCarView.setBounds(970, 522, 143, 29);
-		carLogo.setBounds(238, 31, 400, 155);
-		scrollBar.setBounds(30, 826, 792, 17);
-		tabbedPane.setBounds(970, 80, 343, 300);
+		carLogo.setBounds(75, 11, 400, 155);
+		tabbedPane.setBounds(970, 80, 360, 300);
 		eq.setBounds(1123, 441, 185, 29);
 		sq.setBounds(1123, 482, 185, 29);
 		
 		PieGraph = new pieGraph(carParking);
+		PieGraph.setBackground(SystemColor.inactiveCaption);
 		tabbedPane.addTab("Pie Chart", PieGraph);
 		tabbedPane.addTab("Bar Chart", BarGraph);
 		tabbedPane.addTab("Value Slider", slideController);
 		tabbedPane.addTab("Queue Graph", QueueGraph);
+		
+		JScrollBar scrollBar = new JScrollBar();
+		scrollBar.setBounds(85, 664, 749, 17);
+		frame.getContentPane().add(scrollBar);
+		scrollBar.setOrientation(JScrollBar.HORIZONTAL);
+		scrollBar.setMinimum(0);
+		scrollBar.setMaximum(3600);
 		
 		scrollBar.addAdjustmentListener(new AdjustmentListener() {
 			

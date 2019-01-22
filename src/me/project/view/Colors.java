@@ -21,5 +21,7 @@ public class Colors {
 	public static final Color DARK_GREEN = new Color(2, 74, 0);
 	public static final Color DARK_YELLOW = new Color(228, 189, 14);
 	public static final Color DARK_RED = new Color(116, 0, 6);
+	
+	public static final Color BACKGROUND_BLUE = new Color(191,205,219);
 
 }

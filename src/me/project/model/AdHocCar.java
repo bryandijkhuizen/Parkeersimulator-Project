@@ -9,8 +9,8 @@ import java.awt.Color;
 
 	/**
 	 * Class for adHocCar when they enter an how long the stay
-	 * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
-	 *
+	 * @author Bryan Dijkhuizen, Daphne Gritter, Thalisa Jagt
+	 * @version 1.0
 	 */
 
 public class AdHocCar extends Car {

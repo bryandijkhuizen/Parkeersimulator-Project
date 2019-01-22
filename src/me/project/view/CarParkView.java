@@ -40,6 +40,7 @@ public class CarParkView extends AbstractView{
         size = new Dimension(0, 0); 
         
         titleLabel = new JLabel("Car Parking Simulation");
+        setBackground(Colors.BACKGROUND_BLUE);
 
         add(titleLabel);
 
@@ -87,7 +88,7 @@ public class CarParkView extends AbstractView{
                     Location location = new Location(floor, row, place);
                     Car car = carPark.getCarAt(location);
                     
-                    Color color = Color.WHITE;
+                    Color color = Colors.BACKGROUND_BLUE;
                     
                     /*
                      * This will give the specific car spots the right colors
@@ -127,11 +128,33 @@ public class CarParkView extends AbstractView{
 	public void drawPlace(Graphics graphics, Location location, Color color) {
         graphics.setColor(color);
         graphics.fillRect(
-                (location.getFloor() * 260 + (1 + (int) Math.floor(location.getRow() * 0.5)) * 60 + (location.getRow() % 2) * 20) -59,
+                ((location.getFloor() * 260 + (1 + (int) Math.floor(location.getRow() * 0.5)) * 60 + (location.getRow() % 2) * 20) -59) + 50,
                 location.getPlace() * 10 + 30,
                 20 - 1,
                 10 - 1); 
+        graphics.setColor(Colors.DARK_RED);
+        graphics.fillRect(10, 0, 5, 25);
+        graphics.setColor(Colors.PASTEL_RED);
+        graphics.fillRect(15, 0, 15, 25);
+        graphics.setColor(Colors.DARK_RED);
+        graphics.fillRect(30, 0, 5, 25);
+        
+        graphics.setColor(Colors.MEMBER_BLUE);
+        graphics.fillRect(750, 0, 5, 25);
+        graphics.setColor(Colors.PASTEL_BLUE);
+        graphics.fillRect(755, 0, 20, 25);
+        graphics.setColor(Colors.MEMBER_BLUE);
+        graphics.fillRect(770, 0, 5, 25);
+        
+        graphics.setColor(Color.BLACK);
+        graphics.fillRect(750, 315, 5, 25);
+        graphics.setColor(Color.LIGHT_GRAY);
+        graphics.fillRect(755, 315, 20, 25);
+        graphics.setColor(Color.BLACK);
+        graphics.fillRect(770, 315, 5, 25);
+        
     }
+	
 
     
 

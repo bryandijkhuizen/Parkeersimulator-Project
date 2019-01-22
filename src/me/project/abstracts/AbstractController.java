@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 	/**
 	 * Abstract Class for the controller
 	 * @author Bryan Dijkhuizen, Daphne Gritter, Thalisa Jagt
+	 * @version 1.0.0
 	 *
 	 */
 

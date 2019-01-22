@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 	/**
 	 * All views should extend AbstractView.
 	 *
-	 * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
+	 * @author Bryan Dijkhuizen, Daphne Gritter, Thalisa Jagt
 	 * @version 14.01.2019
 	 */
 

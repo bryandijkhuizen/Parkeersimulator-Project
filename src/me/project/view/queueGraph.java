@@ -41,7 +41,7 @@ public class queueGraph extends AbstractView {
 	}
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(Color.WHITE);
+		g.setColor(Colors.BACKGROUND_BLUE);
 		g.fillRect(0, 0, 300, 300);
 		g.setColor(Colors.DARK_RED);
 		g.fillRect(0, 130, totalRegularQueue * 10, 30);
