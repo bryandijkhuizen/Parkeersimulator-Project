@@ -43,7 +43,6 @@ public class pieGraph extends AbstractView {
 	public void updateView(){
 		CarParkingLogic cpl = (CarParkingLogic) super.model;
 
-
 		totalElectrical = cpl.getTotalElectricals()-1;
 		totalParkingpass = cpl.getTotalPassHolders()-1;
 		totalRegular = cpl.getTotalRegularCars()-1;
