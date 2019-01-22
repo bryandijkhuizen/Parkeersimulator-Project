@@ -25,6 +25,7 @@ public class pieGraph extends AbstractView {
 	private int totalElectrical;
 	private int totalParkingpass;
 	private int totalReservations;
+	@SuppressWarnings("unused")
 	private int totalCars;
 
 	public pieGraph(CarParkingLogic cpl) {

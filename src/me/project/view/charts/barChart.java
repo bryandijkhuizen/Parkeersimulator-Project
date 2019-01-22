@@ -1,16 +1,10 @@
 package me.project.view.charts;
 
-/**
- * The class that creates the Bar Chart 
- * @author Bryan Dijkhuizen
- * @version 1.0.0 (22-1-2019)
- */
-
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
+
 import me.project.abstracts.AbstractView;
 import me.project.logic.CarParkingLogic;
 import me.project.view.otherView.Colors;
