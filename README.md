@@ -6,8 +6,6 @@ Bryan Dijkhuizen
 
 Daphne Gritter
 
-Kevin Wu
-
 Thalisa Jagt
 
 -------------------
