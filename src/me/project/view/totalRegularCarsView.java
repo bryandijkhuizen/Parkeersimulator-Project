@@ -29,12 +29,12 @@ import me.project.logic.CarParkingLogic;
 			super(model);
 			this.setLayout(null);
 
-			passHoldersLabel = new JLabel("Current Regular Cars: ");
+			passHoldersLabel = new JLabel("Regular: ");
 			
 			passHolders = new JTextField();    
 	        
 			passHoldersLabel.setBounds(5, 0, 200, 20);
-			passHolders.setBounds(180, 3, 50, 20);
+			passHolders.setBounds(85, 3, 50, 20);
 	       
 	        add(passHoldersLabel);
 	        add(passHolders);

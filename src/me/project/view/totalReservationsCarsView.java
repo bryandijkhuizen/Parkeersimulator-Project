@@ -29,12 +29,12 @@ import me.project.logic.CarParkingLogic;
 			super(model);
 			this.setLayout(null);
 
-			reservationsLabel = new JLabel("Current Reservation Cars: ");
+			reservationsLabel = new JLabel("Reservations: ");
 			
 			reservations = new JTextField();    
 	        
 			reservationsLabel.setBounds(5, 0, 200, 20);
-			reservations.setBounds(180, 3, 50, 20);
+			reservations.setBounds(85, 3, 50, 20);
 	       
 	        add(reservationsLabel);
 	        add(reservations);

@@ -29,12 +29,12 @@ import me.project.logic.CarParkingLogic;
 			super(model);
 			this.setLayout(null);
 
-			electricalsLabel = new JLabel("Current Electrical Cars: ");
+			electricalsLabel = new JLabel("Electricals: ");
 			
 			electricals = new JTextField();    
 	        
 			electricalsLabel.setBounds(5, 0, 200, 20);
-			electricals.setBounds(180, 3, 50, 20);
+			electricals.setBounds(85, 3, 50, 20);
 	       
 	        add(electricalsLabel);
 	        add(electricals);

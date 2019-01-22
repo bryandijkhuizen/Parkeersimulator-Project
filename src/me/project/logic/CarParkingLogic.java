@@ -34,9 +34,11 @@ public class CarParkingLogic extends AbstractModel {
     private int hour = 0;
     private int minute = 0;
 
-    private int weekDayArrivals= 0; 
-    private int weekendArrivals = 0;
+    private int weekDayArrivals;
+    private int weekendArrivals;
 
+
+    
     private int enterSpeed;
     private int paymentSpeed;
     private int exitSpeed; 
@@ -405,6 +407,61 @@ public class CarParkingLogic extends AbstractModel {
 	 * 
 	 */
 	
+	/**
+	 * Sets the enterSpeed
+	 * @param speed
+	 */
+	
+	public void setEnterSpeed(int enterSpeed) {
+		this.enterSpeed = enterSpeed;
+	}
+	
+	/**
+	 * Sets the exitSpeed
+	 * @param speed
+	 */
+	
+	public void setExitSpeed(int exitSpeed) {
+		this.exitSpeed = exitSpeed;
+	}
+	
+	/**
+	 * Sets the average amount of people
+	 * 
+	 * @param amount
+	 */
+	
+	public void setWeekDayArrivals(int weekDayArrivals) {
+		this.weekDayArrivals = weekDayArrivals;
+	}
+	
+	/**
+	 * 
+	 * 
+	 * @return weekDayArrivals
+	 */
+	
+	public int getWeekDayArrivals() {
+		return weekDayArrivals;
+	}
+	
+	/**
+	 * 
+	 * @param weekendArrivals
+	 */
+	
+	public int getWeekendArrivals() {
+		return weekendArrivals;
+	}
+	
+	/**
+	 * 
+	 * @param weekendarrivals
+	 */
+	
+	public void setWeekendArrivals(int weekendArrivals) {
+		this.weekendArrivals = weekendArrivals;
+	}
     public void tick() {
     	
     	/*
@@ -615,6 +672,8 @@ public class CarParkingLogic extends AbstractModel {
                 ? weekDayArrivals
                 : weekendArrivals;
         
+       
+        
         double standardDeviation = averageNumberOfCarsPerHour * 0.3;
         double numberOfRegularCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
         int numberOfRegularCarsPerMinute = (int)Math.round(numberOfRegularCarsPerHour / 60);
@@ -653,9 +712,16 @@ public class CarParkingLogic extends AbstractModel {
         	 */
         	
         	for(int i = 0; i < entranceCarQueue.carsInQueue(); i++) {
-        		if(entranceCarQueue.carsInQueue() > 10) {
+        		if(entranceCarQueue.carsInQueue() > 25) {
         			@SuppressWarnings("unused")
 					Car car = entranceCarQueue.removeCar();
+        		}
+        	}
+        	
+        	for(int i = 0; i < secondEntranceCarQueue.carsInQueue(); i++) {
+        		if(secondEntranceCarQueue.carsInQueue() > 25) {
+        			@SuppressWarnings("unused")
+        			Car car = secondEntranceCarQueue.removeCar();
         		}
         	}
         		/*
