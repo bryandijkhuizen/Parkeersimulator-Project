@@ -1,4 +1,4 @@
-package me.project.view.viewControl;
+package me.project.view;
 
 import javax.swing.JLabel;
 import javax.swing.JSlider;

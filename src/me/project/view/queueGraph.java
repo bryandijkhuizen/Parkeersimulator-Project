@@ -1,4 +1,4 @@
-package me.project.view.charts;
+package me.project.view;
 
 import java.awt.FlowLayout;
 import java.awt.Graphics;
@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 
 import me.project.abstracts.AbstractView;
 import me.project.logic.CarParkingLogic;
-import me.project.view.otherView.Colors;
 
 @SuppressWarnings("serial")
 public class queueGraph extends AbstractView {

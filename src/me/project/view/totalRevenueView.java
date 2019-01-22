@@ -1,4 +1,4 @@
-package me.project.view.queueView;
+package me.project.view;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -7,39 +7,39 @@ import me.project.abstracts.AbstractView;
 import me.project.logic.CarParkingLogic;
 
 	/**
-	 * This class contains the totalCarsCounter
+	 * This class contains the totalRevenue
 	 * @author Bryan Dijkhuizen, Daphne Gritter, Thalisa Jagt
 	 * @version 1.0
 	 */
 
 	@SuppressWarnings("serial")
-	public class entranceQueueView extends AbstractView {
+	public class totalRevenueView extends AbstractView {
 		
-		private JLabel currentLabel;
+		private JLabel revenueLabel;
 
-		private JTextField currentText;
+		private JTextField totalRevenueView;
 
-		private int currentNumber;
+		private int totalRevenue;
 		
 		/**
 		 * This is the totalCarsView Constructor
 		 */
 		
-		public entranceQueueView(CarParkingLogic model) {
+		public totalRevenueView(CarParkingLogic model) {
 			super(model);
 			this.setLayout(null);
 
-			currentLabel = new JLabel("Entrance Queue: ");
+			revenueLabel = new JLabel("Total Revenue: ");
 			
-			currentText = new JTextField();    
+			totalRevenueView = new JTextField();    
 	        
-			currentLabel.setBounds(5, 0, 200, 20);
-			currentText.setBounds(100, 3, 75, 20);
+			revenueLabel.setBounds(5, 0, 200, 20);
+			totalRevenueView.setBounds(180, 3, 120, 20);
 	       
-	        add(currentLabel);
-	        add(currentText);
+	        add(revenueLabel);
+	        add(totalRevenueView);
        
-	        currentText.setEditable(false);
+	        totalRevenueView.setEditable(false);
 		
 		}
 		
@@ -51,8 +51,8 @@ import me.project.logic.CarParkingLogic;
 
 	        CarParkingLogic carPark = (CarParkingLogic) super.model;
 
-	        currentNumber = carPark.getCarsInEntranceQueue();
-	        currentText.setText("" + currentNumber);
+	        totalRevenue = carPark.getTotalRevenue();
+	        totalRevenueView.setText("€ " + totalRevenue);
 	        
 
 	        setVisible(true);

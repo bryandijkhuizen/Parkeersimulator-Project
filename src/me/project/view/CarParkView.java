@@ -15,7 +15,6 @@ import me.project.model.ElectricalCar;
 import me.project.model.Location;
 import me.project.model.ParkingPassCar;
 import me.project.model.ReservationCar;
-import me.project.view.otherView.Colors;
 
 	/**
 	 * This class contains the carParkView
