@@ -8,8 +8,8 @@ import me.project.logic.CarParkingLogic;
 
 	/**
 	 * This class contains the totalCarsCounter
-	 * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
-	 *
+	 * @author Bryan Dijkhuizen, Daphne Gritter, Thalisa Jagt
+	 * @version 1.0
 	 */
 
 	@SuppressWarnings("serial")

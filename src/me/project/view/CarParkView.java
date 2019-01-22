@@ -18,8 +18,8 @@ import me.project.model.ReservationCar;
 
 	/**
 	 * This class contains the carParkView
-	 * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
-	 *
+	 * @author Bryan Dijkhuizen, Daphne Gritter, Thalisa Jagt
+	 * @version 2.0
 	 */
 
 @SuppressWarnings("serial")
@@ -88,6 +88,10 @@ public class CarParkView extends AbstractView{
                     Car car = carPark.getCarAt(location);
                     
                     Color color = Color.WHITE;
+                    
+                    /*
+                     * This will give the specific car spots the right colors
+                     */
                     
                     if (car == null) {
                     	if(location.getFloor() == 0 || location.getFloor() == 1) {

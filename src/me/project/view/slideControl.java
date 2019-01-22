@@ -8,9 +8,9 @@ import me.project.abstracts.AbstractView;
 import me.project.logic.CarParkingLogic;
 
 	/**
-	 * This class contains the totalCarsCounter
-	 * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
-	 *
+	 * This class contains the slideControl contstructor and updateView method
+	 * @author Bryan Dijkhuizen
+	 * @version 1.0
 	 */
 
 	@SuppressWarnings("serial")
@@ -30,7 +30,7 @@ import me.project.logic.CarParkingLogic;
 		private JSlider exitSpeedSlider;
 		
 		/**
-		 * This is the totalCarsView Constructor
+		 * This is the slideControl Constructor
 		 */
 		
 		public slideControl(CarParkingLogic model) {

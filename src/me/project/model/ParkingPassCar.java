@@ -8,10 +8,11 @@ import me.project.view.Colors;
 
 import java.awt.*;
 
-	/*
+	/**
 	 * This is class ParkingPassCar
 	 * This Class creates the parkingpasses
-	 * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
+	 * @author Bryan Dijkhuizen, Daphne Gritter, Thalisa Jagt
+	 * @version 1.0
 	 */
 
 public class ParkingPassCar extends Car {

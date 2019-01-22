@@ -4,8 +4,8 @@ import java.awt.Color;
 
 	/**
 	 * This class contains all the custom colors we created.
-	 * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
-	 *
+	 * @author Bryan Dijkhuizen, Daphne Gritter, Thalisa Jagt
+	 * @version 1.0
 	 */
 
 public class Colors {

@@ -1,9 +1,9 @@
 package me.project.model;
 
-	/*
+	/**
 	 * This is the location class
-	 * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
-	 * 
+	 * @author Bryan Dijkhuizen, Daphne Gritter, Thalisa Jagt
+	 * @version 1.0
 	 */
 
 public class Location {

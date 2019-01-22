@@ -6,9 +6,11 @@ import java.util.Random;
 import me.project.model.Location;
 
 
-	/*
-	 * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
+	/**
+	 * @author Bryan Dijkhuizen, Daphne Gritter, Thalisa Jagt
+	 * @version 1.0.0
 	 */
+
 
 public abstract class Car extends AbstractModel {
 	private Location location;
@@ -21,13 +23,24 @@ public abstract class Car extends AbstractModel {
     /**
      * Constructor for objects of class Car
      */
+    
     public Car() {
     	isMember = false; 
     }
     
+    /**
+     * Check if a car has to pay
+     * @return boolean(hasToPay)
+     */
+    
     public boolean getHasToPay() {
         return hasToPay;
     }
+    
+    /**
+     * sets hasToPay to true or false
+     * @param hasToPay
+     */
 
     public void setHasToPay(boolean hasToPay) {
         this.hasToPay = hasToPay;
@@ -41,47 +54,49 @@ public abstract class Car extends AbstractModel {
     }
 
     /**
-     * Store the location the particular car is parked in.
-     * @param location The location the particular car is parked
+     * @param location 
      */
+    
     public void setLocation(Location location) {
         this.location = location;
     }
 
     /**
-     * @return minutesLeft Return how much minutes a particular car will be parked.
+     * @return minutesLeft 
      */
+    
     public int getMinutesLeft() {
         return minutesLeft;
     }
 
     /**
-     * Keep track of how many minutes a car should be parked.
-     * @param minutesLeft The amount of minutes the car should be parked
+     * @param minutesLeft 
      */
+    
     public void setMinutesLeft(int minutesLeft) {
         this.minutesLeft = minutesLeft;
     }
     
     /**
-     * @return isPaying	Return whether the particular car is paying
+     * @return isPaying	
      */
+    
     public boolean getIsPaying() {
         return isPaying;
     }
 
     /**
-     * Change when a particular car is paying.
      * @param isPaying
      */
+    
     public void setIsPaying(boolean isPaying) {
         this.isPaying = isPaying;
     }
 
-    @Override
     /**
      * Whenever a minute (tick) passes, the car will stay one minute less before leaving.
      */
+    
     public void tick() {
         minutesLeft--;
     }
@@ -89,6 +104,7 @@ public abstract class Car extends AbstractModel {
     /**
      * Make a car a member.
      */
+    
     public void setIsMember(){
     	isMember = true; 
     }
@@ -96,20 +112,21 @@ public abstract class Car extends AbstractModel {
     /**
     * Check if isMember is true in the simulator class, then let it skip payment if true. 
     */
+    
 	public boolean getIsMember(){
 		return isMember; 
 	}
 
 	/**
-	 * @return minutesStay The amount of time a particular car is parked
+	 * @return minutesStay 
 	 */
+	
 	public int getStayTime(){
 		return minutesStay; 
 	}
 	   
     /**
-     * This method creates a random number, where min and max are the boundries between which the
-     * random number should lie.
+     * This method creates a random number.
      * @param max
      * @param min
      * @return returns a random number between the max and min value 

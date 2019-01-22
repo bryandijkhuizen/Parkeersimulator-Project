@@ -13,8 +13,8 @@ import me.project.model.ReservationCar;
 
 	/**
 	 * This class contains all the logic for the simulator
-	 * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
-	 *
+	 * @author Bryan Dijkhuizen, Daphne Gritter, Thalisa Jagt
+	 * @version 2.2.0 (22-01-2019)
 	 */
 
 public class CarParkingLogic extends AbstractModel {
@@ -37,8 +37,6 @@ public class CarParkingLogic extends AbstractModel {
     private int weekDayArrivals;
     private int weekendArrivals;
 
-
-    
     private int enterSpeed;
     private int paymentSpeed;
     private int exitSpeed; 
@@ -59,7 +57,6 @@ public class CarParkingLogic extends AbstractModel {
     private double memberRevenue = 0;
     private double totalRevenue = 0 + memberRevenue;
 
-    
     /**
      * CarParkingLogic Constructor 
      * @param numberOfFloors 
@@ -88,12 +85,10 @@ public class CarParkingLogic extends AbstractModel {
         exitSpeed = 9; 
         totalSpace = numberOfPlaces * numberOfRows * numberOfFloors; 
         
-
         numberOfEnteringCars = 0;
         numberOfPayingCars = 0;
         numberOfExitingCars = 0;
         numberOfMembersExiting = 0;
-        
         
         totalRegularCarsInPark = 0;
         totalPassHoldersInPark = 0;
@@ -105,20 +100,17 @@ public class CarParkingLogic extends AbstractModel {
         amountOfReservations = 60;
         amountOfElectricals = 30;
 
-        
         currentDay = "Monday";
         
         currentTime = hour + ":" + minute;
     }
     
-
     /**
      * This method creates a random number.
      * @param min
      * @param max
      * @return returns a random integer 
      */
-    
     
     public int getRandInt(int max, int min){
     	
@@ -150,34 +142,28 @@ public class CarParkingLogic extends AbstractModel {
         return numberOfRows;
     }
 
-    
     /**
      * Get number of parking spots in the car park.
      * @return numberOfPlaces 
      */
     
-    
     public int getNumberOfPlaces() {
         return numberOfPlaces;
     }
 
-    
     /**
      * Get the cars array
      * @return cars 
      */
     
-    
     public Car[][][] getCars() {
         return cars;
     }
 
-    
     /**
      * Get queue of all cars that are entering
      * @return cars 
      */
-    
     
     public CarQueue getEntranceCarQueue() {
         return entranceCarQueue;
@@ -196,8 +182,7 @@ public class CarParkingLogic extends AbstractModel {
      * Get queue of the cars that are paying
      * @return cars in the payment car queue
      */
-    
-    
+     
     public CarQueue getPaymentCarQueue() {
         return paymentCarQueue;
     }
@@ -327,7 +312,7 @@ public class CarParkingLogic extends AbstractModel {
     }
     
     /**
-     * @return currenTime
+     * @return currentTime
      */
     
     public String getCurrentTime() {
@@ -401,13 +386,6 @@ public class CarParkingLogic extends AbstractModel {
 	}
 	
 	/**
-	 * 
-	 * Tick method actually simulates the
-	 * carpark
-	 * 
-	 */
-	
-	/**
 	 * Sets the enterSpeed
 	 * @param speed
 	 */
@@ -427,7 +405,6 @@ public class CarParkingLogic extends AbstractModel {
 	
 	/**
 	 * Sets the average amount of people
-	 * 
 	 * @param amount
 	 */
 	
@@ -436,8 +413,6 @@ public class CarParkingLogic extends AbstractModel {
 	}
 	
 	/**
-	 * 
-	 * 
 	 * @return weekDayArrivals
 	 */
 	
@@ -446,7 +421,6 @@ public class CarParkingLogic extends AbstractModel {
 	}
 	
 	/**
-	 * 
 	 * @param weekendArrivals
 	 */
 	
@@ -455,17 +429,21 @@ public class CarParkingLogic extends AbstractModel {
 	}
 	
 	/**
-	 * 
 	 * @param weekendarrivals
 	 */
 	
 	public void setWeekendArrivals(int weekendArrivals) {
 		this.weekendArrivals = weekendArrivals;
 	}
+	
+	/**
+	 * Tick method actually simulates the
+	 * carpark
+	 */
+	
     public void tick() {
     	
     	/*
-    	 * 
     	 * All the regular amount of cars in the 
     	 * carpark
     	 */
@@ -494,9 +472,7 @@ public class CarParkingLogic extends AbstractModel {
     }
     	
     	/*
-    	 * 
     	 * Thursday night will be busy
-    	 * 
     	 */
     	
     	if(day == 3) {
@@ -523,7 +499,6 @@ public class CarParkingLogic extends AbstractModel {
     	
     	/*
     	 * Friday & Saturday will be busy
-    	 * 
     	 */
     	
     	if(day >= 4 && day <= 5) {
@@ -552,8 +527,6 @@ public class CarParkingLogic extends AbstractModel {
     	}
     	
     	/*
-    	 * 
-    	 * 
     	 * Sunday in the afternoon will be busy
     	 */
     	
@@ -581,7 +554,6 @@ public class CarParkingLogic extends AbstractModel {
 
     	/*
     	 * The time will be advanced here
-    	 * 
     	 */
     	
     	minute++;
@@ -609,11 +581,9 @@ public class CarParkingLogic extends AbstractModel {
         	
         }
         
-        /*
-         * 
-         * these if statments will make sure the time will
+        /* 
+         * these if statements will make sure the time will
          * be displayed
-         * 
          */
         
         if(hour < 10) {
@@ -626,12 +596,9 @@ public class CarParkingLogic extends AbstractModel {
         	currentTime = hour + ":" + minute;
         }
         	
-        
         /*
          * The Switch case that creates the days
-         * 
          */
-        
         
         switch (day) {
         case 0: 
@@ -657,9 +624,6 @@ public class CarParkingLogic extends AbstractModel {
         	break;
         }
         
-        
-
-        
         /*
          * A random object gets defined here.
          */
@@ -669,14 +633,11 @@ public class CarParkingLogic extends AbstractModel {
         /*
          * The average numbers are calculated here.
          */
-        
 
         int averageNumberOfCarsPerHour = day < 5
                 ? weekDayArrivals
                 : weekendArrivals;
-        
-       
-        
+
         double standardDeviation = averageNumberOfCarsPerHour * 0.3;
         double numberOfRegularCarsPerHour = averageNumberOfCarsPerHour + random.nextGaussian() * standardDeviation;
         int numberOfRegularCarsPerMinute = (int)Math.round(numberOfRegularCarsPerHour / 60);
@@ -690,16 +651,11 @@ public class CarParkingLogic extends AbstractModel {
         double numberOfParkingPassHoldersPerHour = (amountOfPassHolders / 20) + random.nextGaussian() * standardDeviation;
         int numberOfParkingPassHoldersPerMinute = (int)Math.round(numberOfParkingPassHoldersPerHour / 60);
         int numberTotalCarsPerMinute = numberOfRegularCarsPerMinute + numberOfParkingPassHoldersPerMinute + numberOfReservationsPerMinute + numberOfElectricalsPerMinute;
-        
-        
-        
-        
-        
+              
         /**
          * Here will the Car Park be simulated.
          */
-
-        
+  
         /*
 		 * The cars will enter until 
 	 	 * the maximum amount of cars per minute was reached
@@ -708,10 +664,8 @@ public class CarParkingLogic extends AbstractModel {
         for (int j = 0; j < numberTotalCarsPerMinute; j++) { 	
         	
         	/*
-        	 * This will remove the cars from the entrance queue
+        	 * This will remove the cars from the entrance queues
         	 * if the queue gets too long
-        	 * 
-        	 * 
         	 */
         	
         	for(int i = 0; i < entranceCarQueue.carsInQueue(); i++) {
@@ -727,6 +681,7 @@ public class CarParkingLogic extends AbstractModel {
         			Car car = secondEntranceCarQueue.removeCar();
         		}
         	}
+        	
         		/*
 				 * As long as the maximum of regular cars entering the 
 				 * parking hasn't been reached regular cars will enter
@@ -736,7 +691,8 @@ public class CarParkingLogic extends AbstractModel {
                 Car car = new AdHocCar();
                 numberOfEnteringCars++;
                 entranceCarQueue.addCar(car);
-          }
+            }
+            
             	/*
             	 * As long as the maximum of ParkingPassHolders cars entering the 
             	 * parking hasn't been reached ParkingPassHolders cars will enter
@@ -761,7 +717,7 @@ public class CarParkingLogic extends AbstractModel {
             	numberOfEnteringCars++;
             	secondEntranceCarQueue.addCar(car);
             
-         }
+            }
             	
             	/*
             	 * As long as the maximum of Electrical cars entering the parking hasn't
@@ -775,39 +731,39 @@ public class CarParkingLogic extends AbstractModel {
         				entranceCarQueue.addCar(car);
         			
             		}
-        }
+            	}
 
-            
             super.notifyViews(); //updates the CarParkView
         }
         
         /*
          * For as long as the maximum enterSpeed hasn't been reached
          * The Car will be removed from the EntranceQueue and the NumberOfEnteringCars will be decreased 
-         * by 1.
+         * by 1. This will be done with every car-type to make sure the car will be put into the right spot 
+         * this will be done with the getFirstFreeLocationFor..() methods.
          */
 
         for(int i = 0; i < enterSpeed; i++){
-        	if(totalCars < totalSpace){
-        		if(totalRegularCarsInPark < amountOfRegularCars) {
-        		Car car = entranceCarQueue.removeCar();
-        		numberOfEnteringCars--;
+        	if(totalCars < totalSpace){ //checks if park is full
+        		if(totalRegularCarsInPark < amountOfRegularCars) { //checks if the amount of cars in the park is not full
+        		Car car = entranceCarQueue.removeCar(); //removes the car from the queue
+        		numberOfEnteringCars--; //number of entering cars will be decreased
         		
         		if(car == null){
         			break;
         		} else {
         			if(car instanceof AdHocCar && getFirstFreeLocationForRegular() != null){
-        				this.setCarAt(getFirstFreeLocationForRegular(), car);
+        				this.setCarAt(getFirstFreeLocationForRegular(), car); //checks which type car the spot has to be for
         			} else {
         				break;
         			}
         			
         			if(car instanceof AdHocCar){
-        				totalRegularCarsInPark++;
+        				totalRegularCarsInPark++; //total car amount in park will be increased by 1
         			}
         			
         			if(car instanceof AdHocCar){
-        				car.setMinutesLeft(car.getStayTime());	
+        				car.setMinutesLeft(car.getStayTime());	 
         			}
         		}
         		super.notifyViews();
@@ -844,6 +800,7 @@ public class CarParkingLogic extends AbstractModel {
         	this.tickCars();
         }
     }
+        
         for(int i = 0; i < enterSpeed; i++){
         	if(totalCars < totalSpace){
         		if(totalPassHoldersInPark < amountOfPassHolders) {
@@ -872,6 +829,7 @@ public class CarParkingLogic extends AbstractModel {
         	this.tickCars();
         }
      }
+        
         for(int i = 0; i < enterSpeed; i++){
         	if(totalCars < totalSpace){
         		if(totalReservationsInPark < amountOfReservations) {
@@ -901,13 +859,16 @@ public class CarParkingLogic extends AbstractModel {
         }
       }
       
+        /*
+         * This while loop will get the first leaving car and puts it into the paymentCarQueue exept for the members 
+         */
                 
-        	while(true) {
-        		Car car = this.getFirstLeavingCar();
-        		
-        		if(car == null) {
-        			break;
-        		}
+        while(true) {
+        	Car car = this.getFirstLeavingCar();
+        	
+        	if(car == null) {
+        		break;
+        	}
         
             if(car instanceof AdHocCar && car.getMinutesLeft() <= 0){
             	numberOfPayingCars++;
@@ -937,10 +898,7 @@ public class CarParkingLogic extends AbstractModel {
             
             super.notifyViews();
         }
-    
 
-    
-       
         /*
          * Here will the payments be done.
          * This will happen until the maximum amount of 'payers' has been reached
@@ -966,14 +924,12 @@ public class CarParkingLogic extends AbstractModel {
             }
 
             this.removeCarAt(car.getLocation()); //car gets removed from it's location
-            
-            
-            
+
             super.notifyViews(); //view gets updated
         }
         
         /**
-         * Here the members/parkingpass holders will be entering in their entrance
+         * Here the members/parkingpassholders will be entering in their entrance
          * until the maximum amount of cars has been reached
          */
         
@@ -1066,6 +1022,11 @@ public class CarParkingLogic extends AbstractModel {
         return null;
     }
     
+    /**
+     * This method finds the first free location for a reservation car in the car park and returns it.
+     * @return location
+     */
+    
     public Location getFirstFreeLocationForRes() {
     	for (int floor = 2; floor < getNumberOfFloors(); floor++) {
     		for (int row = 3; row <= 4 ; row++) {
@@ -1080,6 +1041,11 @@ public class CarParkingLogic extends AbstractModel {
     	
     	return null;
     }
+    
+    /**
+     * This method finds the first free location for a PassHolder car in the car park and returns it.
+     * @return location
+     */
     
     public Location getFirstFreeLocationForPass() {
     	for (int floor = 2; floor < getNumberOfFloors(); floor++) {
@@ -1096,6 +1062,11 @@ public class CarParkingLogic extends AbstractModel {
     	return null;
     }
     
+    /**
+     * This method finds the first free location for a Electrical car in the car park and returns it.
+     * @return location
+     */
+    
     public Location getFirstFreeLocationForElec() {
     	for (int floor = 2; floor < getNumberOfFloors(); floor++) {
     		for (int row = 5; row <= 5 ; row++) {
@@ -1110,6 +1081,11 @@ public class CarParkingLogic extends AbstractModel {
     	
     	return null;
     }
+    
+    /**
+     * This method finds the first free location for a Regular car in the car park and returns it.
+     * @return location
+     */
     
     public Location getFirstFreeLocationForRegular() {
     	for (int floor = 0; floor < 2; floor++) {

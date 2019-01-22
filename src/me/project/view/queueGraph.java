@@ -1,16 +1,20 @@
 package me.project.view;
 
+/**
+ * The class that creates the queueGraph
+ * @author Bryan Dijkhuizen
+ * @version 1.0
+ */
+
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-
 import me.project.abstracts.AbstractView;
 import me.project.logic.CarParkingLogic;
 
+@SuppressWarnings("serial")
 public class queueGraph extends AbstractView {
 	
 

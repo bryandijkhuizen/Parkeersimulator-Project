@@ -7,9 +7,9 @@ import me.project.abstracts.AbstractView;
 import me.project.logic.CarParkingLogic;
 
 	/**
-	 * This class contains the totalCarsCounter
-	 * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
-	 *
+	 * This class contains the totalPassHolders
+	 * @author Bryan Dijkhuizen, Daphne Gritter, Thalisa Jagt
+	 * @version 1.0
 	 */
 
 	@SuppressWarnings("serial")
@@ -22,7 +22,7 @@ import me.project.logic.CarParkingLogic;
 		private int totalRegularCars;
 		
 		/**
-		 * This is the totalCarsView Constructor
+		 * This is the totalPassHolders Constructor
 		 */
 		
 		public totalPassHoldersView(CarParkingLogic model) {

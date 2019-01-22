@@ -33,8 +33,8 @@ import me.project.view.entranceQueueView;
 
 	/**
 	 * This class combines all of the functions
-	 * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
-	 *
+	 * @author Bryan Dijkhuizen, Daphne Gritter, Thalisa Jagt
+	 * @version 2.2.0 (22-1-2019)
 	 */
 
 public class CarSimulator {
@@ -180,7 +180,6 @@ public class CarSimulator {
 				
 			}
 		});
-		
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);

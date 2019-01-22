@@ -4,8 +4,8 @@ import java.util.*;
 
 	/**
 	 * Abstract Class for the model subclasses
-	 * @author Bryan Dijkhuizen, Daphne Gritter, Kevin Wu, Thalisa Jagt
-	 *
+	 * @author Bryan Dijkhuizen, Daphne Gritter, Thalisa Jagt
+	 * @version 1.0.0
 	 */
 
 public abstract class AbstractModel {
