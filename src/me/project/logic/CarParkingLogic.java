@@ -536,7 +536,10 @@ public class CarParkingLogic extends AbstractModel {
         	} else if (hour >= 7 && hour < 9) {
         		weekDayArrivals = 75;
             	weekendArrivals = 100;
-        	} else if (hour >= 9 && hour < 17) {
+        	} else if (hour >= 9 && hour < 13) {
+        		weekDayArrivals = 60;
+            	weekendArrivals = 100;
+        	}else if (hour >= 13 && hour < 17)	{
         		weekDayArrivals = 60;
             	weekendArrivals = 140;
         	} else if (hour >= 17 && hour < 21) {
