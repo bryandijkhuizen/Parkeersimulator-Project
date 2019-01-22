@@ -669,14 +669,14 @@ public class CarParkingLogic extends AbstractModel {
         	 */
         	
         	for(int i = 0; i < entranceCarQueue.carsInQueue(); i++) {
-        		if(entranceCarQueue.carsInQueue() > 25) {
+        		if(entranceCarQueue.carsInQueue() > 30) {
         			@SuppressWarnings("unused")
 					Car car = entranceCarQueue.removeCar();
         		}
         	}
         	
         	for(int i = 0; i < secondEntranceCarQueue.carsInQueue(); i++) {
-        		if(secondEntranceCarQueue.carsInQueue() > 25) {
+        		if(secondEntranceCarQueue.carsInQueue() > 30) {
         			@SuppressWarnings("unused")
         			Car car = secondEntranceCarQueue.removeCar();
         		}

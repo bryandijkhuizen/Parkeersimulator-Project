@@ -118,6 +118,7 @@ public class CarParkView extends AbstractView{
                     	color = car.getColor();
                     }
                     drawPlace(graphics, location, color);
+                    drawEntrances(graphics, location, color);
                 }
             }
         }
@@ -133,7 +134,13 @@ public class CarParkView extends AbstractView{
                 location.getPlace() * 10 + 30,
                 20 - 1,
                 10 - 1); 
-        graphics.setColor(Colors.DARK_RED);
+        
+        
+    }
+	
+	
+	public void drawEntrances(Graphics graphics, Location location, Color color) {
+		graphics.setColor(Colors.DARK_RED);
         graphics.fillRect(10, 0, 5, 25);
         graphics.setColor(Colors.PASTEL_RED);
         graphics.fillRect(15, 0, 15, 25);
@@ -153,9 +160,8 @@ public class CarParkView extends AbstractView{
         graphics.fillRect(755, 315, 20, 25);
         graphics.setColor(Color.BLACK);
         graphics.fillRect(770, 315, 5, 25);
-        
-    }
-	
+	}
+
 
     
 
