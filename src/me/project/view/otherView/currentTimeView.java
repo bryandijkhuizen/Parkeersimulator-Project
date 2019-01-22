@@ -1,4 +1,4 @@
-package me.project.view;
+package me.project.view.otherView;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;

@@ -1,4 +1,4 @@
-package me.project.view;
+package me.project.view.otherView;
 
 import java.awt.Color;
 

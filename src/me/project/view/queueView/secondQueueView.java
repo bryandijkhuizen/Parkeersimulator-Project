@@ -1,4 +1,4 @@
-package me.project.view;
+package me.project.view.queueView;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;

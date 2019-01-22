@@ -1,4 +1,4 @@
-package me.project.view;
+package me.project.view.charts;
 
 /**
  * The class that creates the PieView
@@ -15,6 +15,7 @@ import javax.swing.JPanel;
 
 import me.project.abstracts.AbstractView;
 import me.project.logic.CarParkingLogic;
+import me.project.view.otherView.Colors;
 
 @SuppressWarnings("serial")
 public class pieGraph extends AbstractView {

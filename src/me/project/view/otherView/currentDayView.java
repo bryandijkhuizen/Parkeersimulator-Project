@@ -1,4 +1,4 @@
-package me.project.view;
+package me.project.view.otherView;
 
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -13,33 +13,33 @@ import me.project.logic.CarParkingLogic;
 	 */
 
 	@SuppressWarnings("serial")
-	public class entranceQueueView extends AbstractView {
+	public class currentDayView extends AbstractView {
 		
-		private JLabel currentLabel;
+		private JLabel currentDayLabel;
 
-		private JTextField currentText;
+		private JTextField currentDayView;
 
-		private int currentNumber;
+		private String currentDay;
 		
 		/**
 		 * This is the totalCarsView Constructor
 		 */
 		
-		public entranceQueueView(CarParkingLogic model) {
+		public currentDayView(CarParkingLogic model) {
 			super(model);
 			this.setLayout(null);
 
-			currentLabel = new JLabel("Entrance Queue: ");
+			currentDayLabel = new JLabel("Current Day: ");
 			
-			currentText = new JTextField();    
+			currentDayView = new JTextField();    
 	        
-			currentLabel.setBounds(5, 0, 200, 20);
-			currentText.setBounds(100, 3, 75, 20);
+			currentDayLabel.setBounds(5, 0, 200, 20);
+			currentDayView.setBounds(180, 3, 75, 20);
 	       
-	        add(currentLabel);
-	        add(currentText);
+	        add(currentDayLabel);
+	        add(currentDayView);
        
-	        currentText.setEditable(false);
+	        currentDayView.setEditable(false);
 		
 		}
 		
@@ -51,8 +51,8 @@ import me.project.logic.CarParkingLogic;
 
 	        CarParkingLogic carPark = (CarParkingLogic) super.model;
 
-	        currentNumber = carPark.getCarsInEntranceQueue();
-	        currentText.setText("" + currentNumber);
+	        currentDay = carPark.getCurrentDay();
+	        currentDayView.setText("" + currentDay);
 	        
 
 	        setVisible(true);

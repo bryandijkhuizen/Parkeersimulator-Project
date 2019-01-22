@@ -1,4 +1,4 @@
-package me.project.view;
+package me.project.view.charts;
 
 /**
  * The class that creates the Bar Chart 
@@ -13,6 +13,7 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 import me.project.abstracts.AbstractView;
 import me.project.logic.CarParkingLogic;
+import me.project.view.otherView.Colors;
 
 @SuppressWarnings("serial")
 public class barChart extends AbstractView {
