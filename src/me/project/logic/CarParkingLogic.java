@@ -4,6 +4,7 @@ import java.util.Random;
 
 import me.project.abstracts.AbstractModel;
 import me.project.abstracts.Car;
+import me.project.main.CarSimulator;
 import me.project.model.AdHocCar;
 import me.project.model.CarQueue;
 import me.project.model.ElectricalCar;
@@ -23,6 +24,7 @@ public class CarParkingLogic extends AbstractModel {
 
     private Car[][][] cars;
     
+    private CarSimulator cs;
     private int amountOfPassHolders;
     private int amountOfReservations;
     private int amountOfElectricals;
@@ -56,6 +58,11 @@ public class CarParkingLogic extends AbstractModel {
     private double pricePerMinute = 0.16;
     private double memberRevenue = 0;
     private double totalRevenue = 0 + memberRevenue;
+    private double totalMissedRevenue = 0;
+    private double possibleRevenue;
+    
+    private int currentTick = 0;
+    private int revenuePercentage;
 
     /**
      * CarParkingLogic Constructor 
@@ -90,6 +97,9 @@ public class CarParkingLogic extends AbstractModel {
         numberOfExitingCars = 0;
         numberOfMembersExiting = 0;
         
+        possibleRevenue = 170100;
+        revenuePercentage = (int)Math.round(((((getTotalRevenue() / possibleRevenue) * 100 ) / 360)));  
+        
         totalRegularCarsInPark = 0;
         totalPassHoldersInPark = 0;
         totalElectricalsInPark = 0;
@@ -103,6 +113,16 @@ public class CarParkingLogic extends AbstractModel {
         currentDay = "Monday";
         
         currentTime = hour + ":" + minute;
+    }
+    
+    /**
+     * Run the simulator
+     */
+    
+    public void run() {
+        for (int i = 0; i < 10000; i++) {
+            tick();
+        }
     }
     
     /**
@@ -120,6 +140,15 @@ public class CarParkingLogic extends AbstractModel {
     	int randNum = rand.nextInt(max - min) + min; 
     	
     	return randNum;
+    }
+    
+    /**
+     * Gives the revenue percentage
+     * @return revenuePercentage
+     */
+    
+    public int getRevenuePerc() {
+    	return revenuePercentage;
     }
     
     /**
@@ -437,10 +466,37 @@ public class CarParkingLogic extends AbstractModel {
 	}
 	
 	/**
-	 * Advances the time
+	 * @return currentTick
 	 */
 	
-	public void advanceTime() {
+	public int getCurrentTick() {
+		return currentTick;
+	}
+	
+	/**
+	 * returns the possible revenue
+	 * @return possibleRevenue 
+	 */
+	
+	public double getPossRevenue() {
+		return possibleRevenue;
+	}
+	
+	/**
+	 * Gets the total missed revenue
+	 * @return totalMissedRevenue
+	 */
+	
+	public int getTotalMissedRevenue() {
+		return (int)Math.round(totalMissedRevenue);
+	}
+	
+	/**
+	 * Advances the time by minutes
+	 */
+
+	
+	public void advanceTimeMinutes() {
 		minute++;
         while (minute > 59) {
             minute -= 60;
@@ -453,6 +509,8 @@ public class CarParkingLogic extends AbstractModel {
         while (day > 6) {
             day -= 7;
             week++;
+            totalRevenue = 0;
+            totalMissedRevenue = 0;
         }
         
         while (week > 3) {
@@ -473,6 +531,7 @@ public class CarParkingLogic extends AbstractModel {
 	 */
 	
     public void tick() {
+    	
     	
     	/*
     	 * All the regular amount of cars in the 
@@ -587,7 +646,7 @@ public class CarParkingLogic extends AbstractModel {
     	 * The time will be advanced here
     	 */
     	
-    	advanceTime();
+    	advanceTimeMinutes();
         
         /* 
          * these if statements will make sure the time will
@@ -680,6 +739,7 @@ public class CarParkingLogic extends AbstractModel {
         		if(entranceCarQueue.carsInQueue() > 30) {
         			@SuppressWarnings("unused")
 					Car car = entranceCarQueue.removeCar();
+        			totalMissedRevenue += 7.5 / 2;
         		}
         	}
         	
@@ -687,6 +747,7 @@ public class CarParkingLogic extends AbstractModel {
         		if(secondEntranceCarQueue.carsInQueue() > 30) {
         			@SuppressWarnings("unused")
         			Car car = secondEntranceCarQueue.removeCar();
+        			totalMissedRevenue += 7.5;
         		}
         	}
         	
@@ -993,6 +1054,7 @@ public class CarParkingLogic extends AbstractModel {
         	}
         }
         
+        currentTick++;
         totalCars = getTotalRegularCars() + getTotalPassHolders() + getTotalReservations() + getTotalElectricals(); //total cars calculation
         super.notifyViews(); //view gets updated
 
