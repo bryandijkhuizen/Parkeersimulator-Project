@@ -160,33 +160,5 @@ public class CarParkView extends AbstractView{
         graphics.setColor(Color.BLACK);
         graphics.fillRect(770, 315, 5, 25);
 	}
-
-
-    
-
-    /**
-     * Paint the entrance on the screen.
-     
-    
-    private void drawEntrance(Graphics graphics, Location location, Color color) {
-    	graphics.setColor(color);
-    	graphics.
-    }
-    
-    /**
-     * Paint the second entrance on the screen.
-     * 
-     * private void drawSecondEntrance(Graphics graphics, Location location, Color color) {
-    	graphics.setColor(color);
-    	graphics....
-    	}
-     * 
-     * Paint the exit on the screen.
-     * 
-     * private void drawExit(Graphics graphics, Location location, Color color) {
-    	graphics.setColor(color);
-    	graphics.....
-    	}
-     */
     
 }

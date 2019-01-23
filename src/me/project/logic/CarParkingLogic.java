@@ -60,8 +60,7 @@ public class CarParkingLogic extends AbstractModel {
     private double totalRevenue = 0 + memberRevenue;
     private double totalMissedRevenue = 0;
     private double possibleRevenue;
-    
-    private int currentTick = 0;
+  
     private int revenuePercentage;
 
     /**
@@ -433,96 +432,12 @@ public class CarParkingLogic extends AbstractModel {
 	}
 	
 	/**
-	 * Sets the average amount of people
-	 * @param amount
-	 */
-	
-	public void setWeekDayArrivals(int weekDayArrivals) {
-		this.weekDayArrivals = weekDayArrivals;
-	}
-	
-	/**
-	 * @return weekDayArrivals
-	 */
-	
-	public int getWeekDayArrivals() {
-		return weekDayArrivals;
-	}
-	
-	/**
-	 * @param weekendArrivals
-	 */
-	
-	public int getWeekendArrivals() {
-		return weekendArrivals;
-	}
-	
-	/**
-	 * @param weekendarrivals
-	 */
-	
-	public void setWeekendArrivals(int weekendArrivals) {
-		this.weekendArrivals = weekendArrivals;
-	}
-	
-	/**
-	 * @return currentTick
-	 */
-	
-	public int getCurrentTick() {
-		return currentTick;
-	}
-	
-	/**
-	 * returns the possible revenue
-	 * @return possibleRevenue 
-	 */
-	
-	public double getPossRevenue() {
-		return possibleRevenue;
-	}
-	
-	/**
 	 * Gets the total missed revenue
 	 * @return totalMissedRevenue
 	 */
 	
 	public int getTotalMissedRevenue() {
 		return (int)Math.round(totalMissedRevenue);
-	}
-	
-	/**
-	 * Advances the time by minutes
-	 */
-
-	
-	public void advanceTimeMinutes() {
-		minute++;
-        while (minute > 59) {
-            minute -= 60;
-            hour++;
-        }
-        while (hour > 23) {
-            hour -= 24;
-            day++;  
-        }
-        while (day > 6) {
-            day -= 7;
-            week++;
-            totalRevenue = 0;
-            totalMissedRevenue = 0;
-        }
-        
-        while (week > 3) {
-        	week -= 4;
-        	month++;
-        	memberRevenue += 100 * amountOfPassHolders;
-        }
-        
-        while (month > 11) {
-        	month -= 12;
-        	
-        }
 	}
 
 	/**
@@ -646,7 +561,32 @@ public class CarParkingLogic extends AbstractModel {
     	 * The time will be advanced here
     	 */
     	
-    	advanceTimeMinutes();
+    	minute++;
+        while (minute > 59) {
+            minute -= 60;
+            hour++;
+        }
+        while (hour > 23) {
+            hour -= 24;
+            day++;  
+        }
+        while (day > 6) {
+            day -= 7;
+            week++;
+            totalRevenue = 0;
+            totalMissedRevenue = 0;
+        }
+        
+        while (week > 3) {
+        	week -= 4;
+        	month++;
+        	memberRevenue += 100 * amountOfPassHolders;
+        }
+        
+        while (month > 11) {
+        	month -= 12;
+        	
+        }
         
         /* 
          * these if statements will make sure the time will
@@ -1054,7 +994,6 @@ public class CarParkingLogic extends AbstractModel {
         	}
         }
         
-        currentTick++;
         totalCars = getTotalRegularCars() + getTotalPassHolders() + getTotalReservations() + getTotalElectricals(); //total cars calculation
         super.notifyViews(); //view gets updated
 
@@ -1065,33 +1004,12 @@ public class CarParkingLogic extends AbstractModel {
 	 * This method simulates 'x' times
 	 */
     
-	
 	public void steps(int x) {
 		for(int i = 0; i < x; i++) {
 			tick();
 		}
 	}
 
-    
-    /**
-     * This method finds the first free location in the car park and returns it.
-     * @return location
-     */
-    
-    public Location getFirstFreeLocation() {
-        for (int floor = 0; floor < getNumberOfFloors(); floor++) {
-            for (int row = 0; row < getNumberOfRows(); row++) {
-                for (int place = 0; place < getNumberOfPlaces(); place++) {
-                    Location location = new Location(floor, row, place);
-                    if (getCarAt(location) == null) {
-                        return location;
-                    }
-                }
-            }
-        }
-        return null;
-    }
-    
     /**
      * This method finds the first free location for a reservation car in the car park and returns it.
      * @return location
@@ -1277,24 +1195,7 @@ public class CarParkingLogic extends AbstractModel {
         car.setLocation(null);
         return car;
     }
-    
-    /**
-     * @return Quits the program
-     */
-    
-    public void quit() {
-    	System.exit(0);
-    }
-    
-    /**
-     * Prints out the statistics of the car park
-     */
-    
-    public void printCarParkingDetails() {
-        System.out.println("Regular Cars: " + totalRegularCarsInPark);
-        System.out.println("ParkingPass Cars: " + totalPassHoldersInPark);
-        System.out.println("Total Cars: " + totalCars + "/" + totalSpace);
-    }
+
 
 
 	
