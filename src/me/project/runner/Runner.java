@@ -15,7 +15,6 @@ public class Runner {
 	 * Main Method; starts the program.
 	 */
 
-	@SuppressWarnings("static-access")
 	public static void main(String[] args) {
 		new CarSimulator();
 		

@@ -437,6 +437,37 @@ public class CarParkingLogic extends AbstractModel {
 	}
 	
 	/**
+	 * Advances the time
+	 */
+	
+	public void advanceTime() {
+		minute++;
+        while (minute > 59) {
+            minute -= 60;
+            hour++;
+        }
+        while (hour > 23) {
+            hour -= 24;
+            day++;  
+        }
+        while (day > 6) {
+            day -= 7;
+            week++;
+        }
+        
+        while (week > 3) {
+        	week -= 4;
+        	month++;
+        	memberRevenue += 100 * amountOfPassHolders;
+        }
+        
+        while (month > 11) {
+        	month -= 12;
+        	
+        }
+	}
+
+	/**
 	 * Tick method actually simulates the
 	 * carpark
 	 */
@@ -556,30 +587,7 @@ public class CarParkingLogic extends AbstractModel {
     	 * The time will be advanced here
     	 */
     	
-    	minute++;
-        while (minute > 59) {
-            minute -= 60;
-            hour++;
-        }
-        while (hour > 23) {
-            hour -= 24;
-            day++;  
-        }
-        while (day > 6) {
-            day -= 7;
-            week++;
-        }
-        
-        while (week > 3) {
-        	week -= 4;
-        	month++;
-        	memberRevenue += 100 * amountOfPassHolders;
-        }
-        
-        while (month > 11) {
-        	month -= 12;
-        	
-        }
+    	advanceTime();
         
         /* 
          * these if statements will make sure the time will

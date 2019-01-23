@@ -10,6 +10,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollBar;
+import javax.swing.JSlider;
 import javax.swing.JTabbedPane;
 import javax.swing.border.LineBorder;
 
@@ -31,7 +32,6 @@ import me.project.view.totalPassHoldersView;
 import me.project.view.totalRegularCarsView;
 import me.project.view.totalReservationsCarsView;
 
-import javax.swing.UIManager;
 
 	/**
 	 * This class combines all of the functions
@@ -56,7 +56,6 @@ public class CarSimulator {
     private barChart BarGraph;
     private slideControl slideController;
     private queueGraph QueueGraph;
-    
     private entranceQueueView eq;
     private secondQueueView sq;
     
@@ -111,8 +110,6 @@ public class CarSimulator {
 		
 		carLogo = new JLabel("");
 		carLogo.setIcon(new ImageIcon(img));
-		
-		Image legendImg = new ImageIcon(this.getClass().getResource("/legenda.png")).getImage();
 		
 		BarGraph = new barChart(carParking);
 		BarGraph.setBackground(SystemColor.inactiveCaption);
@@ -171,23 +168,6 @@ public class CarSimulator {
 		tabbedPane.addTab("Bar Chart", BarGraph);
 		tabbedPane.addTab("Value Slider", slideController);
 		tabbedPane.addTab("Queue Graph", QueueGraph);
-		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(85, 664, 749, 17);
-		frame.getContentPane().add(scrollBar);
-		scrollBar.setOrientation(JScrollBar.HORIZONTAL);
-		scrollBar.setMinimum(0);
-		scrollBar.setMaximum(3600);
-		
-		scrollBar.addAdjustmentListener(new AdjustmentListener() {
-			
-			
-			@Override
-			public void adjustmentValueChanged(AdjustmentEvent e) {
-				carParking.steps(e.getValue());
-				
-			}
-		});
 		
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
