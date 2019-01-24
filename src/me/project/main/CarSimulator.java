@@ -1,6 +1,7 @@
 package me.project.main;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.SystemColor;
 
@@ -9,6 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JSlider;
 import javax.swing.JTabbedPane;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import me.project.abstracts.AbstractController;
@@ -20,6 +22,7 @@ import me.project.view.barChart;
 import me.project.view.currentDayView;
 import me.project.view.currentTimeView;
 import me.project.view.entranceQueueView;
+import me.project.view.lineChart;
 import me.project.view.missedProfitView;
 import me.project.view.pieGraph;
 import me.project.view.queueGraph;
@@ -30,8 +33,6 @@ import me.project.view.totalPassHoldersView;
 import me.project.view.totalRegularCarsView;
 import me.project.view.totalReservationsCarsView;
 import me.project.view.totalRevenueView;
-import javax.swing.SwingConstants;
-import java.awt.Font;
 
 
 	/**
@@ -40,7 +41,8 @@ import java.awt.Font;
 	 * @version 2.2.0 (22-1-2019)
 	 */
 
-public class CarSimulator {
+@SuppressWarnings("serial")
+public class CarSimulator extends JFrame {
 
 	private JFrame frame;
 	private AbstractView carParkView;
@@ -62,12 +64,11 @@ public class CarSimulator {
     public JSlider simSpeed;
     private totalRevenueView totalRevenue;
     private missedProfitView missedRevenue; 
+    private lineChart LineChart;
     
-    private int tickPause;
     public static boolean run;
 
-
-	/**
+    /**
 	 * The constructor creates instances of CarParkingLogic, Controller, CarParkView, Screen.
 	 */
 	
@@ -78,6 +79,8 @@ public class CarSimulator {
 		 */
 		
 		carParking = new CarParkingLogic(3, 6, 30);
+		
+		
 		
 		controller = new Controller(carParking);
 		controller.setBackground(SystemColor.inactiveCaption);
@@ -133,6 +136,9 @@ public class CarSimulator {
 		
 		sq = new secondQueueView(carParking);
 		sq.setBorder(new LineBorder(new Color(0, 0, 0)));
+		
+		LineChart = new lineChart(carParking);
+		LineChart.setBackground(SystemColor.inactiveCaption);
 		
 		simSpeed = new JSlider(0, 500, 500);
 		simSpeed.setMinorTickSpacing(100);
@@ -194,10 +200,17 @@ public class CarSimulator {
 		tabbedPane.setEnabledAt(3, true);
 		tabbedPane.setForegroundAt(3, SystemColor.text);
 		tabbedPane.setBackgroundAt(3, SystemColor.textHighlight);
+		tabbedPane.addTab("Line Chart", LineChart);
+		tabbedPane.setEnabledAt(4, true);
+		tabbedPane.setForegroundAt(4, SystemColor.text);
+		tabbedPane.setBackgroundAt(4,  SystemColor.textHighlight);
 		
 		totalRevenue = new totalRevenueView(carParking);
 		totalRevenue.setBackground(SystemColor.inactiveCaption);
 		tabbedPane.addTab("Profits", null, totalRevenue, null);
+		tabbedPane.setForegroundAt(5, SystemColor.text);
+		tabbedPane.setEnabledAt(5, true);
+		tabbedPane.setBackgroundAt(5, SystemColor.textHighlight);
 		tabbedPane.setForegroundAt(4, SystemColor.window);
 		tabbedPane.setEnabledAt(4, true);
 		tabbedPane.setBackgroundAt(4, SystemColor.textHighlight);
@@ -226,6 +239,7 @@ public class CarSimulator {
 
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+		frame.setAutoRequestFocus(true);
 		
 		run = true;
 		

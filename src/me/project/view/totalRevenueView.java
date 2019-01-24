@@ -52,7 +52,7 @@ import me.project.logic.CarParkingLogic;
 	        CarParkingLogic carPark = (CarParkingLogic) super.model;
 
 	        totalRevenue = carPark.getTotalMissedRevenue();
-	        totalRevenueView.setText("€ " + totalRevenue);
+	        totalRevenueView.setText("â‚¬ " + totalRevenue);
 	        
 
 	        

@@ -118,6 +118,7 @@ public class CarParkView extends AbstractView{
                     }
                     drawPlace(graphics, location, color);
                     drawEntrances(graphics, location, color);
+                    drawElectricalSpots(graphics, location, color);
                 }
             }
         }
@@ -125,6 +126,13 @@ public class CarParkView extends AbstractView{
         setVisible(true);
         super.updateView();
     }
+	
+	/**
+	 * Will draw the entire simulation screen
+	 * @param graphics
+	 * @param location
+	 * @param color
+	 */
     
 	public void drawPlace(Graphics graphics, Location location, Color color) {
         graphics.setColor(color);
@@ -137,6 +145,12 @@ public class CarParkView extends AbstractView{
         
     }
 	
+	/**
+	 * Will draw the entrances
+	 * @param graphics
+	 * @param location
+	 * @param color
+	 */
 	
 	public void drawEntrances(Graphics graphics, Location location, Color color) {
 		graphics.setColor(Colors.DARK_RED);
@@ -159,6 +173,47 @@ public class CarParkView extends AbstractView{
         graphics.fillRect(755, 315, 20, 25);
         graphics.setColor(Color.BLACK);
         graphics.fillRect(770, 315, 5, 25);
+	}
+	
+	/**
+	 * Will draw the electrical charging spots
+	 * @param graphics
+	 * @param location
+	 * @param color
+	 */
+	
+	public void drawElectricalSpots(Graphics graphics, Location location, Color color) {
+		graphics.setColor(color.BLACK);
+		graphics.fillRect(730, 35, 6, 3);
+		graphics.fillRect(730, 45, 6, 3);
+		graphics.fillRect(730, 55, 6, 3);
+		graphics.fillRect(730, 65, 6, 3);
+		graphics.fillRect(730, 75, 6, 3);
+		graphics.fillRect(730, 85, 6, 3);
+		graphics.fillRect(730, 95, 6, 3);
+		graphics.fillRect(730, 105, 6, 3);
+		graphics.fillRect(730, 115, 6, 3);
+		graphics.fillRect(730, 125, 6, 3);
+		graphics.fillRect(730, 135, 6, 3);
+		graphics.fillRect(730, 145, 6, 3);
+		graphics.fillRect(730, 155, 6, 3);
+		graphics.fillRect(730, 165, 6, 3);
+		graphics.fillRect(730, 175, 6, 3);
+		graphics.fillRect(730, 185, 6, 3);
+		graphics.fillRect(730, 195, 6, 3);
+		graphics.fillRect(730, 205, 6, 3);
+		graphics.fillRect(730, 215, 6, 3);
+		graphics.fillRect(730, 225, 6, 3);
+		graphics.fillRect(730, 235, 6, 3);
+		graphics.fillRect(730, 245, 6, 3);
+		graphics.fillRect(730, 255, 6, 3);
+		graphics.fillRect(730, 265, 6, 3);
+		graphics.fillRect(730, 275, 6, 3);
+		graphics.fillRect(730, 285, 6, 3);
+		graphics.fillRect(730, 295, 6, 3);
+		graphics.fillRect(730, 305, 6, 3);
+		graphics.fillRect(730, 315, 6, 3);
+		graphics.fillRect(730, 325, 6, 3);
 	}
     
 }

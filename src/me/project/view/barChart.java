@@ -1,6 +1,5 @@
 package me.project.view;
 
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Graphics;
 
