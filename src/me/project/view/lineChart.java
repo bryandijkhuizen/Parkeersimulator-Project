@@ -2,35 +2,44 @@ package me.project.view;
 
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.util.Collections;
+import java.util.List;
+import java.awt.RenderingHints;
+import java.awt.Stroke;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.RenderingHints;
-import java.awt.Stroke;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import me.project.abstracts.AbstractView;
 import me.project.logic.CarParkingLogic;
+
 
 @SuppressWarnings("serial")
 public class lineChart extends AbstractView {
 	
-	private static int MAX_VALUE = 1;
-    private static int MIN_VALUE = 0;
-    private static final int width = 260;
+	private static final int width = 260;
     private static final int height = 520;
     private static final int borderSpace = 30;
     private static final int borderSpaceLeft = 50;
-    private static final Color graphColor = new Color(255, 55, 0);
+    private static final Color graphColor = Colors.DARK_RED;
     private static final Stroke graphLine = new BasicStroke(3f);
-    public static List<Integer> values = new ArrayList<>();
+	private static int MAX_VALUE = 1;
+    private static int MIN_VALUE = 0;
+    
+    public static List<Integer> values = new ArrayList<Integer>();
+    
     private int index = 0;
 
     public lineChart(CarParkingLogic cpl) {
         super(cpl);
+        
         values.add(cpl.getTotalCars());
+    }
+    
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(width,height);
     }
 
     @Override
@@ -44,8 +53,7 @@ public class lineChart extends AbstractView {
         	values.add(cpl.getTotalCars());
 	            if (values.size() > 500) {
 	            	values.remove(0);
-	            }
-	           
+	            }  
         }
 
         Graphics2D twoDimensionalGraphics = (Graphics2D) g;
@@ -63,11 +71,13 @@ public class lineChart extends AbstractView {
         twoDimensionalGraphics.setColor(Color.BLACK);
         twoDimensionalGraphics.drawString("Max Amount of Cars", 35, 25);
 
-        List<Point> values2 = new ArrayList<>();
+        List<Point> values2 = new ArrayList<Point>();
         for (int i = 0; i < values.size(); i++) {
             int x1 = (int) (i * xScale + borderSpaceLeft);
             int y1 = (int) (((MAX_VALUE - values.get(i)) * yScale) + borderSpace);
+            
             values2.add(new Point(x1, y1));
+            
             twoDimensionalGraphics.setColor(graphColor);
             twoDimensionalGraphics.setStroke(graphLine);
 	            if (i > 0) {
@@ -77,13 +87,11 @@ public class lineChart extends AbstractView {
 	            }
         }
 
-        twoDimensionalGraphics.setColor(new Color(50, 50, 50));
+        twoDimensionalGraphics.setColor(Colors.DARK_RED);
+        
         twoDimensionalGraphics.drawString(new Integer(MIN_VALUE).toString(), 10, 420);
         twoDimensionalGraphics.drawString(new Integer(MAX_VALUE).toString(), 10, 50);
     }
 
-    @Override
-    public Dimension getPreferredSize() {
-        return new Dimension(width,height);
-    }
+    
 }
