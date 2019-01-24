@@ -1,16 +1,16 @@
 package me.project.main;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.SystemColor;
-import java.awt.event.AdjustmentEvent;
-import java.awt.event.AdjustmentListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JScrollBar;
+import javax.swing.JSlider;
 import javax.swing.JTabbedPane;
+import javax.swing.SwingConstants;
 import javax.swing.border.LineBorder;
 
 import me.project.abstracts.AbstractController;
@@ -22,6 +22,8 @@ import me.project.view.barChart;
 import me.project.view.currentDayView;
 import me.project.view.currentTimeView;
 import me.project.view.entranceQueueView;
+import me.project.view.lineChart;
+import me.project.view.missedProfitView;
 import me.project.view.pieGraph;
 import me.project.view.queueGraph;
 import me.project.view.secondQueueView;
@@ -30,8 +32,8 @@ import me.project.view.totalElectricalsCarView;
 import me.project.view.totalPassHoldersView;
 import me.project.view.totalRegularCarsView;
 import me.project.view.totalReservationsCarsView;
+import me.project.view.totalRevenueView;
 
-import javax.swing.UIManager;
 
 	/**
 	 * This class combines all of the functions
@@ -39,7 +41,8 @@ import javax.swing.UIManager;
 	 * @version 2.2.0 (22-1-2019)
 	 */
 
-public class CarSimulator {
+@SuppressWarnings("serial")
+public class CarSimulator extends JFrame {
 
 	private JFrame frame;
 	private AbstractView carParkView;
@@ -56,25 +59,28 @@ public class CarSimulator {
     private barChart BarGraph;
     private slideControl slideController;
     private queueGraph QueueGraph;
-    
     private entranceQueueView eq;
     private secondQueueView sq;
+    public JSlider simSpeed;
+    private totalRevenueView totalRevenue;
+    private missedProfitView missedRevenue; 
+    private lineChart LineChart;
     
-    private int tickPause;
     public static boolean run;
 
-
-	/**
+    /**
 	 * The constructor creates instances of CarParkingLogic, Controller, CarParkView, Screen.
 	 */
 	
-    public CarSimulator() {
+    public CarSimulator() throws Exception {
 		
 		/** 
 		 * Here the Logic, View and controller are defined 
 		 */
 		
 		carParking = new CarParkingLogic(3, 6, 30);
+		
+		
 		
 		controller = new Controller(carParking);
 		controller.setBackground(SystemColor.inactiveCaption);
@@ -112,14 +118,12 @@ public class CarSimulator {
 		carLogo = new JLabel("");
 		carLogo.setIcon(new ImageIcon(img));
 		
-		Image legendImg = new ImageIcon(this.getClass().getResource("/legenda.png")).getImage();
-		
 		BarGraph = new barChart(carParking);
 		BarGraph.setBackground(SystemColor.inactiveCaption);
 		
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		tabbedPane.setBackground(SystemColor.inactiveCaption);
+		tabbedPane.setBackground(SystemColor.text);
 		
 		slideController = new slideControl(carParking);
 		slideController.setBackground(SystemColor.inactiveCaption);
@@ -133,10 +137,21 @@ public class CarSimulator {
 		sq = new secondQueueView(carParking);
 		sq.setBorder(new LineBorder(new Color(0, 0, 0)));
 		
+		LineChart = new lineChart(carParking);
+		LineChart.setBackground(SystemColor.inactiveCaption);
+		
+		simSpeed = new JSlider(0, 500, 500);
+		simSpeed.setMinorTickSpacing(100);
+		simSpeed.setBackground(SystemColor.inactiveCaption);
+		simSpeed.setForeground(SystemColor.activeCaptionText);
+		simSpeed.setToolTipText("Tick Pause\r\n");
+		simSpeed.setPaintTicks(true);
+		simSpeed.setMajorTickSpacing(50);
+		
 		frame=new JFrame("CarParking Simulation");
 		frame.getContentPane().setBackground(new Color(191, 205, 219));
 		
-		frame.setSize(1394, 909);
+		frame.setSize(1302, 711);
 		frame.getContentPane().setLayout(null);
 		
 		frame.getContentPane().add(carParkView);
@@ -151,61 +166,102 @@ public class CarSimulator {
 		frame.getContentPane().add(tabbedPane);
 		frame.getContentPane().add(eq);
 		frame.getContentPane().add(sq);
+		frame.getContentPane().add(simSpeed);
 		
-		carParkView.setBounds(53, 299, 813, 339);
-		controller.setBounds(220, 692, 511, 44);
-		currentDay.setBounds(75, 259, 275, 29);
-		CurrentTimeView.setBounds(559, 259, 275, 29);
-		tphv.setBounds(970, 559, 143, 29);
-		rcv.setBounds(970, 441, 143, 29);
-		totalRes.setBounds(970, 482, 143, 29);
-		TotalElectricalsCarView.setBounds(970, 522, 143, 29);
-		carLogo.setBounds(75, 11, 400, 155);
-		tabbedPane.setBounds(970, 80, 360, 300);
-		eq.setBounds(1123, 441, 185, 29);
-		sq.setBounds(1123, 482, 185, 29);
+		carParkView.setBounds(10, 177, 813, 339);
+		controller.setBounds(85, 582, 586, 44);
+		currentDay.setBounds(480, 50, 275, 29);
+		CurrentTimeView.setBounds(480, 90, 275, 29);
+		tphv.setBounds(1030, 90, 143, 29);
+		rcv.setBounds(877, 50, 143, 29);
+		totalRes.setBounds(1030, 50, 143, 29);
+		TotalElectricalsCarView.setBounds(877, 90, 143, 29);
+		carLogo.setBounds(10, 11, 400, 155);
+		tabbedPane.setBounds(877, 177, 360, 300);
+		eq.setBounds(877, 487, 185, 29);
+		sq.setBounds(877, 527, 185, 29);
+		simSpeed.setBounds(10, 527, 813, 44);
 		
 		PieGraph = new pieGraph(carParking);
 		PieGraph.setBackground(SystemColor.inactiveCaption);
 		tabbedPane.addTab("Pie Chart", PieGraph);
+		tabbedPane.setForegroundAt(0, SystemColor.text);
+		tabbedPane.setEnabledAt(0, true);
+		tabbedPane.setBackgroundAt(0, SystemColor.textHighlight);
 		tabbedPane.addTab("Bar Chart", BarGraph);
+		tabbedPane.setEnabledAt(1, true);
+		tabbedPane.setForegroundAt(1, SystemColor.text);
+		tabbedPane.setBackgroundAt(1, SystemColor.textHighlight);
 		tabbedPane.addTab("Value Slider", slideController);
+		tabbedPane.setForegroundAt(2, SystemColor.text);
+		tabbedPane.setEnabledAt(2, true);
+		tabbedPane.setBackgroundAt(2, SystemColor.textHighlight);
 		tabbedPane.addTab("Queue Graph", QueueGraph);
+		tabbedPane.setEnabledAt(3, true);
+		tabbedPane.setForegroundAt(3, SystemColor.text);
+		tabbedPane.setBackgroundAt(3, SystemColor.textHighlight);
+		tabbedPane.addTab("Line Chart", LineChart);
+		tabbedPane.setEnabledAt(4, true);
+		tabbedPane.setForegroundAt(4, SystemColor.text);
+		tabbedPane.setBackgroundAt(4,  SystemColor.textHighlight);
 		
-		JScrollBar scrollBar = new JScrollBar();
-		scrollBar.setBounds(85, 664, 749, 17);
-		frame.getContentPane().add(scrollBar);
-		scrollBar.setOrientation(JScrollBar.HORIZONTAL);
-		scrollBar.setMinimum(0);
-		scrollBar.setMaximum(3600);
+		totalRevenue = new totalRevenueView(carParking);
+		totalRevenue.setBackground(SystemColor.inactiveCaption);
+		tabbedPane.addTab("Profits", null, totalRevenue, null);
+		tabbedPane.setForegroundAt(5, SystemColor.text);
+		tabbedPane.setEnabledAt(5, true);
+		tabbedPane.setBackgroundAt(5, SystemColor.textHighlight);
+		tabbedPane.setForegroundAt(4, SystemColor.window);
+		tabbedPane.setEnabledAt(4, true);
+		tabbedPane.setBackgroundAt(4, SystemColor.textHighlight);
+		totalRevenue.setBorder(new LineBorder(new Color(0, 0, 0)));
 		
-		scrollBar.addAdjustmentListener(new AdjustmentListener() {
-			
-			
-			@Override
-			public void adjustmentValueChanged(AdjustmentEvent e) {
-				carParking.steps(e.getValue());
-				
-			}
-		});
+		missedRevenue = new missedProfitView(carParking);
+		missedRevenue.setBackground(SystemColor.inactiveCaption);
+		missedRevenue.setBounds(0, 31, 252, 29);
+		totalRevenue.add(missedRevenue);
 		
+		JLabel lblNewLabel = new JLabel("Fast");
+		lblNewLabel.setFont(new Font("Trebuchet MS", Font.BOLD, 13));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBackground(SystemColor.textHighlight);
+		lblNewLabel.setForeground(SystemColor.text);
+		lblNewLabel.setBounds(10, 582, 65, 37);
+		frame.getContentPane().add(lblNewLabel);
+		
+		JLabel label = new JLabel("Slow");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setForeground(Color.WHITE);
+		label.setFont(new Font("Trebuchet MS", Font.BOLD, 13));
+		label.setBackground(SystemColor.textHighlight);
+		label.setBounds(758, 582, 65, 37);
+		frame.getContentPane().add(label);
+
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
+		frame.setAutoRequestFocus(true);
+		
+		run = true;
+		
+		
 		
 		carParkView.updateView();
 
-        run = true;
-        tickPause = 500;
+        
 
         while(true){
             if (run) {
                 carParking.tick();
             }
             try{
-                Thread.sleep(tickPause);
+                Thread.sleep(simSpeed.getValue());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
 	}
+    
+    public JSlider getJSlider() {
+    	return simSpeed;
+    }
 }

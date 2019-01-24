@@ -49,18 +49,21 @@ public class pieGraph extends AbstractView {
 		totalCars = cpl.getTotalCars();
 		repaint();
 	}
+	
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.setColor(Colors.BACKGROUND_BLUE);
 		g.fillRect(0, 0, 300, 300);
+		g.setColor(Color.WHITE);
+		g.fillArc(75, 50, 180, 180, 0, 360);
 		g.setColor(Colors.DARK_RED);
-		g.fillArc(50, 50, 180, 180, 0, totalRegular );
+		g.fillArc(75, 50, 180, 180, 0, totalRegular );
 		g.setColor(Colors.DARK_GREEN);
-		g.fillArc(50, 50, 180, 180, totalRegular, totalReservations);
+		g.fillArc(75, 50, 180, 180, totalRegular, totalReservations);
 		g.setColor(Colors.MEMBER_BLUE);
-		g.fillArc(50, 50, 180, 180, totalRegular + totalReservations, totalParkingpass);
+		g.fillArc(75, 50, 180, 180, totalRegular + totalReservations, totalParkingpass);
 		g.setColor(Colors.DARK_YELLOW);
-		g.fillArc(50, 50, 180, 180, totalRegular + totalReservations + totalParkingpass, totalElectrical);
+		g.fillArc(75, 50, 180, 180, totalRegular + totalReservations + totalParkingpass, totalElectrical);
 
 	}	
 

@@ -19,7 +19,7 @@ import me.project.model.ReservationCar;
 
 public class CarParkingLogic extends AbstractModel {
     private static int numberOfFloors, numberOfRows, numberOfPlaces;
-    private static CarQueue entranceCarQueue,  paymentCarQueue, membersCarQueue, exitCarQueue, secondEntranceCarQueue, passHolderQueue, reservationQueue ;
+    private static CarQueue entranceCarQueue,  paymentCarQueue, passholdersExitQueue, exitCarQueue, secondEntranceCarQueue, passHolderQueue, reservationExitQueue ;
 
     private Car[][][] cars;
     
@@ -41,10 +41,12 @@ public class CarParkingLogic extends AbstractModel {
     private int paymentSpeed;
     private int exitSpeed; 
     
+    private int maxCarsInQueue;
+    
     private int numberOfEnteringCars; 
     private int numberOfPayingCars; 
     private int numberOfExitingCars; 
-    private int numberOfMembersExiting;
+    private int numberOfPassholdersExiting;
     private int numberOfReservationsExiting;
 
     private int totalRegularCarsInPark, totalPassHoldersInPark, totalCars, totalReservationsInPark, totalElectricalsInPark; 
@@ -53,9 +55,13 @@ public class CarParkingLogic extends AbstractModel {
     private String currentDay;
     private String currentTime;
     
-    private double pricePerMinute = 0.16;
+    private double pricePerMinute = 0.116;
     private double memberRevenue = 0;
     private double totalRevenue = 0 + memberRevenue;
+    private double totalMissedRevenue = 0;
+    private double possibleRevenue;
+  
+    private int revenuePercentage;
 
     /**
      * CarParkingLogic Constructor 
@@ -75,11 +81,12 @@ public class CarParkingLogic extends AbstractModel {
         entranceCarQueue = new CarQueue();
         secondEntranceCarQueue = new CarQueue();
         paymentCarQueue = new CarQueue();
-        membersCarQueue = new CarQueue();
+        passholdersExitQueue = new CarQueue();
         exitCarQueue = new CarQueue();
         passHolderQueue = new CarQueue();
-        reservationQueue = new CarQueue();
+        reservationExitQueue = new CarQueue();
         
+        maxCarsInQueue = 30;
         enterSpeed = 3; 
         paymentSpeed = 10; 
         exitSpeed = 9; 
@@ -88,7 +95,10 @@ public class CarParkingLogic extends AbstractModel {
         numberOfEnteringCars = 0;
         numberOfPayingCars = 0;
         numberOfExitingCars = 0;
-        numberOfMembersExiting = 0;
+        numberOfPassholdersExiting = 0;
+        
+        possibleRevenue = 170100;
+        revenuePercentage = (int)Math.round(((((getTotalRevenue() / possibleRevenue) * 100 ) / 360)));  
         
         totalRegularCarsInPark = 0;
         totalPassHoldersInPark = 0;
@@ -106,6 +116,16 @@ public class CarParkingLogic extends AbstractModel {
     }
     
     /**
+     * Run the simulator
+     */
+    
+    public void run() {
+        for (int i = 0; i < 10000; i++) {
+            tick();
+        }
+    }
+    
+    /**
      * This method creates a random number.
      * @param min
      * @param max
@@ -120,6 +140,15 @@ public class CarParkingLogic extends AbstractModel {
     	int randNum = rand.nextInt(max - min) + min; 
     	
     	return randNum;
+    }
+    
+    /**
+     * Gives the revenue percentage
+     * @return revenuePercentage
+     */
+    
+    public int getRevenuePerc() {
+    	return revenuePercentage;
     }
     
     /**
@@ -249,7 +278,7 @@ public class CarParkingLogic extends AbstractModel {
      */
     
     public int getNumberOfExitingMembers() {
-        return numberOfMembersExiting;
+        return numberOfPassholdersExiting;
     }
     
     /**
@@ -404,36 +433,62 @@ public class CarParkingLogic extends AbstractModel {
 	}
 	
 	/**
-	 * Sets the average amount of people
-	 * @param amount
+	 * Gets the total missed revenue
+	 * @return totalMissedRevenue
 	 */
 	
-	public void setWeekDayArrivals(int weekDayArrivals) {
-		this.weekDayArrivals = weekDayArrivals;
+	public int getTotalMissedRevenue() {
+		return (int)Math.round(totalMissedRevenue);
+	}
+
+	/**
+	 * Returns the maxCarsInQueue
+	 * @return maxCarsInQueue
+	 */
+	
+	public int getMaxCarsInQueue() {
+		return maxCarsInQueue;
 	}
 	
 	/**
-	 * @return weekDayArrivals
+	 * Sets the maxCarsInQueue
+	 * @param int maxCars
 	 */
 	
-	public int getWeekDayArrivals() {
-		return weekDayArrivals;
+	public void setMaxCarsInQueue(int maxCars) {
+		maxCarsInQueue = maxCars;
 	}
 	
 	/**
-	 * @param weekendArrivals
+	 * @return ticketPrice per hour
 	 */
 	
-	public int getWeekendArrivals() {
-		return weekendArrivals;
+	public double getTicketPrice() {
+		return (pricePerMinute * 60);
 	}
 	
 	/**
-	 * @param weekendarrivals
+	 * @param pricePerHour
 	 */
 	
-	public void setWeekendArrivals(int weekendArrivals) {
-		this.weekendArrivals = weekendArrivals;
+	public void setTicketPrice(double pricePerHour) {
+		pricePerMinute = pricePerHour / 60;
+	}
+	
+	/**
+	 * @return hour
+	 */
+	
+	public int getCurrentHour() {
+		return hour;
+	}
+	
+	/**
+	 * @return minute
+	 */
+	
+	public int getCurrentMinute() {
+		return minute;
 	}
 	
 	/**
@@ -442,6 +497,7 @@ public class CarParkingLogic extends AbstractModel {
 	 */
 	
     public void tick() {
+    	
     	
     	/*
     	 * All the regular amount of cars in the 
@@ -568,6 +624,8 @@ public class CarParkingLogic extends AbstractModel {
         while (day > 6) {
             day -= 7;
             week++;
+            totalRevenue = 0;
+            totalMissedRevenue = 0;
         }
         
         while (week > 3) {
@@ -669,16 +727,18 @@ public class CarParkingLogic extends AbstractModel {
         	 */
         	
         	for(int i = 0; i < entranceCarQueue.carsInQueue(); i++) {
-        		if(entranceCarQueue.carsInQueue() > 30) {
+        		if(entranceCarQueue.carsInQueue() > maxCarsInQueue) {
         			@SuppressWarnings("unused")
 					Car car = entranceCarQueue.removeCar();
+        			totalMissedRevenue += 7.5 / 2;
         		}
         	}
         	
         	for(int i = 0; i < secondEntranceCarQueue.carsInQueue(); i++) {
-        		if(secondEntranceCarQueue.carsInQueue() > 30) {
+        		if(secondEntranceCarQueue.carsInQueue() > maxCarsInQueue) {
         			@SuppressWarnings("unused")
         			Car car = secondEntranceCarQueue.removeCar();
+        			totalMissedRevenue += 7.5;
         		}
         	}
         	
@@ -872,7 +932,7 @@ public class CarParkingLogic extends AbstractModel {
         
             if(car instanceof AdHocCar && car.getMinutesLeft() <= 0){
             	numberOfPayingCars++;
-            	paymentCarQueue.addCar(car); // Car gets added to the payment Queue
+            	paymentCarQueue.addCar(car); // Car gets added to the payment Queue 
             	totalRevenue += car.getStayTime() * pricePerMinute;
             	break;
             	
@@ -883,8 +943,8 @@ public class CarParkingLogic extends AbstractModel {
             	break;
 	
             } else if(car instanceof ParkingPassCar && car.getMinutesLeft() <= 0) { 
-                numberOfMembersExiting++;
-            	membersCarQueue.addCar(car); // Car gets added to the membersCarQueue to leave
+            	numberOfPassholdersExiting++;
+            	passholdersExitQueue.addCar(car); // Car gets added to the membersCarQueue to leave
                 this.removeCarAt(car.getLocation()); //Car gets removed from it's location
                 break;
             } else if(car instanceof ReservationCar && car.getMinutesLeft() <= 0) {
@@ -915,7 +975,7 @@ public class CarParkingLogic extends AbstractModel {
                 numberOfExitingCars++;
             } else if (car instanceof ReservationCar) {
             	numberOfPayingCars--;
-            	reservationQueue.addCar(car);
+            	reservationExitQueue.addCar(car);
             	setNumberOfReservationsExiting(getNumberOfReservationsExiting() + 1);
             } else if (car instanceof ElectricalCar) {
             	numberOfPayingCars--;
@@ -964,11 +1024,11 @@ public class CarParkingLogic extends AbstractModel {
         
 
         for (int i = 0; i < exitSpeed; i++) {
-            Car car = membersCarQueue.removeCar(); //car gets removed from the members exiting queue
+            Car car = passholdersExitQueue.removeCar(); //car gets removed from the members exiting queue
             if (car == null) { //car has to exist else there will be a break
                 break;
             } else {
-            	numberOfMembersExiting--; //exiting car queue will be decreased by 1
+            	numberOfPassholdersExiting--; //exiting car queue will be decreased by 1
             	totalPassHoldersInPark--; //total passholder count will be decreased by 1
             }
             super.notifyViews();  //view gets updated
@@ -976,7 +1036,7 @@ public class CarParkingLogic extends AbstractModel {
         }
         
         for (int i = 0; i < exitSpeed; i++) {
-        	Car car = reservationQueue.removeCar();
+        	Car car = reservationExitQueue.removeCar();
         	if(car == null) {
         		break;
         	} else {
@@ -995,33 +1055,12 @@ public class CarParkingLogic extends AbstractModel {
 	 * This method simulates 'x' times
 	 */
     
-	
 	public void steps(int x) {
 		for(int i = 0; i < x; i++) {
 			tick();
 		}
 	}
 
-    
-    /**
-     * This method finds the first free location in the car park and returns it.
-     * @return location
-     */
-    
-    public Location getFirstFreeLocation() {
-        for (int floor = 0; floor < getNumberOfFloors(); floor++) {
-            for (int row = 0; row < getNumberOfRows(); row++) {
-                for (int place = 0; place < getNumberOfPlaces(); place++) {
-                    Location location = new Location(floor, row, place);
-                    if (getCarAt(location) == null) {
-                        return location;
-                    }
-                }
-            }
-        }
-        return null;
-    }
-    
     /**
      * This method finds the first free location for a reservation car in the car park and returns it.
      * @return location
@@ -1166,6 +1205,7 @@ public class CarParkingLogic extends AbstractModel {
         if (floor < 0 || floor >= numberOfFloors || row < 0 || row > numberOfRows || place < 0 || place > numberOfPlaces) {
             return false;
         }
+        
         return true;
     }
     
@@ -1186,6 +1226,7 @@ public class CarParkingLogic extends AbstractModel {
                 }
             }
         }
+        
         return null;
     }
 
@@ -1207,28 +1248,5 @@ public class CarParkingLogic extends AbstractModel {
         car.setLocation(null);
         return car;
     }
-    
-    /**
-     * @return Quits the program
-     */
-    
-    public void quit() {
-    	System.exit(0);
-    }
-    
-    /**
-     * Prints out the statistics of the car park
-     */
-    
-    public void printCarParkingDetails() {
-        System.out.println("Regular Cars: " + totalRegularCarsInPark);
-        System.out.println("ParkingPass Cars: " + totalPassHoldersInPark);
-        System.out.println("Total Cars: " + totalCars + "/" + totalSpace);
-    }
-
-
-	
-
-
 	
 }

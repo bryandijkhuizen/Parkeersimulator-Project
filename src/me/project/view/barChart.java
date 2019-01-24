@@ -40,18 +40,30 @@ public class barChart extends AbstractView {
 	
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		int baseline = 270;
 		g.setColor(Colors.BACKGROUND_BLUE);
 		g.fillRect(0, 0, 300, 300);
 		g.setColor(Colors.DARK_RED);
-		g.fillRect(0, 0, 50, totalRegular);
+		g.fillRect(0, (baseline - totalRegular), 50, totalRegular);
+		g.setColor(Colors.MEMBER_BLUE);
+		g.fillRect(50, (baseline - totalParkingpass), 50, totalParkingpass);
 		g.setColor(Colors.DARK_GREEN);
+		g.fillRect(100, (baseline - totalReservations), 50, totalReservations);
+		g.setColor(Colors.DARK_YELLOW);
+		g.fillRect(150, (baseline - totalElectrical), 50, totalElectrical);
+		
+
+
+	}	
+
+}
+/*
+
+g.setColor(Colors.DARK_GREEN);
 		g.fillRect(50, 0, 50, totalReservations);
 		g.setColor(Colors.MEMBER_BLUE);
 		g.fillRect(150, 0, 50, totalParkingpass);
 		g.setColor(Colors.DARK_YELLOW);
 		g.fillRect(100, 0, 50, totalElectrical);
 
-
-	}	
-
-}
+*/

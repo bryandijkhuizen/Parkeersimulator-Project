@@ -13,7 +13,7 @@ import me.project.logic.CarParkingLogic;
 	 */
 
 	@SuppressWarnings("serial")
-	public class totalRevenueView extends AbstractView {
+	public class missedProfitView extends AbstractView {
 		
 		private JLabel revenueLabel;
 
@@ -25,11 +25,11 @@ import me.project.logic.CarParkingLogic;
 		 * This is the totalCarsView Constructor
 		 */
 		
-		public totalRevenueView(CarParkingLogic model) {
+		public missedProfitView(CarParkingLogic model) {
 			super(model);
 			this.setLayout(null);
 
-			revenueLabel = new JLabel("Missed Profit / Week: ");
+			revenueLabel = new JLabel("Profit / Week: ");
 			
 			totalRevenueView = new JTextField();    
 	        
@@ -51,7 +51,7 @@ import me.project.logic.CarParkingLogic;
 
 	        CarParkingLogic carPark = (CarParkingLogic) super.model;
 
-	        totalRevenue = carPark.getTotalMissedRevenue();
+	        totalRevenue = carPark.getTotalRevenue();
 	        totalRevenueView.setText("€ " + totalRevenue);
 	        
 
