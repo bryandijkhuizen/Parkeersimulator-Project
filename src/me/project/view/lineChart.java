@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import me.project.abstracts.AbstractView;
 import me.project.logic.CarParkingLogic;
 
+
 @SuppressWarnings("serial")
 public class lineChart extends AbstractView {
 	
@@ -26,7 +27,7 @@ public class lineChart extends AbstractView {
 	private static int MAX_VALUE = 1;
     private static int MIN_VALUE = 0;
     
-    public static List<Integer> values = new ArrayList<>();
+    public static List<Integer> values = new ArrayList<Integer>();
     
     private int index = 0;
 
@@ -34,6 +35,11 @@ public class lineChart extends AbstractView {
         super(cpl);
         
         values.add(cpl.getTotalCars());
+    }
+    
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(width,height);
     }
 
     @Override
@@ -65,7 +71,7 @@ public class lineChart extends AbstractView {
         twoDimensionalGraphics.setColor(Color.BLACK);
         twoDimensionalGraphics.drawString("Max Amount of Cars", 35, 25);
 
-        List<Point> values2 = new ArrayList<>();
+        List<Point> values2 = new ArrayList<Point>();
         for (int i = 0; i < values.size(); i++) {
             int x1 = (int) (i * xScale + borderSpaceLeft);
             int y1 = (int) (((MAX_VALUE - values.get(i)) * yScale) + borderSpace);
@@ -82,12 +88,10 @@ public class lineChart extends AbstractView {
         }
 
         twoDimensionalGraphics.setColor(Colors.DARK_RED);
+        
         twoDimensionalGraphics.drawString(new Integer(MIN_VALUE).toString(), 10, 420);
         twoDimensionalGraphics.drawString(new Integer(MAX_VALUE).toString(), 10, 50);
     }
 
-    @Override
-    public Dimension getPreferredSize() {
-        return new Dimension(width,height);
-    }
+    
 }
