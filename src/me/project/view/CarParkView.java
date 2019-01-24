@@ -183,7 +183,7 @@ public class CarParkView extends AbstractView{
 	 */
 	
 	public void drawElectricalSpots(Graphics graphics, Location location, Color color) {
-		graphics.setColor(color.BLACK);
+		graphics.setColor(Color.BLACK);
 		graphics.fillRect(730, 35, 6, 3);
 		graphics.fillRect(730, 45, 6, 3);
 		graphics.fillRect(730, 55, 6, 3);

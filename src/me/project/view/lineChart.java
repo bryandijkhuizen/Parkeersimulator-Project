@@ -11,7 +11,6 @@ import java.awt.Stroke;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import me.project.abstracts.AbstractView;
 import me.project.logic.CarParkingLogic;
 
