@@ -1,12 +1,17 @@
 # Parkeergarage
-Parkeergarage for Project: Design & Build.
-Hanzehogeschool Groningen
 
-Bryan Dijkhuizen
+## Getting started
 
-Daphne Gritter
+This is the final product of the design & build project for the Hanzehogeschool.
 
-Thalisa Jagt
+### How to use
 
--------------------
-HBO-ICT
+```
+git clone https://github.com/bryandijkhuizen/Parkeersimulator-Project
+```
+
+### How to run
+
+```
+/runnable/parkeergarage.jar
+```
