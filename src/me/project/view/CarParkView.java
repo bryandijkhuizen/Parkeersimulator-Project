@@ -40,7 +40,7 @@ public class CarParkView extends AbstractView{
         size = new Dimension(0, 0); 
         
         titleLabel = new JLabel("Car Parking Simulation");
-        setBackground(Colors.BACKGROUND_BLUE);
+        setBackground(Color.BLACK);
 
         add(titleLabel);
 
@@ -63,6 +63,7 @@ public class CarParkView extends AbstractView{
         else {
             // Rescale the previous image.
             g.drawImage(carParkImage, 0, 0, currentSize.width, currentSize.height, null);
+           
         }
     }
 

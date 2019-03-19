@@ -87,7 +87,7 @@ public class CarSimulator extends JFrame {
 		
 		carParkView = new CarParkView(carParking);
 		carParkView.setBorder(new LineBorder(new Color(0, 0, 0)));
-		carParkView.setBackground(SystemColor.inactiveCaption);
+		carParkView.setBackground(SystemColor.black);
 		
 		currentDay = new currentDayView(carParking);
 		currentDay.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -153,6 +153,7 @@ public class CarSimulator extends JFrame {
 		
 		frame.setSize(1302, 711);
 		frame.getContentPane().setLayout(null);
+		frame.setBackground(Color.LIGHT_GRAY);
 		
 		frame.getContentPane().add(carParkView);
 		frame.getContentPane().add(controller);
