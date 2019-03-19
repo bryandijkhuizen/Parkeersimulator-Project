@@ -1,5 +1,7 @@
 package me.project.runner;
 
+import java.applet.Applet;
+
 import javax.swing.JFrame;
 
 import me.project.main.CarSimulator;
@@ -11,7 +13,7 @@ import me.project.main.CarSimulator;
 	 */
 
 @SuppressWarnings("serial")
-public class Runner extends JFrame {
+public class Runner extends Applet {
 	
 	/**
 	 * Main Method; starts the program.
