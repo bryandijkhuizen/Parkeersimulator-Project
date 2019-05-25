@@ -244,11 +244,7 @@ public class CarSimulator extends JFrame {
 		
 		run = true;
 		
-		
-		
 		carParkView.updateView();
-
-        
 
         while(true){
             if (run) {

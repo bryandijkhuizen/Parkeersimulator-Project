@@ -21,8 +21,7 @@ public class Runner extends Applet {
 	 */
 
 	public static void main(String[] args) throws Exception {
-		new CarSimulator();
-		
+		CarSimulator cp = new CarSimulator();
 		
 	}
 
