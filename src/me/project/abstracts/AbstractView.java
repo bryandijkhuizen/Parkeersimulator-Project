@@ -2,7 +2,6 @@ package me.project.abstracts;
 
 import javax.swing.JPanel;
 
-import javafx.stage.Stage;
 
 	/**
 	 * All views should extend AbstractView.
@@ -14,7 +13,6 @@ import javafx.stage.Stage;
 public abstract class AbstractView extends JPanel {
 	private static final long serialVersionUID = 6437976554496769048L;
 	protected AbstractModel model;
-	private Stage stage;
 
     /**
      * The constructor initializes the instance variable model with a model that applies to this view.
@@ -44,12 +42,4 @@ public abstract class AbstractView extends JPanel {
 		repaint();
 	}
 
-	public void start(Stage stage) throws Exception {
-		
-		this.stage = stage;
-	}
-	
-	public Stage getStage() {
-		return stage;
-	}
 }

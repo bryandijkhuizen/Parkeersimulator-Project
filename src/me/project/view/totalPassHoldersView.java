@@ -8,7 +8,7 @@ import me.project.logic.CarParkingLogic;
 
 	/**
 	 * This class contains the totalPassHolders
-	 * @author Bryan Dijkhuizen, Daphne Gritter, Thalisa Jagt
+	 * @author Bryan Dijkhuizen, Thalisa Jagt
 	 * @version 1.0
 	 */
 
@@ -40,7 +40,6 @@ import me.project.logic.CarParkingLogic;
 	        add(regularCars);
        
 	        regularCars.setEditable(false);
-		
 		}
 		
 		/**
@@ -54,7 +53,6 @@ import me.project.logic.CarParkingLogic;
 	        totalRegularCars = carPark.getTotalPassHolders();
 	        regularCars.setText("" + totalRegularCars);
 	        
-
 	        setVisible(true);
 	        super.updateView();
 	    }

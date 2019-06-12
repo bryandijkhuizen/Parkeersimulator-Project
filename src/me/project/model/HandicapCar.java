@@ -15,7 +15,7 @@ import java.awt.Color;
 
 public class HandicapCar extends Car {
 	
-	private static final Color COLOR=Colors.LIGHT_ORANGE;
+	private static final Color color = Colors.BACKGROUND_BLUE;
 	
 	/**
 	 * creates an instance of HandicapCar
@@ -35,7 +35,7 @@ public class HandicapCar extends Car {
 	 */
     
     public Color getColor(){
-    	return COLOR;
+    	return color;
     }
 }
 
